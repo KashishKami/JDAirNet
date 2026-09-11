@@ -1,4 +1,4 @@
-﻿# Architecture & Design Decisions Log
+# Architecture & Design Decisions Log
 
 This document records every significant design decision, its rationale, and its trade-offs for the JDAirNet website. Every architectural deviation or non-obvious choice must be logged here before implementation begins. If a proposal contradicts a logged decision, flag it and ask before proceeding.
 
@@ -244,3 +244,42 @@ Even for a marketing website, quality gates prevent regressions and ensure the s
 - `ci:quality` is for local pre-push validation only
 - Vitest for unit tests (component logic, schema generator functions, data integrity)
 - Playwright for E2E (contact form submission flow, navigation, mobile viewport tests)
+
+---
+
+### Decision 12: Global Light / White Theme & 15% Margins Content Grid (`70vw`)
+
+**Date:** 2026-09-12
+**Status:** Accepted
+
+#### Context
+The user requested a clean, modern white background across all page sections below the video hero, along with strict 15% left and right margins (`70vw` desktop width) across all sections, aligning the Navbar, Hero Card, Plan Cards, Why Us, FAQs, and Footer.
+
+#### Decision
+- Global CSS tokens in `globals.css` set body background to clean white (`#ffffff`) and off-white (`#f8fafc`) with dark high-contrast typography (`#0f172a` headings, `#475569` body text).
+- `.container`, `.navContainer`, and `.heroCard` enforce `width: 70vw; max-width: 70vw; margin-inline: auto;` on desktop (`@media (min-width: 768px)` / `1024px`).
+- Button colors updated to refined low-saturation tones (burgundy red `#c81e2b`, matte WhatsApp green `#1f8a4c`, bordered white secondary CTA) with soft neutral shadows.
+
+#### Consequences
+- Consistent edge-to-edge 15% margin alignment on all desktop screen sizes.
+- Crisp readability with optimal WCAG contrast across all sections.
+
+---
+
+### Decision 13: High-Clarity Transparent Hero Overlay & Single Framed CTA
+
+**Date:** 2026-09-12
+**Status:** Accepted
+
+#### Context
+The user requested maximum clarity for the background video through the hero card, extending the video to the very top behind a transparent navbar, and replacing dual CTAs with a single framed white pill button (`VIEW PLANS →`).
+
+#### Decision
+- Removed backdrop blur and heavy dark overlays (`backdrop-filter: none`, ambient `rgba(255, 255, 255, 0.04)` fill, deep ambient shadow `box-shadow: 0 40px 110px rgba(0,0,0,0.85)`).
+- Navbar is transparent (`background: transparent`), extending the video behind the top bar.
+- Navbar logo "JD" in pure white (`#ffffff`) and nav links in solid white (`#ffffff`) with active/hover highlight in red (`#ff4757`).
+- Single framed white button with primary arrow icon links to `/plans/`.
+
+#### Consequences
+- Visually striking hero with natural video fidelity.
+- Clear single conversion path to the plans page.

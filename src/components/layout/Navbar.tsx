@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <header className={styles.header}>
-      <div className={`container ${styles.navContainer}`}>
+      <div className={styles.navContainer}>
         {/* Brand Logo */}
         <Link href="/" className={styles.logo} onClick={closeMenu}>
           <span>JD<span className={styles.logoAccent}>AirNet</span></span>

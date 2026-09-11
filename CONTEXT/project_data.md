@@ -1,4 +1,4 @@
-﻿# Project Data: JDAirNet Website
+# Project Data: JDAirNet Website
 
 This document is the single source of truth for all project metadata, business content, technical stack decisions, SEO rules, sitemap, plans data, and design references for the JDAirNet marketing website.
 
@@ -239,27 +239,34 @@ export const LEASE_LINE_USE_CASES = ['Businesses', 'Hostels', 'Colleges', 'Resid
 - The hero section must match this visually: full-screen video with rounded card overlay, city skyline visible through the video, gradient sky (purple → pink → magenta → dark at horizon).
 
 ### Hero Section Specs
-- Background: `Hero.mp4` (full-screen `<video>` tag, `autoPlay muted loop playsInline`)
+- Background: `Hero.mp4` (full-screen `<video>` tag, `autoPlay muted loop playsInline`, seamlessly extending behind transparent Navbar)
 - Mobile fallback: `hero-poster.jpg` (single extracted frame from Hero.mp4, used as `poster` attribute)
-- Overlay: A rounded card/container centered on screen (as seen in theme) containing:
-  - Small eyebrow badge: "BEST BROADBAND SOLUTION" (uppercase, bordered pill)
-  - H1: "Best Internet Services In Your Region" (large, bold, white)
-  - Subtext: Brief tagline
-  - Two CTAs: Primary "View Plans →" + Secondary "Call Now"
+- Overlay: An expansive, high-clarity transparent glass card centered on screen (width: `70vw` on desktop, 15% margins on left & right) containing:
+  - Small eyebrow badge: "BEST BROADBAND SOLUTION" (uppercase, bordered red pill)
+  - H1: "Best Internet Services In Your Region" (large, bold, white, `clamp`)
+  - Subtext: Brief tagline in high-contrast white
+  - Primary CTA: Single framed white button with arrow icon "VIEW PLANS →"
 - On mobile: video does NOT autoplay by default on iOS without `muted` + `playsInline` — both must always be set.
 
-### Color Palette
+### Color Palette (Light Theme Base)
 | Token | Hex | Usage |
 |---|---|---|
-| `--color-primary` | `#E10419` | Brand red (from TelNet theme) — CTAs, accents |
-| `--color-primary-dark` | `#b80014` | Hover state for primary red |
-| `--color-bg-dark` | `#0a0a1a` | Dark page sections |
-| `--color-bg-medium` | `#12122a` | Slightly lighter dark sections |
-| `--color-text-white` | `#ffffff` | Primary text on dark |
-| `--color-text-muted` | `#a0a0b8` | Secondary text on dark |
+| `--color-primary` | `#c81e2b` | Refined brand red (low-saturation) — CTAs, accents |
+| `--color-primary-dark` | `#a51823` | Hover state for primary red |
+| `--color-primary-glow` | `rgba(200, 30, 43, 0.15)` | Subtle accent glow |
+| `--color-bg-dark` | `#ffffff` | Primary base background for page sections |
+| `--color-bg-medium` | `#f8fafc` | Subtle off-white alternating section background |
+| `--color-bg-card` | `#ffffff` | Card container background |
+| `--color-bg-card-hover` | `#f1f5f9` | Card hover state background |
+| `--color-text-white` | `#0f172a` | High-contrast dark primary text (headings/body) |
+| `--color-text-muted` | `#475569` | Secondary muted text |
+| `--color-text-dim` | `#94a3b8` | Dim tertiary text / captions |
+| `--color-border` | `#e2e8f0` | Light border lines on white bg |
+| `--color-border-hover` | `#cbd5e1` | Hover state border lines |
+| `--color-whatsapp` | `#1f8a4c` | Refined WhatsApp green (low-saturation) |
+| `--color-whatsapp-dark` | `#166534` | WhatsApp button hover state |
 | `--color-accent-purple` | `#6c3fc8` | Gradient accent |
 | `--color-accent-magenta` | `#d4007f` | Gradient accent (hero sky) |
-| `--color-border` | `rgba(255,255,255,0.1)` | Subtle borders on dark bg |
 
 ### Typography
 | Role | Font | Weight | Source |

@@ -8,11 +8,11 @@
   align-items: center;
   justify-content: space-around;
   padding: 0.65rem 1rem;
-  background: rgba(10, 10, 26, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border-top: 1px solid var(--color-border);
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  border-top: 1px solid #e2e8f0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .channelBtn {
@@ -33,20 +33,20 @@
 
 .callBtn {
   background-color: var(--color-primary);
-  color: var(--color-text-white);
+  color: #ffffff;
   box-shadow: 0 2px 10px var(--color-primary-glow);
 }
 
 .whatsappBtn {
   background-color: var(--color-whatsapp);
-  color: var(--color-text-white);
+  color: #ffffff;
   box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3);
 }
 
 .formBtn {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-text-white);
-  border: 1px solid var(--color-border);
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
 }
 
 @media (min-width: 768px) {

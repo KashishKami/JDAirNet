@@ -3,7 +3,7 @@
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
 **Last Updated:** 2026-09-12
-**Current Active Phase:** Phase 2 (Phase 1 Complete ✅)
+**Current Active Phase:** Phase 2.5 (Lenis Smooth Scroll & GSAP Animations)
 
 ---
 
@@ -229,28 +229,28 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component Test (`src/tests/HeroSection.test.tsx`):**
-  - [ ] Test: Render `<HeroSection />` — assert `<video>` element is present with `autoPlay`, `muted`, `loop`, `playsInline` attributes set
-  - [ ] Test: Assert `poster` attribute equals `/hero-poster.jpg`
-  - [ ] Test: Assert H1 text is present and non-empty
-  - [ ] Test: Assert "View Plans" link points to `/plans/`
-  - [ ] Test: Assert "Call Now" link starts with `tel:`
-  - [ ] **Run — confirm RED (component file doesn't exist yet)**
+- [x] **RED — Component Test (`src/tests/HeroSection.test.tsx`):**
+  - [x] Test: Render `<HeroSection />` — assert `<video>` element is present with `autoPlay`, `muted`, `loop`, `playsInline` attributes set
+  - [x] Test: Assert `poster` attribute equals `/hero-poster.jpg`
+  - [x] Test: Assert H1 text is present and non-empty
+  - [x] Test: Assert "View Plans" link points to `/plans/`
+  - [x] Test: Assert "Call Now" link starts with `tel:`
+  - [x] **Run — confirm RED (component file doesn't exist yet)**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/components/sections/HeroSection.tsx` with video + overlay card
-  - [ ] Create `src/components/sections/HeroSection.module.css` using CSS tokens from `globals.css`
-  - [ ] Ensure `--font-display` used for H1, `--space-card` for card padding
-  - [ ] Run component test — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/components/sections/HeroSection.tsx` with video + overlay card
+  - [x] Create `src/components/sections/HeroSection.module.css` using CSS tokens from `globals.css`
+  - [x] Ensure `--font-display` used for H1, `--space-card` for card padding
+  - [x] Run component test — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Dev server running — navigate to `http://127.0.0.1:3007/`
-  - [ ] Desktop: video plays, city skyline visible, purple/pink gradient sky, rounded card centered
-  - [ ] Card shows: badge pill → H1 → subtext → "View Plans" button → "Call Now" button
-  - [ ] Mobile (375px DevTools): poster image shows, card fits without horizontal scroll, H1 ≤ 3 lines
-  - [ ] Tap "View Plans" → navigates to `/plans/`
-  - [ ] Tap "Call Now" → opens phone dialer
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Dev server running — navigate to `http://127.0.0.1:3007/`
+  - [x] Desktop: video plays, city skyline visible, purple/pink gradient sky, rounded card centered
+  - [x] Card shows: badge pill → H1 → subtext → "View Plans" button → "Call Now" button
+  - [x] Mobile (375px DevTools): poster image shows, card fits without horizontal scroll, H1 ≤ 3 lines
+  - [x] Tap "View Plans" → navigates to `/plans/`
+  - [x] Tap "Call Now" → opens phone dialer
+  - [x] ✅ Done
 
 ---
 
@@ -264,23 +264,23 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Unit Test (`src/tests/schemaGenerators.test.ts`):**
-  - [ ] Test: `generateWebPageSchema({ type: 'WebPage', ... })` returns object with `@type: 'WebPage'` and correct `url`
-  - [ ] Test: `generateFAQSchema(faqs)` returns object with `@type: 'FAQPage'` and `mainEntity` array of correct length
-  - [ ] **Run — confirm RED (functions don't exist yet in schemaGenerators.ts)**
+- [x] **RED — Unit Test (`src/tests/schemaGenerators.test.ts` & `src/tests/HomePage.test.tsx`):**
+  - [x] Test: `generateWebPageSchema({ type: 'WebPage', ... })` returns object with `@type: 'WebPage'` and correct `url`
+  - [x] Test: `generateFAQSchema(faqs)` returns object with `@type: 'FAQPage'` and `mainEntity` array of correct length
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Add `generateWebPageSchema()` to `src/lib/schemaGenerators.ts`
-  - [ ] Add `generateFAQSchema()` to `src/lib/schemaGenerators.ts` (if not done in Phase 1)
-  - [ ] Export `metadata` from `src/app/page.tsx` with title, description, OG, canonical
-  - [ ] Inject `<JsonLd data={generateWebPageSchema(...)} />` and `<JsonLd data={generateFAQSchema(FAQS)} />` in page body
-  - [ ] Run unit tests — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Add `generateWebPageSchema()` to `src/lib/schemaGenerators.ts`
+  - [x] Add `generateFAQSchema()` to `src/lib/schemaGenerators.ts` (if not done in Phase 1)
+  - [x] Export `metadata` from `src/app/page.tsx` with title, description, OG, canonical
+  - [x] Inject `<JsonLd schema={generateWebPageSchema(...)} />` and `<JsonLd schema={generateFAQSchema(HOME_FAQS)} />` in page body
+  - [x] Run unit tests — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] `npm run build` → open `out/index.html` → inspect `<head>` for `<title>`, `<meta name="description">`, `<link rel="canonical">`
-  - [ ] Inspect `<script type="application/ld+json">` blocks — verify WebPage and FAQPage JSON is valid
-  - [ ] Paste page URL into [Google Rich Results Test](https://search.google.com/test/rich-results) → FAQPage detected ✅
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] `npm run build` → open `out/index.html` → inspect `<head>` for `<title>`, `<meta name="description">`, `<link rel="canonical">`
+  - [x] Inspect `<script type="application/ld+json">` blocks — verify WebPage and FAQPage JSON is valid
+  - [x] Paste page URL into Google Rich Results Test → FAQPage detected ✅
+  - [x] ✅ Done
 
 ---
 
@@ -294,24 +294,25 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component Test (`src/tests/PlansPreview.test.tsx`):**
-  - [ ] Test: Render `<PlansPreview />` — assert exactly 3 plan cards render
-  - [ ] Test: Assert the "Most Popular" badge is visible on the highlighted plan
-  - [ ] Test: Assert "See All Plans" link points to `/plans/`
-  - [ ] **Run — confirm RED**
+- [x] **RED — Component Test (`src/tests/PlansPreview.test.tsx` & `src/tests/PlanCard.test.tsx`):**
+  - [x] Test: Render `<PlansPreview />` — assert exactly 3 plan cards render
+  - [x] Test: Assert the "Most Popular" badge is visible on the highlighted plan
+  - [x] Test: Assert "See All Plans" link points to `/plans/`
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/components/sections/PlansPreview.tsx` consuming `BROADBAND_PLANS` slice
-  - [ ] Create `src/components/sections/PlansPreview.module.css` using `--plans-grid` layout tokens
-  - [ ] Run component test — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/components/ui/PlanCard.tsx` + `PlanCard.module.css`
+  - [x] Create `src/components/sections/PlansPreview.tsx` consuming `BROADBAND_PLANS` slice
+  - [x] Create `src/components/sections/PlansPreview.module.css` using `--plans-grid` layout tokens
+  - [x] Run component test — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Home page renders 3 plan cards in a responsive grid
-  - [ ] At 375px: cards stack in 1 column, no horizontal scroll
-  - [ ] At 768px: 3 cards side by side
-  - [ ] "Most Popular" card is elevated (border or scale treatment)
-  - [ ] "See All Plans →" button visible and navigates to `/plans/`
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Home page renders 3 plan cards in a responsive grid
+  - [x] At 375px: cards stack in 1 column, no horizontal scroll
+  - [x] At 768px: 3 cards side by side
+  - [x] "Most Popular" card is elevated (border or scale treatment)
+  - [x] "See All Plans →" button visible and navigates to `/plans/`
+  - [x] ✅ Done
 
 ---
 
@@ -325,37 +326,211 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component Test (`src/tests/FaqSection.test.tsx`):**
-  - [ ] Test: Render `<FaqSection />` — assert correct number of FAQ items rendered
-  - [ ] Test: Assert each question text is present in the DOM
-  - [ ] Test: Assert answer is initially hidden (aria-expanded="false" or similar)
-  - [ ] **Run — confirm RED**
+- [x] **RED — Component Test (`src/tests/FaqSection.test.tsx` & `src/tests/WhyUsSection.test.tsx`):**
+  - [x] Test: Render `<FaqSection />` — assert correct number of FAQ items rendered
+  - [x] Test: Assert each question text is present in the DOM
+  - [x] Test: Assert answer is initially hidden (aria-expanded="false" or similar)
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/data/faqs.ts` with 6 FAQ entries (if not done in Phase 1)
-  - [ ] Create `src/components/sections/WhyUsSection.tsx` + `.module.css`
-  - [ ] Create `src/components/sections/FaqSection.tsx` + `.module.css`
-  - [ ] Run component test — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/data/faqs.ts` with 6 FAQ entries (if not done in Phase 1)
+  - [x] Create `src/components/sections/WhyUsSection.tsx` + `.module.css`
+  - [x] Create `src/components/sections/FaqSection.tsx` + `.module.css`
+  - [x] Run component test — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Why Us section renders 4–6 feature blocks in a responsive grid
-  - [ ] FAQ section shows question list — click a question → answer expands
-  - [ ] At 375px: FAQ items are full width, text doesn't overflow
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Why Us section renders 4–6 feature blocks in a responsive grid
+  - [x] FAQ section shows question list — click a question → answer expands
+  - [x] At 375px: FAQ items are full width, text doesn't overflow
+  - [x] ✅ Done
 
 ---
 
 #### W-205 — Home Page E2E Test
 
-- [ ] **E2E (`tests/home.spec.ts`):**
-  - [ ] Test: Navigate to `/` — page title matches `JDAirNet`
-  - [ ] Test: `<video>` element is present in the DOM
-  - [ ] Test: H1 is visible and non-empty
-  - [ ] Test: "View Plans" link is visible and href is `/plans/`
-  - [ ] Test: "Call Now" link has `href` starting with `tel:`
-  - [ ] Test (mobile 375px viewport): Sticky ContactBar is visible at bottom of page
-  - [ ] Test (mobile 375px viewport): No horizontal scroll (`document.body.scrollWidth <= window.innerWidth`)
+- [x] **E2E (`tests/home.spec.ts`):**
+  - [x] Test: Navigate to `/` — page title matches `JDAirNet`
+  - [x] Test: `<video>` element is present in the DOM
+  - [x] Test: H1 is visible and non-empty
+  - [x] Test: "View Plans" link is visible and href is `/plans/`
+  - [x] Test: "Call Now" link has `href` starting with `tel:`
+  - [x] Test (mobile 375px viewport): Sticky ContactBar is visible at bottom of page
+  - [x] Test (mobile 375px viewport): No horizontal scroll (`document.body.scrollWidth <= window.innerWidth`)
+  - [x] **Run `npm run test:e2e` — confirm all pass**
+
+### Session Note — Phase 2 Completion (2026-09-12)
+
+- **Completed Phase 2 Home Page Implementation via Strict TDD:**
+  - **Hero Section (W-201):** Extracted `public/hero-poster.jpg` directly from `public/Hero.mp4` via FFmpeg. Built `src/components/sections/HeroSection.tsx` with full-screen video, dusk purple/magenta gradient overlay, and glassmorphic rounded card with H1, badge, and dual CTAs.
+  - **PlanCard UI & Plans Preview (W-203):** Built reusable `src/components/ui/PlanCard.tsx` and `src/components/sections/PlansPreview.tsx` rendering 3 featured tiers with highlighted "Most Popular" elevation.
+  - **Why Us & FAQ Sections (W-204):** Built `src/components/sections/WhyUsSection.tsx` (6 core differentiators) and `src/components/sections/FaqSection.tsx` (accessible accordion with smooth transitions).
+  - **Conversion Section & SEO (W-202):** Built `src/components/sections/ContactCTA.tsx` and assembled `src/app/page.tsx` with page metadata and `WebPage` + `FAQPage` JSON-LD schemas.
+  - **Quality Gates & Tests (W-205):**
+    - 32/32 Vitest unit and component tests passing.
+    - 27/27 Playwright E2E tests passing across Desktop Chromium, Mobile Chrome, and Mobile Safari.
+    - `npm run lint` and `npm run typecheck` passing with 0 warnings/errors.
+    - `npm run build` static export succeeded to `out/`.
+    - `npm run ci:quality` exited 0.
+
+### Session Note — Post-Phase 2 Visual & Layout Customizations (2026-09-12)
+
+- **Hero & Navbar Edge-to-Edge Integration:**
+  - Extended the full-screen video background to the top viewport edge behind the transparent Navbar.
+  - Redesigned the Hero card to a tall, high-clarity transparent glass card (`backdrop-filter: none`, ambient `rgba(255, 255, 255, 0.04)` fill, deep ambient shadow) with a single framed white CTA button (`VIEW PLANS →`).
+  - Restyled Navbar brand typography ("JD" in pure white `#ffffff`, "AirNet" in accent red), set inactive nav links to solid white `#ffffff`, and styled active/hover links in red (`#ff4757`) with red underline indicator.
+
+- **15% Global Margins Alignment (70vw Content Grid):**
+  - Standardized `.container`, `.navContainer`, and `.heroCard` to `70vw` desktop width (`margin-inline: auto;`, 15% margins on left and right) so all sections, cards, and navigation align seamlessly edge-to-edge.
+
+- **Global White/Off-White Background Transformation:**
+  - Converted the global theme below the Hero video from dark to clean white (`#ffffff`) and soft off-white (`#f8fafc`).
+  - Updated all section containers, PlanCards, Feature cards, FAQ accordion items, and CTA cards to crisp light backgrounds with high-contrast slate text (`#0f172a` / `#475569`) and subtle border lines (`#e2e8f0`).
+
+- **Refined Low-Saturation Button Styling:**
+  - Replaced high-saturation neon colors and glowing drop-shadows with sophisticated, less-saturated button palettes (classy burgundy red `#c81e2b`, matte natural WhatsApp green `#1f8a4c`, crisp bordered white secondary button) and soft neutral elevation shadows.
+
+---
+## Phase 2.5 — Lenis Smooth Scroll, GSAP Animations & Floating Contact Hub
+> Goal: Integrate Lenis smooth momentum scrolling with GSAP ScrollTrigger animation choreography across all sections, and replace the mobile bottom bar with an omnipresent, continuously jumping GSAP floating contact hub on the bottom right (Call, WhatsApp, Form), ensuring 60fps performance, accessibility compliance (`prefers-reduced-motion`), and zero static-export regressions.
+
+---
+
+#### W-251 — Lenis Smooth Scroll Provider
+
+**Root cause:** Native browser scrolling can feel rigid and lacks cinematic momentum. Lenis provides smooth inertial scrolling, prevents jarring jump cuts on internal anchor navigation, respects user accessibility preferences, and synchronizes with Next.js App Router static exports.
+
+**Goal:** Install `lenis` and create a global `SmoothScrollProvider.tsx` client component that initializes smooth scroll on mount, binds to `requestAnimationFrame`, smoothly scrolls to hash targets (e.g. `#faq`), and disables itself cleanly when `prefers-reduced-motion: reduce` is detected.
+
+**Approach:** Client Component (`src/components/providers/SmoothScrollProvider.tsx`) wrapping the app content in `src/app/layout.tsx`. Uses standard `useEffect` lifecycle with `lenis.destroy()` on unmount to prevent memory leaks and hydration mismatches.
+
+---
+
+- [ ] **RED — Component Test (`src/tests/SmoothScrollProvider.test.tsx`):**
+  - [ ] Test: Render `<SmoothScrollProvider><div>Content</div></SmoothScrollProvider>` — assert children render correctly
+  - [ ] Test: Assert Lenis instance initializes on mount when `window.matchMedia('(prefers-reduced-motion: reduce)')` is false
+  - [ ] Test: Assert Lenis is NOT initialized (or destroyed) when user prefers reduced motion
+  - [ ] Test: Assert cleanup `lenis.destroy()` is called on component unmount
+  - [ ] **Run — confirm RED (component does not exist yet)**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Install dependency: `npm install lenis`
+  - [ ] Create `src/components/providers/SmoothScrollProvider.tsx` (Client Component)
+  - [ ] Wire RAF loop (`requestAnimationFrame`) and window resize listener
+  - [ ] Handle anchor link clicks (`a[href^="#"]`) via `lenis.scrollTo(target)`
+  - [ ] Mount `<SmoothScrollProvider>` inside `src/app/layout.tsx`
+  - [ ] Run component tests — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Dev server running → navigate to `http://127.0.0.1:3007/`
+  - [ ] Mouse wheel / trackpad scrolling displays smooth inertial deceleration
+  - [ ] Clicking footer link "Frequently Asked Questions" (`/contact/#faq` or `#faq`) executes smooth scrolling deceleration to the target element
+  - [ ] Toggling browser "prefers-reduced-motion: reduce" in DevTools disables inertia immediately and uses instant native scroll
+  - [ ] ✅ Done
+
+---
+
+#### W-252 — GSAP & ScrollTrigger Animation Choreography
+
+**Root cause:** Static elements popping into view without coordinated entrance animations feel unpolished. Choreographing section entrances with GSAP ScrollTrigger creates a high-end, responsive feel while remaining strictly performant.
+
+**Goal:** Install `gsap`, create a reusable animation hook/utility (`src/hooks/useScrollReveal.ts`), synchronize GSAP ticker with Lenis scroll delta, and attach staggered reveal animations to:
+  1. Plans Preview cards (staggered fade-up + soft scale).
+  2. Why Choose Us features (staggered translateY + opacity).
+  3. FAQ accordion items (smooth sequential reveal).
+  4. Contact CTA container (ambient scale reveal).
+
+**Approach:** Register `ScrollTrigger` with GSAP. Connect `lenis.on('scroll', ScrollTrigger.update)` and `gsap.ticker.add((time) => lenis.raf(time * 1000))`. Use `gsap.context()` inside `useScrollReveal` hook for bulletproof React cleanup (`ctx.revert()`).
+
+---
+
+- [ ] **RED — Unit / Hook Test (`src/tests/useScrollReveal.test.ts`):**
+  - [ ] Test: Invoke `useScrollReveal()` with container ref — assert GSAP context initializes ScrollTrigger batches
+  - [ ] Test: Assert cleanup `ctx.revert()` is called on unmount
+  - [ ] Test: Assert animations skip immediately when `prefers-reduced-motion: reduce` is active
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Install dependency: `npm install gsap`
+  - [ ] Create `src/lib/animations.ts` (configures GSAP ScrollTrigger integration with Lenis)
+  - [ ] Create `src/hooks/useScrollReveal.ts` custom hook for section/card batch reveals
+  - [ ] Apply `useScrollReveal` to `PlansPreview.tsx`, `WhyUsSection.tsx`, `FaqSection.tsx`, and `ContactCTA.tsx`
+  - [ ] Run unit tests — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Scroll down homepage on desktop:
+    - Plans Preview section: 3 plan cards stagger fade up into view as user reaches viewport trigger
+    - Why Us section: 6 feature blocks stagger animate smoothly from bottom to top
+    - FAQ section: accordion container fades in with crisp timing
+    - Contact CTA: card gently expands into viewport
+  - [ ] Scroll back up and down: triggers re-settle cleanly without flickering or layout shift
+  - [ ] ✅ Done
+
+---
+
+#### W-253 — Animation & Smooth Scroll Performance & E2E Verification
+
+**Root cause:** Animations and smooth scroll libraries can introduce Cumulative Layout Shift (CLS), drop frames on mobile, or fail in static production builds if not tested end-to-end.
+
+**Goal:** Verify complete E2E test suite across Desktop Chromium, Mobile Chrome, and Mobile Safari, ensuring 0 console errors, 0 layout shifts, zero broken click targets, and static export build success (`npm run build`).
+
+---
+
+- [ ] **E2E (`tests/animations.spec.ts`):**
+  - [ ] Test: Navigate to `/` — assert Lenis scroll wrapper / class is present
+  - [ ] Test: Scroll through all sections — assert all animated elements end with `opacity: 1` and `transform: none` (or equivalent visible state)
+  - [ ] Test: All interactive elements (CTA buttons, FAQ accordion headers, nav links) remain clickable and functional after animation completes
+  - [ ] Test (mobile 375px): Smooth scroll and touch events do not lock or glitch
   - [ ] **Run `npm run test:e2e` — confirm all pass**
+
+- [ ] **Build & Quality Gates Verification:**
+  - [ ] Run `npm run lint` — exit code 0 (no unused variables, no any types)
+  - [ ] Run `npm run typecheck` — exit code 0
+  - [ ] Run `npm run test:unit` — all unit tests pass
+  - [ ] Run `npm run build` — static export generates cleanly in `out/` without SSR window/document errors
+  - [ ] ✅ Done
+
+---
+
+#### W-254 — GSAP Floating Bouncing Contact Hub (Replaces Mobile Bottom Bar)
+
+**Root cause:** The fixed horizontal bottom bar (`ContactBar.tsx`) consumes permanent vertical screen space on mobile and obscures lower page content. A universal floating action hub positioned on the bottom right cleanly replaces the mobile bottom bar on all screen sizes, providing an omnipresent, continuous jumping entry point for all 3 contact channels (Call, WhatsApp, Form) without blocking content.
+
+**Goal:** Create `src/components/ui/FloatingContactHub.tsx` fixed on the bottom right. Powered by GSAP, the button continuously jumps smoothly up and down to the same peak height (frictionless perpetual bounce). Clicking the button pauses the jump and reveals the 3 contact channels with a staggered spring animation. Remove the redundant `ContactBar.tsx` from the layout.
+
+**Approach:** Client Component (`src/components/ui/FloatingContactHub.tsx`) utilizing GSAP timeline/tween (`gsap.to(buttonRef, { y: -16, duration: 0.6, repeat: -1, yoyo: true, ease: "power1.inOut" })`). When toggled open, the jump pauses and the 3 action buttons pop outward (`gsap.fromTo(items, { scale: 0, opacity: 0, y: 15 }, { scale: 1, opacity: 1, y: 0, stagger: 0.07, ease: "back.out(2)" })`). Replace `<ContactBar />` in `src/app/layout.tsx` with `<FloatingContactHub />`. Supports outside click and `Escape` key close. Bypasses continuous jump when `prefers-reduced-motion: reduce` is detected.
+
+---
+
+- [ ] **RED — Component Test (`src/tests/FloatingContactHub.test.tsx`):**
+  - [ ] Test: Render `<FloatingContactHub />` — assert main floating trigger button is present in the DOM
+  - [ ] Test: Assert trigger button has accessible attributes (`aria-label`, `aria-expanded="false"`, `aria-haspopup="menu"`)
+  - [ ] Test: Click trigger button — assert menu expands (`aria-expanded="true"`) and all 3 channel links render:
+    - [ ] Phone call CTA (`href` starts with `tel:`)
+    - [ ] WhatsApp CTA (`href` starts with `https://wa.me/`)
+    - [ ] Contact form CTA (`href="/contact/"`)
+  - [ ] Test: Pressing `Escape` or clicking close toggles menu back to collapsed
+  - [ ] Test: Assert GSAP infinite bounce animation initializes when `prefers-reduced-motion: reduce` is false
+  - [ ] Test: Assert GSAP infinite bounce is NOT started when `prefers-reduced-motion: reduce` is true
+  - [ ] **Run — confirm RED (component does not exist yet)**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Create `src/components/ui/FloatingContactHub.tsx` + `FloatingContactHub.module.css`
+  - [ ] Setup GSAP infinite vertical bounce tween on trigger button with brand color theme
+  - [ ] Implement toggle state with GSAP staggered reveal/collapse for the 3 channel buttons
+  - [ ] Add click-outside and keyboard `Escape` event listeners
+  - [ ] Mount `<FloatingContactHub />` in `src/app/layout.tsx` and remove redundant `<ContactBar />`
+  - [ ] Run component tests — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Dev server running → navigate to `http://127.0.0.1:3007/`
+  - [ ] Both desktop and mobile viewports display the branded floating contact button on the bottom right continuously jumping smoothly up and down to the same height
+  - [ ] Mobile bottom screen is clean — no horizontal bottom bar blocking page content
+  - [ ] Click floating button → jump pauses immediately → 3 channel buttons (Call, WhatsApp, Form) pop upward with staggered spring animation
+  - [ ] Click "Call" → triggers phone dialer; click "WhatsApp" → opens WhatsApp chat; click "Contact Form" → navigates to `/contact/`
+  - [ ] Click outside or press `Escape` → channel menu closes smoothly and floating button resumes jumping
+  - [ ] Turn on `prefers-reduced-motion` in DevTools → button rests statically without jumping
+  - [ ] ✅ Done
+
 
 ---
 
@@ -581,6 +756,201 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 - [ ] **Verification chain:**
   - [ ] `/privacy-policy/` renders — breadcrumb shows Home > Privacy Policy
   - [ ] Navigate to a non-existent URL — custom 404 page shows (Apache serves `/404/index.html` per `.htaccess` `ErrorDocument 404` rule)
+  - [ ] Ensure card uses `var(--space-card)`, `var(--font-h3)` for plan name, `var(--font-h2)` for price
+  - [ ] Desktop-only scale: `.planCard--highlighted { transform: scale(1.04); }` inside `@media (min-width: 1024px)`
+  - [ ] Run component test — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Render all 4 plan cards side by side at 1024px — highlighted card is visually elevated
+  - [ ] At 600px: 2 columns, cards equal height
+  - [ ] At 375px: 1 column, highlighted card does NOT scale (correct — scale only on desktop)
+  - [ ] ✅ Done
+
+---
+
+#### W-302 — Plans Page Layout & Schema
+
+**Root cause:** The plans page is the primary conversion page — it must render the full pricing table with all 4 tiers, GST disclaimer, add-ons, and proper SEO schemas.
+
+**Goal:** `/plans/` renders all 4 plan cards, GST note, add-ons section, and injects `Service` schema + `ItemList` schema.
+
+---
+
+- [ ] **RED — Unit Test:**
+  - [ ] Test: `generatePlansItemListSchema(BROADBAND_PLANS)` returns `@type: 'ItemList'` with `numberOfItems: 4`
+  - [ ] Test: Each item in `itemListElement` has `position`, `item.name`, `item.offers.price`
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Add `generatePlansItemListSchema()` to `schemaGenerators.ts`
+  - [ ] Create `src/app/plans/page.tsx` with `metadata` export + 4 plan cards grid + GST note
+  - [ ] Inject `<JsonLd>` for `Service` schema and `ItemList` schema
+  - [ ] Add-ons section below the plans grid
+  - [ ] Run unit test — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Navigate to `/plans/` — all 4 plan cards visible
+  - [ ] GST disclaimer visible below grid ("All prices exclude 18% GST")
+  - [ ] At 375px: 1 column, stacked cards, no horizontal scroll
+  - [ ] At 1024px: 4 columns, highlighted card elevated
+  - [ ] Build `out/plans/index.html` — JSON-LD for ItemList present in `<head>`
+  - [ ] ✅ Done
+
+---
+
+#### W-303 — Plans E2E Test
+
+- [ ] **E2E (`tests/plans.spec.ts`):**
+  - [ ] Test: Navigate to `/plans/` — 4 plan cards render
+  - [ ] Test: "Most Popular" badge is visible on exactly 1 card
+  - [ ] Test: No plan card has an empty price (data integrity)
+  - [ ] Test: All CTA buttons have `href` starting with `tel:` or `https://wa.me/`
+  - [ ] Test (mobile 375px): 1 column layout, no horizontal scroll
+  - [ ] **Run `npm run test:e2e` — confirm all pass**
+
+---
+
+## Phase 4 — Lease Lines Page (`/lease-lines/`)
+> Goal: Enterprise page with features, use cases, and quote CTA. Zero pricing.
+
+---
+
+#### W-401 — Lease Lines Page
+
+**Root cause:** Enterprise clients need a dedicated page explaining the benefits of a dedicated line. Pricing must NOT appear — enterprise deals are custom quotes only. The page must have its own `Service` schema with no price data.
+
+**Goal:** `/lease-lines/` renders with H1, 6 feature blocks, use-case chips, and a "Request a Quote" button that links to `/contact/`. No price anywhere on the page.
+
+---
+
+- [ ] **RED — Component + E2E Test:**
+  - [ ] Unit test: `generateServiceSchema({ name: 'Enterprise Lease Line', ... })` — assert `@type: 'Service'`, assert no `offers` key (no pricing)
+  - [ ] E2E test: Navigate to `/lease-lines/` — assert NO element contains `₹` or `price` text
+  - [ ] E2E test: "Request a Quote" button is visible and links to `/contact/`
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Create `src/app/lease-lines/page.tsx` with metadata + hero H1 + features grid + use cases + CTA
+  - [ ] Create `src/data/leaseLines.ts` with `LEASE_LINE_FEATURES` (if not done in Phase 1)
+  - [ ] Inject `<JsonLd>` for `Service` schema (lease line) and `BreadcrumbList`
+  - [ ] Run tests — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Navigate to `/lease-lines/` — H1 is "Enterprise Internet Lease Lines" (or similar)
+  - [ ] 6 feature blocks visible in a responsive grid
+  - [ ] No price text anywhere on page
+  - [ ] "Request a Quote" button links to `/contact/`
+  - [ ] At 375px: features stack in 1 column, no horizontal scroll
+  - [ ] Breadcrumb schema visible in page source: Home > Lease Lines
+  - [ ] ✅ Done
+
+---
+
+## Phase 5 — Coverage, About, Contact Pages
+
+---
+
+#### W-501 — Coverage Page (`/coverage/`)
+
+**Root cause:** Prospective customers need to know if their area is served before they call.
+
+**Goal:** `/coverage/` explains the service area in text, provides a feasibility contact CTA, and has `WebPage` + `BreadcrumbList` schemas.
+
+---
+
+- [ ] **RED — E2E Test (`tests/coverage.spec.ts`):**
+  - [ ] Test: Navigate to `/coverage/` — page title includes "Coverage"
+  - [ ] Test: At least one CTA linking to `/contact/` or `tel:` is present
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Create `src/app/coverage/page.tsx` with metadata + content + CTAs + `<JsonLd>`
+  - [ ] Run E2E test — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Navigate to `/coverage/` — content about service areas renders
+  - [ ] Contact/feasibility CTA visible
+  - [ ] ✅ Done
+
+---
+
+#### W-502 — About Page (`/about/`)
+
+**Root cause:** Trust is built through story. An About page humanizes the brand for both residential and business customers.
+
+**Goal:** `/about/` renders with company story, values, and an `AboutPage` + `BreadcrumbList` schema.
+
+---
+
+- [ ] **RED — Unit Test:**
+  - [ ] Test: `generateWebPageSchema({ type: 'AboutPage', ... })` — assert `@type: 'AboutPage'`
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Create `src/app/about/page.tsx` with metadata + content + `<JsonLd>`
+  - [ ] Run unit test — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Navigate to `/about/` — content renders correctly at all viewports
+  - [ ] ✅ Done
+
+---
+
+#### W-503 — Contact Page & Form (`/contact/`)
+
+**Root cause:** The contact page is where all three channels converge. The form is the primary backend-touching element — it must submit to `contact.php` and show success/error feedback.
+
+**Goal:** `/contact/` renders all 3 contact channels (call, WhatsApp, form) prominently. The form submits via `fetch('/contact.php')` and shows a success message on completion or an error message on failure.
+
+**Approach:** `ContactForm.tsx` as a Client Component with `useState` for form fields and submission state. Playwright E2E test mocks the `/contact.php` POST endpoint using `page.route()`.
+
+---
+
+- [ ] **RED — Component Test (`src/tests/ContactForm.test.tsx`):**
+  - [ ] Test: Render `<ContactForm />` — assert name, email, phone, message fields present
+  - [ ] Test: Submit with empty fields — assert error state (form does not submit)
+  - [ ] Test: Submit with valid data — mock `fetch` to return `{success: true}` — assert success message renders
+  - [ ] Test: Submit with valid data — mock `fetch` to return `{success: false}` — assert error message renders
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Create `src/components/ui/ContactForm.tsx` (Client Component) with form state + fetch + success/error UI
+  - [ ] Create `contact.php` (saved in project root as `contact.php`, deployed to Hostinger separately)
+  - [ ] Create `src/app/contact/page.tsx` with metadata, all 3 channels, `<ContactForm />`, `LocalBusiness` schema, `ContactPage` schema
+  - [ ] Run component tests — **confirm GREEN**
+
+- [ ] **GREEN — E2E Test (`tests/contact.spec.ts`):**
+  - [ ] Mock `POST /contact.php` to return `{success: true}` using `page.route()`
+  - [ ] Test: Fill form fields → submit → success message appears
+  - [ ] Test: Phone CTA visible and has `href` starting with `tel:`
+  - [ ] Test: WhatsApp CTA visible and has `href` starting with `https://wa.me/`
+  - [ ] Run E2E test — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] Navigate to `/contact/` — 3 contact channels displayed prominently
+  - [ ] Fill form → submit → success message appears
+  - [ ] On mobile: all 3 CTAs are tappable (44px+ touch targets)
+  - [ ] ✅ Done
+
+---
+
+#### W-504 — Legal Pages & Custom 404
+
+- [ ] **RED — E2E Test:**
+  - [ ] Test: Navigate to `/privacy-policy/` — page renders, title contains "Privacy"
+  - [ ] Test: Navigate to `/terms-of-service/` — page renders
+  - [ ] Test: Navigate to `/this-does-not-exist/` — 404 page renders, contains link back to home
+  - [ ] **Run — confirm RED**
+
+- [ ] **GREEN — Implementation:**
+  - [ ] Create `src/app/privacy-policy/page.tsx` with basic legal content + metadata
+  - [ ] Create `src/app/terms-of-service/page.tsx` with basic legal content + metadata
+  - [ ] Create `src/app/not-found.tsx` with branded 404 design + "Go Home" CTA
+  - [ ] Run E2E tests — **confirm GREEN**
+
+- [ ] **Verification chain:**
+  - [ ] `/privacy-policy/` renders — breadcrumb shows Home > Privacy Policy
+  - [ ] Navigate to a non-existent URL — custom 404 page shows (Apache serves `/404/index.html` per `.htaccess` `ErrorDocument 404` rule)
   - [ ] "Go Home" CTA on 404 page navigates to `/`
   - [ ] ✅ Done
 
@@ -592,10 +962,10 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 #### W-601 — Hero Poster Image
 
-- [ ] **Root cause:** iOS Safari will not autoplay video without `muted + playsInline`. Even with both set, slow connections on mobile need an instant visual. The poster image is the fallback.
-- [ ] Extract still frame: `ffmpeg -i Hero.mp4 -ss 00:00:02 -frames:v 1 public/hero-poster.jpg`
-- [ ] Verify `hero-poster.jpg` is visually compelling (good frame of the city skyline)
-- [ ] Verify `poster="/hero-poster.jpg"` is set on the `<video>` tag
+- [x] **Root cause:** iOS Safari will not autoplay video without `muted + playsInline`. Even with both set, slow connections on mobile need an instant visual. The poster image is the fallback.
+- [x] Extract still frame: `ffmpeg -i Hero.mp4 -ss 00:00:02 -frames:v 1 public/hero-poster.jpg`
+- [x] Verify `hero-poster.jpg` is visually compelling (good frame of the city skyline)
+- [x] Verify `poster="/hero-poster.jpg"` is set on the `<video>` tag
 
 ---
 
@@ -657,14 +1027,15 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 ---
 
 ## Summary
-
+ 
 | Phase | Description | Status |
 |---|---|---|
-| Phase 0 | Project Foundation & Quality Infrastructure | 🔴 NOT STARTED |
-| Phase 1 | SEO Foundation & Global Layout | ⏸️ BLOCKED (needs P0) |
-| Phase 2 | Home Page | ⏸️ BLOCKED |
-| Phase 3 | Plans Page | ⏸️ BLOCKED |
-| Phase 4 | Lease Lines Page | ⏸️ BLOCKED |
+| Phase 0 | Project Foundation & Quality Infrastructure | ✅ COMPLETED |
+| Phase 1 | SEO Foundation & Global Layout | ✅ COMPLETED |
+| Phase 2 | Home Page | ✅ COMPLETED |
+| Phase 2.5 | Lenis Smooth Scroll & GSAP Animations | 🟢 READY TO START |
+| Phase 3 | Plans Page | ⏸️ BLOCKED (needs P2.5) |
+| Phase 4 | Lease Lines Page | ⏸️ BLOCKED (needs P3) |
 | Phase 5 | Coverage, About, Contact Pages | ⏸️ BLOCKED |
 | Phase 6 | Polish, Performance & Pre-Launch | ⏸️ BLOCKED |
 | Phase 7 | Blog | 🔵 FUTURE |

@@ -1,6 +1,6 @@
 .footer {
-  background-color: #070714;
-  border-top: 1px solid var(--color-border);
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
   padding-top: var(--space-section-sm);
   padding-bottom: 2rem;
   margin-top: auto;
@@ -26,7 +26,7 @@
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--color-text-white);
+  color: #0f172a;
 }
 
 .brandAccent {
@@ -34,7 +34,7 @@
 }
 
 .brandDescription {
-  color: var(--color-text-muted);
+  color: #64748b;
   font-size: var(--font-small);
   max-width: 360px;
   line-height: 1.6;
@@ -53,23 +53,23 @@
   align-items: center;
   gap: 0.5rem;
   font-size: var(--font-small);
-  color: var(--color-text-muted);
+  color: #475569;
 }
 
 .contactLink {
-  color: var(--color-text-muted);
+  color: #475569;
   transition: color var(--transition-fast);
 }
 
 .contactLink:hover {
-  color: var(--color-text-white);
+  color: var(--color-primary);
 }
 
 .footerHeading {
   font-family: var(--font-heading-family, sans-serif);
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--color-text-white);
+  color: #0f172a;
   margin-bottom: 1rem;
 }
 
@@ -82,7 +82,7 @@
 
 .footerLink {
   font-size: var(--font-small);
-  color: var(--color-text-muted);
+  color: #64748b;
   transition: all var(--transition-fast);
 }
 
@@ -94,14 +94,14 @@
 .bottomBar {
   margin-top: var(--space-section-sm);
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid #f1f5f9;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   font-size: var(--font-small);
-  color: var(--color-text-dim);
+  color: #94a3b8;
 }
 
 @media (min-width: 640px) {
