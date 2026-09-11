@@ -23,39 +23,32 @@ export default function PlanCard({ plan }: PlanCardProps) {
 
   return (
     <div className={`${styles.card} ${isHighlighted ? styles.highlighted : ''}`}>
-      {/* Badge if present */}
+      {/* Top Center Badge if present */}
       {plan.badge && (
         <div className={styles.badgeContainer}>
-          <span className={styles.cardBadge}>{plan.badge}</span>
+          <span className={styles.cardBadge}>★ {plan.badge}</span>
         </div>
       )}
 
-      {/* Plan Header */}
+      {/* Plan Header - Centered Name & Speed */}
       <div className={styles.cardHeader}>
         <h3 className={styles.planName}>{plan.name}</h3>
-        <div className={styles.speedBadge}>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-          </svg>
+        <div className={styles.speedDisplay}>
           <span>{plan.speed}</span>
         </div>
       </div>
 
-      {/* Price */}
+      {/* Price - Centered with /mo and GST note */}
       <div className={styles.priceContainer}>
-        <span className={styles.price}>{plan.priceDisplay}</span>
-        <span className={styles.pricePeriod}>/month (excl. GST)</span>
+        <div className={styles.priceRow}>
+          <span className={styles.price}>{plan.priceDisplay}</span>
+          <span className={styles.priceUnit}>/mo</span>
+        </div>
+        <span className={styles.pricePeriod}>+ 18% GST</span>
       </div>
+
+      {/* Divider */}
+      <div className={styles.divider} aria-hidden="true" />
 
       {/* Features list */}
       <ul className={styles.featuresList}>
@@ -68,7 +61,7 @@ export default function PlanCard({ plan }: PlanCardProps) {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="3"
+              strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
               aria-hidden="true"
@@ -87,7 +80,7 @@ export default function PlanCard({ plan }: PlanCardProps) {
           className={`btn ${isHighlighted ? 'btn-primary' : styles.cardBtnSecondary} ${styles.cardBtn}`}
           aria-label={`${plan.ctaLabel} - ${plan.name} ${plan.speed}`}
         >
-          {plan.ctaLabel}
+          {plan.ctaLabel} →
         </a>
       </div>
     </div>

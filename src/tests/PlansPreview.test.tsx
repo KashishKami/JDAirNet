@@ -11,12 +11,12 @@ describe('PlansPreview', () => {
     expect(screen.getByText(/Choose the perfect speed for streaming, gaming, and work/i)).toBeInTheDocument()
   })
 
-  it('renders exactly 3 featured plan cards', () => {
+  it('renders exactly 3 featured plan cards with Home in the middle', () => {
     render(<PlansPreview />)
 
+    expect(screen.getByRole('heading', { level: 3, name: 'Starter' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 3, name: 'Home' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { level: 3, name: 'Power' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { level: 3, name: 'Ultra' })).toBeInTheDocument()
   })
 
   it('renders "View All Plans" link pointing to /plans/', () => {

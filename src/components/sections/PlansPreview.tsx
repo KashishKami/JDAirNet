@@ -17,8 +17,8 @@ export default function PlansPreview() {
     duration: 0.8,
   })
 
-  // Show the 3 featured plans (indices 1, 2, 3: Home 100Mbps, Power 200Mbps, Ultra 500Mbps)
-  const previewPlans = BROADBAND_PLANS.slice(1, 4)
+  // Show 3 plans with Home (Most Popular) in the middle: Starter (0), Home (1), Power (2)
+  const previewPlans = [BROADBAND_PLANS[0], BROADBAND_PLANS[1], BROADBAND_PLANS[2]]
 
   return (
     <section className={styles.section} aria-labelledby="plans-preview-title">

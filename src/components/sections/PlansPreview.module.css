@@ -33,10 +33,11 @@
 /* 3-Card Grid for Preview */
 .grid {
   display: grid;
-  gap: var(--space-gap-md);
+  gap: 2rem;
   grid-template-columns: 1fr;
   margin-bottom: 3.5rem;
   align-items: stretch;
+  padding: 1.5rem 0;
 }
 
 @media (min-width: 640px) {
@@ -48,6 +49,9 @@
 @media (min-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 1.75rem;
+    padding: 2rem 0;
   }
 }
 

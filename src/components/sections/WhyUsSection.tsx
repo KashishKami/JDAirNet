@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useRef } from 'react'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import React, { useRef, useEffect } from 'react'
+import { gsap } from '@/lib/animations'
 import styles from './WhyUsSection.module.css'
 
 const FEATURES = [
   {
+    num: '01',
     title: '99.9% Network Uptime',
     description: 'Redundant fiber backbone rings and proactive NOC monitoring ensure continuous internet availability without interruptions.',
     icon: (
@@ -15,6 +16,7 @@ const FEATURES = [
     ),
   },
   {
+    num: '02',
     title: 'Ultra-Low Latency',
     description: 'Direct peering with major cloud providers, CDN networks, and gaming servers for instantaneous response times and zero lag.',
     icon: (
@@ -24,6 +26,7 @@ const FEATURES = [
     ),
   },
   {
+    num: '03',
     title: '24/7 Local Support',
     description: 'No endless IVR loops. Direct access to our dedicated local technical team ready to assist you over phone, WhatsApp, or on-site.',
     icon: (
@@ -33,6 +36,7 @@ const FEATURES = [
     ),
   },
   {
+    num: '04',
     title: 'Dual-Band Wi-Fi 6 Routers',
     description: 'Every plan comes paired with next-generation gigabit routers engineered to deliver seamless coverage throughout your home or office.',
     icon: (
@@ -42,6 +46,7 @@ const FEATURES = [
     ),
   },
   {
+    num: '05',
     title: 'Symmetric Speeds',
     description: 'Enjoy equal download and upload speeds — essential for seamless 4K video conferencing, large file backups, and live streaming.',
     icon: (
@@ -52,6 +57,7 @@ const FEATURES = [
     ),
   },
   {
+    num: '06',
     title: 'Zero Hidden FUP',
     description: 'Truly unlimited high-speed broadband with transparent pricing and zero mid-month speed throttling. What you see is what you get.',
     icon: (
@@ -63,17 +69,89 @@ const FEATURES = [
 ]
 
 export default function WhyUsSection() {
-  const gridRef = useRef<HTMLDivElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
 
-  useScrollReveal(gridRef, {
-    selector: `.${styles.grid} > *`,
-    y: 30,
-    stagger: 0.1,
-    duration: 0.75,
-  })
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (process.env.NODE_ENV === 'test') return
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) return
+
+    const section = sectionRef.current
+    const track = trackRef.current
+    if (!section || !track) return
+
+    const ctx = gsap.context(() => {
+      const getScrollDistance = () => {
+        const viewportWidth = track.parentElement?.clientWidth || window.innerWidth
+        return Math.max(0, track.scrollWidth - viewportWidth)
+      }
+
+      // 1. Master horizontal translation tween (starts when section arrives at top of viewport)
+      const horizontalTween = gsap.to(track, {
+        x: () => -getScrollDistance(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 1,
+          start: 'top top',
+          end: () => `+=${getScrollDistance() + 450}`,
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+        },
+      })
+
+      // 2. Playful alternating entrance for cards as they enter the screen
+      const cards = track.querySelectorAll<HTMLElement>(`.${styles.card}`)
+      cards.forEach((card, index) => {
+        // First card starts immediately visible in resting position
+        if (index === 0) {
+          gsap.set(card, { y: 0, rotationZ: 0, scale: 1, opacity: 1 })
+          return
+        }
+
+        const isEven = index % 2 === 0
+        const initialY = isEven ? 75 : -65
+        const initialRotation = isEven ? 5 : -5
+
+        gsap.fromTo(
+          card,
+          {
+            y: initialY,
+            rotationZ: initialRotation,
+            scale: 0.88,
+            opacity: 0.35,
+          },
+          {
+            y: 0,
+            rotationZ: 0,
+            scale: 1,
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              containerAnimation: horizontalTween,
+              start: 'left 95%',
+              end: 'left 45%',
+              scrub: 0.6,
+            },
+          }
+        )
+      })
+
+      return () => {
+        horizontalTween.kill()
+      }
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <section className={styles.section} aria-labelledby="why-us-title">
+    <section ref={sectionRef} className={styles.section} aria-labelledby="why-us-title">
       <div className="container">
         <div className={styles.header}>
           <div className={styles.eyebrow}>
@@ -87,19 +165,25 @@ export default function WhyUsSection() {
           </p>
         </div>
 
-        <div ref={gridRef} className={styles.grid}>
-
-          {FEATURES.map((feature, idx) => (
-            <div key={idx} className={styles.card}>
-              <div className={styles.iconWrapper} aria-hidden="true">
-                {feature.icon}
+        {/* Horizontal Track Viewport */}
+        <div className={styles.trackViewport}>
+          <div ref={trackRef} className={styles.track}>
+            {FEATURES.map((feature, idx) => (
+              <div key={idx} className={styles.card}>
+                <div className={styles.cardHeader}>
+                  <div className={styles.iconWrapper} aria-hidden="true">
+                    {feature.icon}
+                  </div>
+                  <span className={styles.cardNum}>{feature.num}</span>
+                </div>
+                <h3 className={styles.cardTitle}>{feature.title}</h3>
+                <p className={styles.cardText}>{feature.description}</p>
               </div>
-              <h3 className={styles.cardTitle}>{feature.title}</h3>
-              <p className={styles.cardText}>{feature.description}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
   )
 }
+

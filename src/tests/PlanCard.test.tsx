@@ -14,7 +14,8 @@ describe('PlanCard', () => {
     expect(screen.getByRole('heading', { level: 3, name: starterPlan.name })).toBeInTheDocument()
     expect(screen.getByText(starterPlan.speed)).toBeInTheDocument()
     expect(screen.getByText(starterPlan.priceDisplay)).toBeInTheDocument()
-    expect(screen.getByText(/\/month/i)).toBeInTheDocument()
+    expect(screen.getByText(/\/mo/i)).toBeInTheDocument()
+    expect(screen.getByText(/\+ 18% GST/i)).toBeInTheDocument()
   })
 
   it('renders all features included in the plan', () => {
