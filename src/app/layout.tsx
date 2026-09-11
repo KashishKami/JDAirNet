@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Unbounded, Kanit, Poppins } from 'next/font/google'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import ContactBar from '@/components/ui/ContactBar'
+import FloatingContactHub from '@/components/ui/FloatingContactHub'
+import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider'
 import JsonLd from '@/components/seo/JsonLd'
 import { generateOrganizationSchema, generateWebSiteSchema } from '@/lib/schemaGenerators'
 import '@/styles/globals.css'
@@ -109,11 +110,14 @@ export default function RootLayout({
         <JsonLd schema={webSiteSchema} />
       </head>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <ContactBar />
+        <SmoothScrollProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <FloatingContactHub />
+        </SmoothScrollProvider>
       </body>
     </html>
   )
 }
+

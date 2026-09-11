@@ -1,18 +1,27 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { HOME_FAQS } from '@/data/faqs'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import styles from './FaqSection.module.css'
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const accordionRef = useRef<HTMLDivElement>(null)
+
+  useScrollReveal(accordionRef, {
+    selector: `.${styles.faqItem}`,
+    y: 20,
+    stagger: 0.08,
+    duration: 0.65,
+  })
 
   const toggleFaq = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index))
   }
 
   return (
-    <section className={styles.section} aria-labelledby="faq-section-title">
+    <section id="faq" className={styles.section} aria-labelledby="faq-section-title">
       <div className="container">
         {/* Section Header */}
         <div className={styles.header}>
@@ -28,7 +37,8 @@ export default function FaqSection() {
         </div>
 
         {/* Accordion Container */}
-        <div className={styles.accordionContainer}>
+        <div ref={accordionRef} className={styles.accordionContainer}>
+
           {HOME_FAQS.map((faq, index) => {
             const isOpen = openIndex === index
             const questionId = `faq-q-${index}`

@@ -1,15 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useRef } from 'react'
 import Link from 'next/link'
 import { CONTACT_INFO } from '@/data/contact'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import styles from './ContactCTA.module.css'
 
 export default function ContactCTA() {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  useScrollReveal(cardRef, {
+    y: 25,
+    scale: 0.97,
+    duration: 0.75,
+  })
+
   return (
     <section className={styles.section} aria-labelledby="cta-title">
       <div className="container">
-        <div className={styles.card}>
+        <div ref={cardRef} className={styles.card}>
+
           <div className={styles.eyebrow}>
             <span className="badge badge-primary">GET CONNECTED TODAY</span>
           </div>

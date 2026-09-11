@@ -67,8 +67,9 @@ test.describe('Home Page E2E', () => {
     })
     expect(hasHorizontalOverflow).toBe(false)
 
-    // Sticky mobile contact bar should be visible on 375px
-    const contactBar = page.locator('aside[aria-label="Quick Contact Actions"]')
-    await expect(contactBar).toBeVisible()
+    // Floating contact hub should be visible on 375px
+    const contactHub = page.locator('button[aria-label="Contact Us"]')
+    await expect(contactHub).toBeVisible()
   })
 })
+

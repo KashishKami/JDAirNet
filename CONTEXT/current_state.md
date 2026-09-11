@@ -3,7 +3,8 @@
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
 **Last Updated:** 2026-09-12
-**Current Active Phase:** Phase 2.5 (Lenis Smooth Scroll & GSAP Animations)
+**Current Active Phase:** Phase 3 (Plans Page `/plans/`)
+
 
 ---
 
@@ -405,27 +406,27 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component Test (`src/tests/SmoothScrollProvider.test.tsx`):**
-  - [ ] Test: Render `<SmoothScrollProvider><div>Content</div></SmoothScrollProvider>` — assert children render correctly
-  - [ ] Test: Assert Lenis instance initializes on mount when `window.matchMedia('(prefers-reduced-motion: reduce)')` is false
-  - [ ] Test: Assert Lenis is NOT initialized (or destroyed) when user prefers reduced motion
-  - [ ] Test: Assert cleanup `lenis.destroy()` is called on component unmount
-  - [ ] **Run — confirm RED (component does not exist yet)**
+- [x] **RED — Component Test (`src/tests/SmoothScrollProvider.test.tsx`):**
+  - [x] Test: Render `<SmoothScrollProvider><div>Content</div></SmoothScrollProvider>` — assert children render correctly
+  - [x] Test: Assert Lenis instance initializes on mount when `window.matchMedia('(prefers-reduced-motion: reduce)')` is false
+  - [x] Test: Assert Lenis is NOT initialized (or destroyed) when user prefers reduced motion
+  - [x] Test: Assert cleanup `lenis.destroy()` is called on component unmount
+  - [x] **Run — confirm RED (component does not exist yet)**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Install dependency: `npm install lenis`
-  - [ ] Create `src/components/providers/SmoothScrollProvider.tsx` (Client Component)
-  - [ ] Wire RAF loop (`requestAnimationFrame`) and window resize listener
-  - [ ] Handle anchor link clicks (`a[href^="#"]`) via `lenis.scrollTo(target)`
-  - [ ] Mount `<SmoothScrollProvider>` inside `src/app/layout.tsx`
-  - [ ] Run component tests — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Install dependency: `npm install lenis`
+  - [x] Create `src/components/providers/SmoothScrollProvider.tsx` (Client Component)
+  - [x] Wire RAF loop (`requestAnimationFrame`) and window resize listener
+  - [x] Handle anchor link clicks (`a[href^="#"]`) via `lenis.scrollTo(target)`
+  - [x] Mount `<SmoothScrollProvider>` inside `src/app/layout.tsx`
+  - [x] Run component tests — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Dev server running → navigate to `http://127.0.0.1:3007/`
-  - [ ] Mouse wheel / trackpad scrolling displays smooth inertial deceleration
-  - [ ] Clicking footer link "Frequently Asked Questions" (`/contact/#faq` or `#faq`) executes smooth scrolling deceleration to the target element
-  - [ ] Toggling browser "prefers-reduced-motion: reduce" in DevTools disables inertia immediately and uses instant native scroll
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Dev server running → navigate to `http://127.0.0.1:3007/`
+  - [x] Mouse wheel / trackpad scrolling displays smooth inertial deceleration
+  - [x] Clicking footer link "Frequently Asked Questions" (`/contact/#faq` or `#faq`) executes smooth scrolling deceleration to the target element
+  - [x] Toggling browser "prefers-reduced-motion: reduce" in DevTools disables inertia immediately and uses instant native scroll
+  - [x] ✅ Done
 
 ---
 
@@ -443,27 +444,27 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Unit / Hook Test (`src/tests/useScrollReveal.test.ts`):**
-  - [ ] Test: Invoke `useScrollReveal()` with container ref — assert GSAP context initializes ScrollTrigger batches
-  - [ ] Test: Assert cleanup `ctx.revert()` is called on unmount
-  - [ ] Test: Assert animations skip immediately when `prefers-reduced-motion: reduce` is active
-  - [ ] **Run — confirm RED**
+- [x] **RED — Unit / Hook Test (`src/tests/useScrollReveal.test.ts`):**
+  - [x] Test: Invoke `useScrollReveal()` with container ref — assert GSAP context initializes ScrollTrigger batches
+  - [x] Test: Assert cleanup `ctx.revert()` is called on unmount
+  - [x] Test: Assert animations skip immediately when `prefers-reduced-motion: reduce` is active
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Install dependency: `npm install gsap`
-  - [ ] Create `src/lib/animations.ts` (configures GSAP ScrollTrigger integration with Lenis)
-  - [ ] Create `src/hooks/useScrollReveal.ts` custom hook for section/card batch reveals
-  - [ ] Apply `useScrollReveal` to `PlansPreview.tsx`, `WhyUsSection.tsx`, `FaqSection.tsx`, and `ContactCTA.tsx`
-  - [ ] Run unit tests — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Install dependency: `npm install gsap`
+  - [x] Create `src/lib/animations.ts` (configures GSAP ScrollTrigger integration with Lenis)
+  - [x] Create `src/hooks/useScrollReveal.ts` custom hook for section/card batch reveals
+  - [x] Apply `useScrollReveal` to `PlansPreview.tsx`, `WhyUsSection.tsx`, `FaqSection.tsx`, and `ContactCTA.tsx`
+  - [x] Run unit tests — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Scroll down homepage on desktop:
+- [x] **Verification chain:**
+  - [x] Scroll down homepage on desktop:
     - Plans Preview section: 3 plan cards stagger fade up into view as user reaches viewport trigger
     - Why Us section: 6 feature blocks stagger animate smoothly from bottom to top
     - FAQ section: accordion container fades in with crisp timing
     - Contact CTA: card gently expands into viewport
-  - [ ] Scroll back up and down: triggers re-settle cleanly without flickering or layout shift
-  - [ ] ✅ Done
+  - [x] Scroll back up and down: triggers re-settle cleanly without flickering or layout shift
+  - [x] ✅ Done
 
 ---
 
@@ -475,19 +476,19 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **E2E (`tests/animations.spec.ts`):**
-  - [ ] Test: Navigate to `/` — assert Lenis scroll wrapper / class is present
-  - [ ] Test: Scroll through all sections — assert all animated elements end with `opacity: 1` and `transform: none` (or equivalent visible state)
-  - [ ] Test: All interactive elements (CTA buttons, FAQ accordion headers, nav links) remain clickable and functional after animation completes
-  - [ ] Test (mobile 375px): Smooth scroll and touch events do not lock or glitch
-  - [ ] **Run `npm run test:e2e` — confirm all pass**
+- [x] **E2E (`tests/animations.spec.ts`):**
+  - [x] Test: Navigate to `/` — assert Lenis scroll wrapper / class is present
+  - [x] Test: Scroll through all sections — assert all animated elements end with `opacity: 1` and `transform: none` (or equivalent visible state)
+  - [x] Test: All interactive elements (CTA buttons, FAQ accordion headers, nav links) remain clickable and functional after animation completes
+  - [x] Test (mobile 375px): Smooth scroll and touch events do not lock or glitch
+  - [x] **Run `npm run test:e2e` — confirm all pass**
 
-- [ ] **Build & Quality Gates Verification:**
-  - [ ] Run `npm run lint` — exit code 0 (no unused variables, no any types)
-  - [ ] Run `npm run typecheck` — exit code 0
-  - [ ] Run `npm run test:unit` — all unit tests pass
-  - [ ] Run `npm run build` — static export generates cleanly in `out/` without SSR window/document errors
-  - [ ] ✅ Done
+- [x] **Build & Quality Gates Verification:**
+  - [x] Run `npm run lint` — exit code 0 (no unused variables, no any types)
+  - [x] Run `npm run typecheck` — exit code 0
+  - [x] Run `npm run test:unit` — all unit tests pass
+  - [x] Run `npm run build` — static export generates cleanly in `out/` without SSR window/document errors
+  - [x] ✅ Done
 
 ---
 
@@ -501,35 +502,61 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component Test (`src/tests/FloatingContactHub.test.tsx`):**
-  - [ ] Test: Render `<FloatingContactHub />` — assert main floating trigger button is present in the DOM
-  - [ ] Test: Assert trigger button has accessible attributes (`aria-label`, `aria-expanded="false"`, `aria-haspopup="menu"`)
-  - [ ] Test: Click trigger button — assert menu expands (`aria-expanded="true"`) and all 3 channel links render:
-    - [ ] Phone call CTA (`href` starts with `tel:`)
-    - [ ] WhatsApp CTA (`href` starts with `https://wa.me/`)
-    - [ ] Contact form CTA (`href="/contact/"`)
-  - [ ] Test: Pressing `Escape` or clicking close toggles menu back to collapsed
-  - [ ] Test: Assert GSAP infinite bounce animation initializes when `prefers-reduced-motion: reduce` is false
-  - [ ] Test: Assert GSAP infinite bounce is NOT started when `prefers-reduced-motion: reduce` is true
-  - [ ] **Run — confirm RED (component does not exist yet)**
+- [x] **RED — Component Test (`src/tests/FloatingContactHub.test.tsx`):**
+  - [x] Test: Render `<FloatingContactHub />` — assert main floating trigger button is present in the DOM
+  - [x] Test: Assert trigger button has accessible attributes (`aria-label`, `aria-expanded="false"`, `aria-haspopup="menu"`)
+  - [x] Test: Click trigger button — assert menu expands (`aria-expanded="true"`) and all 3 channel links render:
+    - [x] Phone call CTA (`href` starts with `tel:`)
+    - [x] WhatsApp CTA (`href` starts with `https://wa.me/`)
+    - [x] Contact form CTA (`href="/contact/"`)
+  - [x] Test: Pressing `Escape` or clicking close toggles menu back to collapsed
+  - [x] Test: Assert GSAP infinite bounce animation initializes when `prefers-reduced-motion: reduce` is false
+  - [x] Test: Assert GSAP infinite bounce is NOT started when `prefers-reduced-motion: reduce` is true
+  - [x] **Run — confirm RED (component does not exist yet)**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/components/ui/FloatingContactHub.tsx` + `FloatingContactHub.module.css`
-  - [ ] Setup GSAP infinite vertical bounce tween on trigger button with brand color theme
-  - [ ] Implement toggle state with GSAP staggered reveal/collapse for the 3 channel buttons
-  - [ ] Add click-outside and keyboard `Escape` event listeners
-  - [ ] Mount `<FloatingContactHub />` in `src/app/layout.tsx` and remove redundant `<ContactBar />`
-  - [ ] Run component tests — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/components/ui/FloatingContactHub.tsx` + `FloatingContactHub.module.css`
+  - [x] Setup GSAP infinite vertical bounce tween on trigger button with brand color theme
+  - [x] Implement toggle state with GSAP staggered reveal/collapse for the 3 channel buttons
+  - [x] Add click-outside and keyboard `Escape` event listeners
+  - [x] Mount `<FloatingContactHub />` in `src/app/layout.tsx` and remove redundant `<ContactBar />`
+  - [x] Run component tests — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Dev server running → navigate to `http://127.0.0.1:3007/`
-  - [ ] Both desktop and mobile viewports display the branded floating contact button on the bottom right continuously jumping smoothly up and down to the same height
-  - [ ] Mobile bottom screen is clean — no horizontal bottom bar blocking page content
-  - [ ] Click floating button → jump pauses immediately → 3 channel buttons (Call, WhatsApp, Form) pop upward with staggered spring animation
-  - [ ] Click "Call" → triggers phone dialer; click "WhatsApp" → opens WhatsApp chat; click "Contact Form" → navigates to `/contact/`
-  - [ ] Click outside or press `Escape` → channel menu closes smoothly and floating button resumes jumping
-  - [ ] Turn on `prefers-reduced-motion` in DevTools → button rests statically without jumping
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Dev server running → navigate to `http://127.0.0.1:3007/`
+  - [x] Both desktop and mobile viewports display the branded floating contact button on the bottom right continuously jumping smoothly up and down to the same height
+  - [x] Mobile bottom screen is clean — no horizontal bottom bar blocking page content
+  - [x] Click floating button → jump pauses immediately → 3 channel buttons (Call, WhatsApp, Form) pop upward with staggered spring animation
+  - [x] Click "Call" → triggers phone dialer; click "WhatsApp" → opens WhatsApp chat; click "Contact Form" → navigates to `/contact/`
+  - [x] Click outside or press `Escape` → channel menu closes smoothly and floating button resumes jumping
+  - [x] Turn on `prefers-reduced-motion` in DevTools → button rests statically without jumping
+  - [x] ✅ Done
+
+### Session Note — Phase 2.5 & Polish Completion (2026-09-12)
+
+- **Completed Phase 2.5 (Lenis Smooth Scroll, GSAP Choreography & Floating Contact Hub):**
+  - **Lenis Smooth Scroll (W-251):** Created `SmoothScrollProvider.tsx` wrapping the application, synchronizing RAF loop with GSAP ticker, providing anchor target deceleration, and honoring `prefers-reduced-motion`.
+  - **GSAP ScrollTrigger Reveal (W-252):** Created `src/lib/animations.ts` and `src/hooks/useScrollReveal.ts` providing scoped GSAP context animations to Plans Preview, Why Us features, FAQ accordion, and Contact CTA.
+  - **Floating Bouncing Contact Hub (W-254):**
+    - Created `FloatingContactHub.tsx` with a perpetual frictionless elastic ball bounce (zero energy loss, identical peak height of 26px on every bounce) with ground squash/stretch.
+    - Set `z-index: 99999` to ensure it always renders in front of video and all page sections.
+    - Removed side tooltip text ("Chat / Call with us") per user feedback for a clean, minimal floating trigger.
+    - Staggered spring popup for the 3 contact channels (Phone Call, WhatsApp, Form) with click-outside and `Escape` handlers.
+    - Removed redundant mobile bottom bar (`ContactBar`).
+  - **Navbar Responsive Scaling & Color Cleanup:**
+    - Standardized Navbar typography to fluid `clamp()` and responsive gaps.
+    - Added `white-space: nowrap` and flexible pill call button so text never wraps or clips on tablet/small screens.
+    - Fixed responsive drawer breakpoint cleanly at `< 1024px`.
+    - **Color Palette Enforcement:** Replaced all `#0f172a` / slate-tinted background colors across mobile drawer, buttons, and badges with pure neutral darks (`#111111`, `#0a0a0a`, `rgba(10, 10, 10, 0.98)`) and verified zero blue/slate tints remain.
+  - **Hero Video & Poster Asset Synchronization:**
+    - Replaced `public/Hero.mp4` with the updated 4K H.264 video asset (16.3 MB).
+    - Executed `node scripts/extract-poster.js` via ffmpeg to re-generate the first-frame poster `public/hero-poster.jpg`.
+    - Documented HTTP 206 byte-range browser caching behavior and hard-reload (`Ctrl + Shift + R`) steps for asset verification.
+  - **Tests & Quality Gates (W-253):**
+    - Created unit test suites for `SmoothScrollProvider`, `useScrollReveal`, `FloatingContactHub`, and E2E test suite `tests/animations.spec.ts`.
+    - Handled Playwright continuous animation stability checks using `{ force: true }` clicks on the perpetual bouncing hub.
+    - Verified 43/43 unit tests passing in Vitest and 35 E2E tests passing in Playwright.
+
 
 
 ---

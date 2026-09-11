@@ -50,8 +50,9 @@ test.describe('Global Layout & SEO Verification', () => {
     await expect(mobileMenu.locator('a', { hasText: 'Plans' })).toBeVisible()
     await expect(mobileMenu.locator('a', { hasText: 'Lease Lines' })).toBeVisible()
 
-    // Sticky mobile contact bar is visible on mobile
-    const contactBar = page.locator('aside[aria-label="Quick Contact Actions"]')
-    await expect(contactBar).toBeVisible()
+    // Floating contact hub is visible
+    const contactHub = page.locator('button[aria-label="Contact Us"]')
+    await expect(contactHub).toBeVisible()
   })
 })
+

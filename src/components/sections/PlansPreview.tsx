@@ -1,12 +1,22 @@
 'use client'
 
-import React from 'react'
+import React, { useRef } from 'react'
 import Link from 'next/link'
 import { BROADBAND_PLANS } from '@/data/plans'
 import PlanCard from '@/components/ui/PlanCard'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import styles from './PlansPreview.module.css'
 
 export default function PlansPreview() {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useScrollReveal(gridRef, {
+    selector: `.${styles.grid} > *`,
+    y: 35,
+    stagger: 0.12,
+    duration: 0.8,
+  })
+
   // Show the 3 featured plans (indices 1, 2, 3: Home 100Mbps, Power 200Mbps, Ultra 500Mbps)
   const previewPlans = BROADBAND_PLANS.slice(1, 4)
 
@@ -28,11 +38,12 @@ export default function PlansPreview() {
         </div>
 
         {/* 3-Card Grid */}
-        <div className={styles.grid}>
+        <div ref={gridRef} className={styles.grid}>
           {previewPlans.map((plan) => (
             <PlanCard key={plan.id} plan={plan} />
           ))}
         </div>
+
 
         {/* Bottom CTA to view all plans */}
         <div className={styles.actionWrapper}>

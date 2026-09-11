@@ -1,4 +1,7 @@
-import React from 'react'
+'use client'
+
+import React, { useRef } from 'react'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 import styles from './WhyUsSection.module.css'
 
 const FEATURES = [
@@ -60,6 +63,15 @@ const FEATURES = [
 ]
 
 export default function WhyUsSection() {
+  const gridRef = useRef<HTMLDivElement>(null)
+
+  useScrollReveal(gridRef, {
+    selector: `.${styles.grid} > *`,
+    y: 30,
+    stagger: 0.1,
+    duration: 0.75,
+  })
+
   return (
     <section className={styles.section} aria-labelledby="why-us-title">
       <div className="container">
@@ -75,7 +87,8 @@ export default function WhyUsSection() {
           </p>
         </div>
 
-        <div className={styles.grid}>
+        <div ref={gridRef} className={styles.grid}>
+
           {FEATURES.map((feature, idx) => (
             <div key={idx} className={styles.card}>
               <div className={styles.iconWrapper} aria-hidden="true">
