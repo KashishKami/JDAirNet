@@ -3,7 +3,7 @@
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
 **Last Updated:** 2026-09-12
-**Current Active Phase:** Phase 1 (Phase 0 Complete ✅)
+**Current Active Phase:** Phase 2 (Phase 1 Complete ✅)
 
 ---
 
@@ -171,23 +171,46 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 ## Phase 1 — SEO Foundation & Global Layout
 > Goal: Root layout, fonts, global CSS tokens, sitemap.ts, robots.ts, schemaGenerators.ts, Navbar, Footer, ContactBar — all wired up and SEO-verified. No page content yet.
 
-- [ ] **P1.1** — `src/styles/globals.css` — CSS custom properties (colors, fonts, spacing, breakpoints)
-- [ ] **P1.2** — `src/app/layout.tsx` — Fonts (Unbounded, Kanit, Poppins via `next/font`), root metadata, GA script placeholder, `<JsonLd>` for Organization schema
-- [ ] **P1.3** — `src/lib/schemaGenerators.ts` — All schema generator functions (Organization, LocalBusiness, Service, FAQ, Article, Breadcrumb)
-- [ ] **P1.4** — `src/components/seo/JsonLd.tsx` — Injects `<script type="application/ld+json">`
-- [ ] **P1.5** — `src/data/contact.ts` — CONTACT_INFO constant (phone, WhatsApp, email, address)
-- [ ] **P1.6** — `src/data/plans.ts` — BROADBAND_PLANS array (all 4 tiers with correct data)
-- [ ] **P1.7** — `src/data/leaseLines.ts` — LEASE_LINE_FEATURES and USE_CASES arrays
-- [ ] **P1.8** — `src/data/faqs.ts` — FAQ items for home page
-- [ ] **P1.9** — `src/app/sitemap.ts` — All 8 pages + blog gated by `NEXT_PUBLIC_BLOG_ENABLED`
-- [ ] **P1.10** — `src/app/robots.ts` — Allow all, disallow `/api/`, point to sitemap URL
-- [ ] **P1.11** — `src/components/layout/Navbar.tsx` — Logo left, nav links center, phone CTA right. Mobile: hamburger menu.
-- [ ] **P1.12** — `src/components/layout/Footer.tsx` — Links, contact info, WhatsApp link, copyright
-- [ ] **P1.13** — `src/components/ui/ContactBar.tsx` — Sticky bottom mobile bar (Call / WhatsApp / Form)
-- [ ] **P1.14** — Unit tests for `schemaGenerators.ts` functions
-- [ ] **P1.15** — Unit tests for `plans.ts` data integrity (all 4 plans have required fields)
-- [ ] **P1.16** — E2E test: Navbar renders on all pages, mobile hamburger opens, phone CTA links to `tel:`
-- [ ] **P1.17** — Verify `npm run build` produces correct `sitemap.xml` and `robots.txt` in `out/`
+- [x] **P1.1** — `src/styles/globals.css` — CSS custom properties (colors, fonts, spacing, breakpoints)
+- [x] **P1.2** — `src/app/layout.tsx` — Fonts (Unbounded, Kanit, Poppins via `next/font`), root metadata, GA script placeholder, `<JsonLd>` for Organization schema
+- [x] **P1.3** — `src/lib/schemaGenerators.ts` — All schema generator functions (Organization, LocalBusiness, Service, FAQ, Article, Breadcrumb)
+- [x] **P1.4** — `src/components/seo/JsonLd.tsx` — Injects `<script type="application/ld+json">`
+- [x] **P1.5** — `src/data/contact.ts` — CONTACT_INFO constant (phone, WhatsApp, email, address)
+- [x] **P1.6** — `src/data/plans.ts` — BROADBAND_PLANS array (all 4 tiers with correct data)
+- [x] **P1.7** — `src/data/leaseLines.ts` — LEASE_LINE_FEATURES and USE_CASES arrays
+- [x] **P1.8** — `src/data/faqs.ts` — FAQ items for home page
+- [x] **P1.9** — `src/app/sitemap.ts` — All 8 pages + blog gated by `NEXT_PUBLIC_BLOG_ENABLED`
+- [x] **P1.10** — `src/app/robots.ts` — Allow all, disallow `/api/`, point to sitemap URL
+- [x] **P1.11** — `src/components/layout/Navbar.tsx` — Logo left, nav links center, phone CTA right. Mobile: hamburger menu.
+- [x] **P1.12** — `src/components/layout/Footer.tsx` — Links, contact info, WhatsApp link, copyright
+- [x] **P1.13** — `src/components/ui/ContactBar.tsx` — Sticky bottom mobile bar (Call / WhatsApp / Form)
+- [x] **P1.14** — Unit tests for `schemaGenerators.ts` functions
+- [x] **P1.15** — Unit tests for `plans.ts` data integrity (all 4 plans have required fields)
+- [x] **P1.16** — E2E test: Navbar renders on all pages, mobile hamburger opens, phone CTA links to `tel:`
+- [x] **P1.17** — Verify `npm run build` produces correct `sitemap.xml` and `robots.txt` in `out/`
+
+### Session Note — Phase 1 Completion (2026-09-12)
+
+- **Completed Phase 1 SEO Foundation & Global Layout:**
+  - **Shared Types & Data Stores:** Created TypeScript interfaces in `src/types/index.ts` and core data files:
+    - `src/data/contact.ts`: `CONTACT_INFO` constant with phone, WhatsApp, email, address, business hours, and social links.
+    - `src/data/plans.ts`: `BROADBAND_PLANS` array (Starter 50Mbps, Home 100Mbps, Power 200Mbps, Ultra 500Mbps).
+    - `src/data/leaseLines.ts`: `LEASE_LINE_FEATURES` and `LEASE_LINE_USE_CASES` enterprise specs.
+    - `src/data/faqs.ts`: `HOME_FAQS` list with high-intent customer Q&As.
+  - **Structured Data & SEO Generators:** Built `src/lib/schemaGenerators.ts` (Organization, WebSite, LocalBusiness, Service, ItemList, FAQPage, BreadcrumbList, WebPage, Article) and `src/components/seo/JsonLd.tsx` injection component.
+  - **CSS Design System:** Implemented full design token suite in `src/styles/globals.css` with fluid clamp typography, fluid spacing, glassmorphism tokens, and responsive utility classes.
+  - **Sitemap & Robots:** Created `src/app/sitemap.ts` (all 8 routes + blog flag) and `src/app/robots.ts` with `export const dynamic = 'force-static'` for static export compatibility.
+  - **Global Navigation & Layout:**
+    - `src/components/layout/Navbar.tsx`: Desktop navigation, brand logo, direct call CTA, and mobile hamburger drawer.
+    - `src/components/layout/Footer.tsx`: Brand summary, contact details, quick navigation, legal links, and copyright.
+    - `src/components/ui/ContactBar.tsx`: Sticky bottom mobile contact bar for Call, WhatsApp, and Contact Form.
+    - `src/app/layout.tsx`: Loaded Google Fonts (`Unbounded`, `Kanit`, `Poppins` via `next/font/google`), root metadata, and global JSON-LD schemas.
+  - **Automated Verification & Testing:**
+    - Unit test suite (`src/tests/schemaGenerators.test.ts`, `src/tests/plans.test.ts`, `src/tests/smoke.test.ts`): 13/13 tests passing.
+    - E2E test suite (`tests/layout.spec.ts`, `tests/smoke.spec.ts`): 14/14 tests passing across Chromium, Mobile Chrome (Pixel 5), and Mobile Safari (iPhone 12).
+    - Static export (`npm run build`): Generated static HTML, `sitemap.xml`, and `robots.txt` in `out/`.
+    - Local CI quality gate: `npm run ci:quality` exited 0.
+  - **Git Status:** Committed and pushed to `main` branch.
 
 ---
 
