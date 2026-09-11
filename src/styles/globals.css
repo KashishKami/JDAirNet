@@ -1,0 +1,21 @@
+﻿/* JDAirNet — Global Styles
+ * CSS custom properties (design tokens), resets, and typography scale
+ * are defined here in Phase 1. This file is intentionally empty for now.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

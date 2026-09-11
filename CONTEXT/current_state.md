@@ -1,9 +1,9 @@
-﻿# Current State: JDAirNet Website Implementation Tracker
+# Current State: JDAirNet Website Implementation Tracker
 
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
-**Last Updated:** 2026-09-11
-**Current Active Phase:** Phase 0
+**Last Updated:** 2026-09-12
+**Current Active Phase:** Phase 1 (Phase 0 Complete ✅)
 
 ---
 
@@ -19,76 +19,76 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ### P0.1 — Initialize Next.js Project
 
-- [ ] Run `npx create-next-app@latest ./ --typescript --app --no-tailwind --no-src-dir --import-alias "@/*"` inside the project root
+- [x] Run `npx create-next-app@latest ./ --typescript --app --no-tailwind --no-src-dir --import-alias "@/*"` inside the project root
   - Ensure `src/` directory IS used: re-run with `--src-dir` flag if needed
   - Choose: TypeScript ✅, App Router ✅, No Tailwind ✅
-- [ ] Verify `package.json` has correct project name (`jdairnet`)
-- [ ] Delete auto-generated boilerplate (`src/app/page.tsx` content, `src/app/globals.css` content) — keep the files, just empty them
-- [ ] Move `Hero.mp4` from project root into `public/` folder
+- [x] Verify `package.json` has correct project name (`jdairnet`)
+- [x] Delete auto-generated boilerplate (`src/app/page.tsx` content, `src/app/globals.css` content) — keep the files, just empty them
+- [x] Move `Hero.mp4` from project root into `public/` folder
 
 ### P0.2 — Configure `next.config.mjs`
 
-- [ ] Set `output: process.env.NODE_ENV === 'production' ? 'export' : undefined`
-- [ ] Set `trailingSlash: true`
-- [ ] Set `images: { unoptimized: true }`
-- [ ] Verify: `npm run build` produces an `out/` folder with `index.html` at root
+- [x] Set `output: process.env.NODE_ENV === 'production' ? 'export' : undefined`
+- [x] Set `trailingSlash: true`
+- [x] Set `images: { unoptimized: true }`
+- [x] Verify: `npm run build` produces an `out/` folder with `index.html` at root
 
 ### P0.3 — Environment Files
 
-- [ ] Create `.env.example` with all required variables (no real values, just keys + comments)
-- [ ] Create `.env.local` from `.env.example` — fill in dev values
-- [ ] Create `.env.test` from `.env.example` — fill in test values
-- [ ] Add `.env.local` and `.env.test` to `.gitignore` (keep `.env.example` tracked)
-- [ ] Verify: `NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3007` in both `.env.local` and `.env.test`
+- [x] Create `.env.example` with all required variables (no real values, just keys + comments)
+- [x] Create `.env.local` from `.env.example` — fill in dev values
+- [x] Create `.env.test` from `.env.example` — fill in test values
+- [x] Add `.env.local` and `.env.test` to `.gitignore` (keep `.env.example` tracked)
+- [x] Verify: `NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3007` in both `.env.local` and `.env.test`
 
 ### P0.4 — Dev Server Port & Host
 
-- [ ] Update `package.json` dev script: `"dev": "next dev -p 3007 -H 127.0.0.1"`
-- [ ] Verify: `npm run dev` starts server at `http://127.0.0.1:3007`
-- [ ] Verify: Navigating to `http://127.0.0.1:3007` shows the (empty) Next.js page without error
+- [x] Update `package.json` dev script: `"dev": "next dev -p 3007 -H 127.0.0.1"`
+- [x] Verify: `npm run dev` starts server at `http://127.0.0.1:3007`
+- [x] Verify: Navigating to `http://127.0.0.1:3007` shows the (empty) Next.js page without error
 
 ### P0.5 — ESLint Configuration
 
-- [ ] Verify `next lint` runs without error on the boilerplate
-- [ ] Add custom ESLint rules to `.eslintrc.json` (or `eslint.config.mjs`):
+- [x] Verify `next lint` runs without error on the boilerplate
+- [x] Add custom ESLint rules to `.eslintrc.json` (or `eslint.config.mjs`):
   - No `any` types (`@typescript-eslint/no-explicit-any: 'error'`)
   - Enforce `'use client'` directive presence check
-- [ ] Add `"lint": "next lint"` and `"lint:fix": "next lint --fix"` to `package.json`
-- [ ] Verify: `npm run lint` exits 0
+- [x] Add `"lint": "next lint"` and `"lint:fix": "next lint --fix"` to `package.json`
+- [x] Verify: `npm run lint` exits 0
 
 ### P0.6 — TypeScript Strict Mode
 
-- [ ] Ensure `tsconfig.json` has `"strict": true`
-- [ ] Add `"typecheck": "tsc --noEmit"` to `package.json`
-- [ ] Verify: `npm run typecheck` exits 0 on the boilerplate
+- [x] Ensure `tsconfig.json` has `"strict": true`
+- [x] Add `"typecheck": "tsc --noEmit"` to `package.json`
+- [x] Verify: `npm run typecheck` exits 0 on the boilerplate
 
 ### P0.7 — Vitest Unit Testing Setup
 
-- [ ] Install: `npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/jest-dom`
-- [ ] Create `vitest.config.ts` at project root (see `local_setup.md` for exact config)
-- [ ] Create `src/tests/setup.ts` — import `@testing-library/jest-dom/vitest`
-- [ ] Add scripts to `package.json`:
+- [x] Install: `npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/jest-dom`
+- [x] Create `vitest.config.ts` at project root (see `local_setup.md` for exact config)
+- [x] Create `src/tests/setup.ts` — import `@testing-library/jest-dom/vitest`
+- [x] Add scripts to `package.json`:
   ```json
   "test:unit": "vitest run",
   "test:unit:watch": "vitest",
   "test:unit:ui": "vitest --ui"
   ```
-- [ ] Create a smoke test `src/tests/smoke.test.ts`:
+- [x] Create a smoke test `src/tests/smoke.test.ts`:
   ```typescript
   // Loads .env.test — verify NEXT_PUBLIC_SITE_URL is set
   test('env is loaded', () => {
     expect(process.env.NEXT_PUBLIC_SITE_URL).toBe('http://127.0.0.1:3007')
   })
   ```
-- [ ] Verify: `npm run test:unit` exits 0 and the smoke test passes
+- [x] Verify: `npm run test:unit` exits 0 and the smoke test passes
 
 ### P0.8 — Playwright E2E Testing Setup
 
-- [ ] Install: `npm install -D @playwright/test dotenv`
-- [ ] Run: `npx playwright install` (installs Chromium, Firefox, WebKit)
-- [ ] Create `playwright.config.ts` at project root (see `local_setup.md` for exact config)
-- [ ] Create `tests/` directory at project root
-- [ ] Create `tests/smoke.spec.ts`:
+- [x] Install: `npm install -D @playwright/test dotenv`
+- [x] Run: `npx playwright install` (installs Chromium, Firefox, WebKit)
+- [x] Create `playwright.config.ts` at project root (see `local_setup.md` for exact config)
+- [x] Create `tests/` directory at project root
+- [x] Create `tests/smoke.spec.ts`:
   ```typescript
   import { test, expect } from '@playwright/test'
   test('homepage loads', async ({ page }) => {
@@ -96,27 +96,27 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
     await expect(page).toHaveTitle(/JDAirNet/)
   })
   ```
-- [ ] Add scripts to `package.json`:
+- [x] Add scripts to `package.json`:
   ```json
   "test:e2e": "playwright test",
   "test:e2e:ui": "playwright test --ui",
   "test:e2e:report": "playwright show-report"
   ```
-- [ ] Verify: `npm run test:e2e` runs against `http://127.0.0.1:3007` (dev server starts automatically)
+- [x] Verify: `npm run test:e2e` runs against `http://127.0.0.1:3007` (dev server starts automatically)
 
 ### P0.9 — Combined CI Quality Command
 
-- [ ] Add to `package.json`:
+- [x] Add to `package.json`:
   ```json
   "ci:quality": "npm run lint && npm run typecheck && npm run test:unit && npm run test:e2e"
   ```
-- [ ] Add `"serve": "npx serve out"` for post-build preview
-- [ ] Verify: `npm run ci:quality` exits 0 (all gates pass on clean boilerplate)
+- [x] Add `"serve": "npx serve out"` for post-build preview
+- [x] Verify: `npm run ci:quality` exits 0 (all gates pass on clean boilerplate)
 
 ### P0.10 — GitHub Actions CI Pipeline
 
-- [ ] Create `.github/workflows/ci.yml`
-- [ ] Pipeline structure (individual steps — NOT calling `ci:quality`):
+- [x] Create `.github/workflows/ci.yml`
+- [x] Pipeline structure (individual steps — NOT calling `ci:quality`):
   ```yaml
   name: CI
   on: [push, pull_request]
@@ -141,14 +141,14 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
         - name: Build (Static Export)
           run: npm run build
   ```
-- [ ] Push to GitHub and verify all steps appear individually in the Actions tab
-- [ ] Verify all steps show green ✅ on a clean push
+- [x] Push to GitHub and verify all steps appear individually in the Actions tab
+- [x] Verify all steps show green ✅ on a clean push
 
 ### P0.11 — Git Setup & Initial Commit
 
-- [ ] Verify `.gitignore` includes: `.next/`, `out/`, `node_modules/`, `.env.local`, `.env.test`, `playwright-report/`, `test-results/`
-- [ ] Initial commit: `git commit -m "chore: Phase 0 — project foundation and quality infrastructure"`
-- [ ] Push to GitHub
+- [x] Verify `.gitignore` includes: `.next/`, `out/`, `node_modules/`, `.env.local`, `.env.test`, `playwright-report/`, `test-results/`
+- [x] Initial commit: `git commit -m "chore: Phase 0 — project foundation and quality infrastructure"`
+- [x] Push to GitHub
 
 **✅ Phase 0 DONE when:** All checkboxes above are checked AND `npm run ci:quality` exits 0 AND GitHub Actions shows green on all individual steps.
 

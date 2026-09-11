@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+
+# Static export output — never commit the build
+out/
+
+# Environment files — real values never go to git
+.env.local
+.env.test
+.env.production
+
+# Example env is committed (no real values)
+!.env.example
+
+# Test artifacts
+playwright-report/
+test-results/
+coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.tsbuildinfo
