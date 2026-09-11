@@ -152,6 +152,20 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 **✅ Phase 0 DONE when:** All checkboxes above are checked AND `npm run ci:quality` exits 0 AND GitHub Actions shows green on all individual steps.
 
+### Session Note — Phase 0 Completion (2026-09-12)
+
+- **Completed Phase 0 Setup & Tooling Infrastructure:**
+  - **Next.js & Structure:** Configured Next.js 15 App Router (`src/` dir), TypeScript strict mode, and Vanilla CSS.
+  - **Static Export Config:** Configured `next.config.mjs` for production static export (`output: 'export'`), `trailingSlash: true` (clean `/slug/index.html` structure), and `images: { unoptimized: true }`.
+  - **Environment & Assets:** Set up `.env.example`, `.env.local`, and `.env.test` pointing to `http://127.0.0.1:3007` (domain: `jdairnet.com`). Moved `Hero.mp4` to `public/Hero.mp4`.
+  - **Code Quality Gates:** Configured ESLint with `@typescript-eslint` rules; `npm run lint` and `npm run typecheck` pass with 0 errors.
+  - **Testing Infrastructure:**
+    - **Unit Tests (Vitest):** Configured `vitest.config.ts`, `src/tests/setup.ts`, and smoke test `src/tests/smoke.test.ts` (100% pass).
+    - **E2E Tests (Playwright):** Configured `playwright.config.ts`, installed Chromium & WebKit binaries, and verified `tests/smoke.spec.ts` passing on Chromium, Mobile Chrome (Pixel 5), and Mobile Safari (iPhone 12).
+  - **Production Build:** Verified `npm run build` static export to `out/` directory.
+  - **CI/CD:** Created `.github/workflows/ci.yml` with isolated quality gates (Lint, Type Check, Unit Tests, Playwright E2E, Static Build) and local runner `npm run ci:quality`.
+  - **Git Status:** Committed (`chore: Phase 0 — project foundation and quality infrastructure`) and pushed to `main` branch (`c9f0d24`).
+
 ---
 
 ## Phase 1 — SEO Foundation & Global Layout
