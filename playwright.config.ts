@@ -1,9 +1,16 @@
 import { defineConfig, devices } from '@playwright/test'
 import dotenv from 'dotenv'
 import path from 'path'
+import fs from 'fs'
 
-// Load .env.test explicitly
-dotenv.config({ path: path.resolve(__dirname, '.env.test') })
+// Load .env.test explicitly (fallback to .env.example if .env.test is not created)
+const envTestPath = path.resolve(__dirname, '.env.test')
+const envExamplePath = path.resolve(__dirname, '.env.example')
+if (fs.existsSync(envTestPath)) {
+  dotenv.config({ path: envTestPath })
+} else if (fs.existsSync(envExamplePath)) {
+  dotenv.config({ path: envExamplePath })
+}
 
 export default defineConfig({
   testDir: './tests',
