@@ -7,7 +7,7 @@ describe('WhyUsSection', () => {
   it('renders section heading and subtitle', () => {
     render(<WhyUsSection />)
 
-    expect(screen.getByRole('heading', { level: 2, name: /Why Choose JDAirNet/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /Why Choose Us/i })).toBeInTheDocument()
     expect(screen.getByText(/Engineered for ultra-fast, uninterrupted connectivity/i)).toBeInTheDocument()
   })
 

@@ -158,7 +158,7 @@ export default function WhyUsSection() {
             <span className="badge badge-primary">THE JDAIRNET ADVANTAGE</span>
           </div>
           <h2 id="why-us-title" className={styles.title}>
-            Why Choose JDAirNet
+            Why Choose Us
           </h2>
           <p className={styles.subtitle}>
             Engineered for ultra-fast, uninterrupted connectivity with enterprise-grade infrastructure tailored for residential and business users.

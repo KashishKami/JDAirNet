@@ -23,7 +23,7 @@ export default function Navbar() {
   const closeMenu = () => setIsOpen(false)
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${pathname === '/' ? '' : styles.headerDark}`}>
       <div className={styles.navContainer}>
         {/* Brand Logo */}
         <Link href="/" className={styles.logo} onClick={closeMenu}>

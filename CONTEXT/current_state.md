@@ -710,6 +710,33 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
+### Session Note — UI Polish: Section Heading, Footer, Navbar & FloatingContactHub Icon Morph (2026-09-14)
+
+- **WhyUsSection Heading Renamed:**
+  - Changed the `<h2>` text from `Why Choose JDAirNet` → **`Why Choose Us`** in `src/components/sections/WhyUsSection.tsx`.
+  - Updated matching assertions in `src/tests/WhyUsSection.test.tsx` and `src/tests/HomePage.test.tsx` to `/Why Choose Us/i`.
+  - All 15 unit test files / 50 tests remain green after the change.
+
+- **Footer Dark Background (`Footer.module.css`):**
+  - Changed footer background from `#ffffff` → `#0a0a1a` (matching the hero/site dark theme).
+  - `JD` in the brand logo now renders **white** (`color: #ffffff` on `.brandLogo`) — `AirNet` remains the primary red accent via `.brandAccent`.
+  - All body text, contact items, and links updated to light variants (`#94a3b8`, `#ffffff`) appropriate for the dark surface.
+  - Divider lines updated to `rgba(255,255,255,0.08)` subtle strokes.
+
+- **Conditional Dark Sticky Navbar (`Navbar.tsx` + `Navbar.module.css`):**
+  - Homepage (`/`) keeps the existing transparent `position: absolute` overlay navbar (works over the dark hero video).
+  - All other pages now get a **sticky dark navbar** via `.headerDark`: `position: sticky`, `background: #0a0a1a`, subtle `border-bottom` and `box-shadow`.
+  - Implemented via pathname check: `pathname === '/' ? '' : styles.headerDark` — no extra props or layout changes.
+  - Ensures white nav link text is readable on all inner pages (Plans, Lease Lines, Coverage, About, Contact).
+
+- **FloatingContactHub — Smooth Icon Morph Animation (`FloatingContactHub.tsx` + `.module.css`):**
+  - Replaced the hard conditional React SVG swap (`{isOpen ? <X /> : <Chat />}`) with a CSS-only crossfade+rotate transition.
+  - Both icons (chat bubble and ×) now **always exist in the DOM**, layered via `position: absolute` inside `position: relative; overflow: hidden` button.
+  - CSS classes `.iconSlot`, `.iconSlotVisible`, `.iconSlotHidden` drive the animation:
+    - **Visible:** `opacity: 1`, `rotate(0deg)`, `scale(1)`
+    - **Hidden:** `opacity: 0`, `rotate(90deg)`, `scale(0.6)`
+  - Transition: `0.28s cubic-bezier(0.16, 1, 0.3, 1)` on both `opacity` and `transform` — smooth morph-spin between chat and × icons.
+  - Purely CSS-driven, zero flicker, no React re-render jank for the icon swap.
 
 ## Phase 5 — Coverage, About, Contact Pages
 
@@ -824,194 +851,6 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
   - [ ] Render all 4 plan cards side by side at 1024px — highlighted card is visually elevated
   - [ ] At 600px: 2 columns, cards equal height
   - [ ] At 375px: 1 column, highlighted card does NOT scale (correct — scale only on desktop)
-  - [ ] ✅ Done
-
----
-
-#### W-302 — Plans Page Layout & Schema
-
-**Root cause:** The plans page is the primary conversion page — it must render the full pricing table with all 4 tiers, GST disclaimer, add-ons, and proper SEO schemas.
-
-**Goal:** `/plans/` renders all 4 plan cards, GST note, add-ons section, and injects `Service` schema + `ItemList` schema.
-
----
-
-- [ ] **RED — Unit Test:**
-  - [ ] Test: `generatePlansItemListSchema(BROADBAND_PLANS)` returns `@type: 'ItemList'` with `numberOfItems: 4`
-  - [ ] Test: Each item in `itemListElement` has `position`, `item.name`, `item.offers.price`
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Add `generatePlansItemListSchema()` to `schemaGenerators.ts`
-  - [ ] Create `src/app/plans/page.tsx` with `metadata` export + 4 plan cards grid + GST note
-  - [ ] Inject `<JsonLd>` for `Service` schema and `ItemList` schema
-  - [ ] Add-ons section below the plans grid
-  - [ ] Run unit test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/plans/` — all 4 plan cards visible
-  - [ ] GST disclaimer visible below grid ("All prices exclude 18% GST")
-  - [ ] At 375px: 1 column, stacked cards, no horizontal scroll
-  - [ ] At 1024px: 4 columns, highlighted card elevated
-  - [ ] Build `out/plans/index.html` — JSON-LD for ItemList present in `<head>`
-  - [ ] ✅ Done
-
----
-
-#### W-303 — Plans E2E Test
-
-- [ ] **E2E (`tests/plans.spec.ts`):**
-  - [ ] Test: Navigate to `/plans/` — 4 plan cards render
-  - [ ] Test: "Most Popular" badge is visible on exactly 1 card
-  - [ ] Test: No plan card has an empty price (data integrity)
-  - [ ] Test: All CTA buttons have `href` starting with `tel:` or `https://wa.me/`
-  - [ ] Test (mobile 375px): 1 column layout, no horizontal scroll
-  - [ ] **Run `npm run test:e2e` — confirm all pass**
-
----
-
-## Phase 4 — Lease Lines Page (`/lease-lines/`)
-> Goal: Enterprise page with features, use cases, and quote CTA. Zero pricing.
-
----
-
-#### W-401 — Lease Lines Page
-
-**Root cause:** Enterprise clients need a dedicated page explaining the benefits of a dedicated line. Pricing must NOT appear — enterprise deals are custom quotes only. The page must have its own `Service` schema with no price data.
-
-**Goal:** `/lease-lines/` renders with H1, 6 feature blocks, use-case chips, and a "Request a Quote" button that links to `/contact/`. No price anywhere on the page.
-
----
-
-- [ ] **RED — Component + E2E Test:**
-  - [ ] Unit test: `generateServiceSchema({ name: 'Enterprise Lease Line', ... })` — assert `@type: 'Service'`, assert no `offers` key (no pricing)
-  - [ ] E2E test: Navigate to `/lease-lines/` — assert NO element contains `₹` or `price` text
-  - [ ] E2E test: "Request a Quote" button is visible and links to `/contact/`
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/lease-lines/page.tsx` with metadata + hero H1 + features grid + use cases + CTA
-  - [ ] Create `src/data/leaseLines.ts` with `LEASE_LINE_FEATURES` (if not done in Phase 1)
-  - [ ] Inject `<JsonLd>` for `Service` schema (lease line) and `BreadcrumbList`
-  - [ ] Run tests — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/lease-lines/` — H1 is "Enterprise Internet Lease Lines" (or similar)
-  - [ ] 6 feature blocks visible in a responsive grid
-  - [ ] No price text anywhere on page
-  - [ ] "Request a Quote" button links to `/contact/`
-  - [ ] At 375px: features stack in 1 column, no horizontal scroll
-  - [ ] Breadcrumb schema visible in page source: Home > Lease Lines
-  - [ ] ✅ Done
-
----
-
-## Phase 5 — Coverage, About, Contact Pages
-
----
-
-#### W-501 — Coverage Page (`/coverage/`)
-
-**Root cause:** Prospective customers need to know if their area is served before they call.
-
-**Goal:** `/coverage/` explains the service area in text, provides a feasibility contact CTA, and has `WebPage` + `BreadcrumbList` schemas.
-
----
-
-- [ ] **RED — E2E Test (`tests/coverage.spec.ts`):**
-  - [ ] Test: Navigate to `/coverage/` — page title includes "Coverage"
-  - [ ] Test: At least one CTA linking to `/contact/` or `tel:` is present
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/coverage/page.tsx` with metadata + content + CTAs + `<JsonLd>`
-  - [ ] Run E2E test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/coverage/` — content about service areas renders
-  - [ ] Contact/feasibility CTA visible
-  - [ ] ✅ Done
-
----
-
-#### W-502 — About Page (`/about/`)
-
-**Root cause:** Trust is built through story. An About page humanizes the brand for both residential and business customers.
-
-**Goal:** `/about/` renders with company story, values, and an `AboutPage` + `BreadcrumbList` schema.
-
----
-
-- [ ] **RED — Unit Test:**
-  - [ ] Test: `generateWebPageSchema({ type: 'AboutPage', ... })` — assert `@type: 'AboutPage'`
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/about/page.tsx` with metadata + content + `<JsonLd>`
-  - [ ] Run unit test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/about/` — content renders correctly at all viewports
-  - [ ] ✅ Done
-
----
-
-#### W-503 — Contact Page & Form (`/contact/`)
-
-**Root cause:** The contact page is where all three channels converge. The form is the primary backend-touching element — it must submit to `contact.php` and show success/error feedback.
-
-**Goal:** `/contact/` renders all 3 contact channels (call, WhatsApp, form) prominently. The form submits via `fetch('/contact.php')` and shows a success message on completion or an error message on failure.
-
-**Approach:** `ContactForm.tsx` as a Client Component with `useState` for form fields and submission state. Playwright E2E test mocks the `/contact.php` POST endpoint using `page.route()`.
-
----
-
-- [ ] **RED — Component Test (`src/tests/ContactForm.test.tsx`):**
-  - [ ] Test: Render `<ContactForm />` — assert name, email, phone, message fields present
-  - [ ] Test: Submit with empty fields — assert error state (form does not submit)
-  - [ ] Test: Submit with valid data — mock `fetch` to return `{success: true}` — assert success message renders
-  - [ ] Test: Submit with valid data — mock `fetch` to return `{success: false}` — assert error message renders
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/components/ui/ContactForm.tsx` (Client Component) with form state + fetch + success/error UI
-  - [ ] Create `contact.php` (saved in project root as `contact.php`, deployed to Hostinger separately)
-  - [ ] Create `src/app/contact/page.tsx` with metadata, all 3 channels, `<ContactForm />`, `LocalBusiness` schema, `ContactPage` schema
-  - [ ] Run component tests — **confirm GREEN**
-
-- [ ] **GREEN — E2E Test (`tests/contact.spec.ts`):**
-  - [ ] Mock `POST /contact.php` to return `{success: true}` using `page.route()`
-  - [ ] Test: Fill form fields → submit → success message appears
-  - [ ] Test: Phone CTA visible and has `href` starting with `tel:`
-  - [ ] Test: WhatsApp CTA visible and has `href` starting with `https://wa.me/`
-  - [ ] Run E2E test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/contact/` — 3 contact channels displayed prominently
-  - [ ] Fill form → submit → success message appears
-  - [ ] On mobile: all 3 CTAs are tappable (44px+ touch targets)
-  - [ ] ✅ Done
-
----
-
-#### W-504 — Legal Pages & Custom 404
-
-- [ ] **RED — E2E Test:**
-  - [ ] Test: Navigate to `/privacy-policy/` — page renders, title contains "Privacy"
-  - [ ] Test: Navigate to `/terms-of-service/` — page renders
-  - [ ] Test: Navigate to `/this-does-not-exist/` — 404 page renders, contains link back to home
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/privacy-policy/page.tsx` with basic legal content + metadata
-  - [ ] Create `src/app/terms-of-service/page.tsx` with basic legal content + metadata
-  - [ ] Create `src/app/not-found.tsx` with branded 404 design + "Go Home" CTA
-  - [ ] Run E2E tests — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] `/privacy-policy/` renders — breadcrumb shows Home > Privacy Policy
-  - [ ] Navigate to a non-existent URL — custom 404 page shows (Apache serves `/404/index.html` per `.htaccess` `ErrorDocument 404` rule)
-  - [ ] "Go Home" CTA on 404 page navigates to `/`
   - [ ] ✅ Done
 
 ---

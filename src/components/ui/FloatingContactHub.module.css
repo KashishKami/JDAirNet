@@ -92,6 +92,7 @@
 }
 
 .triggerBtn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,6 +106,7 @@
   cursor: pointer;
   touch-action: manipulation;
   transform-origin: center bottom;
+  overflow: hidden;
 }
 
 .triggerBtn:hover {
@@ -118,8 +120,29 @@
 }
 
 
-.triggerIcon {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* Icon slot: both icons are always in DOM, layered via absolute positioning */
+.iconSlot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Visible state: fully opaque, no rotation */
+.iconSlotVisible {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Hidden state: faded out + rotated 90°, ready to swap */
+.iconSlotHidden {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+  pointer-events: none;
 }
 
 @media (max-width: 600px) {

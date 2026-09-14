@@ -18,7 +18,7 @@ test.describe('Animations, Smooth Scroll & Floating Contact Hub E2E', () => {
     // Scroll down to Why Choose Us
     const whyUsSection = page.locator('section[aria-labelledby="why-us-title"]')
     await whyUsSection.scrollIntoViewIfNeeded()
-    await expect(page.getByRole('heading', { level: 2, name: /Why Choose JDAirNet/i })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 2, name: /Why Choose Us/i })).toBeVisible()
 
     // Scroll down to FAQ section
     const faqSection = page.locator('section[aria-labelledby="faq-section-title"]')

@@ -14,7 +14,7 @@ describe('HomePage', () => {
     expect(screen.getByRole('heading', { level: 2, name: /Popular Broadband Plans/i })).toBeInTheDocument()
 
     // Why Us section
-    expect(screen.getByRole('heading', { level: 2, name: /Why Choose JDAirNet/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /Why Choose Us/i })).toBeInTheDocument()
 
     // FAQ section
     expect(screen.getByRole('heading', { level: 2, name: /Frequently Asked Questions/i })).toBeInTheDocument()

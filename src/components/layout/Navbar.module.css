@@ -10,6 +10,14 @@
   transition: all var(--transition-normal);
 }
 
+.headerDark {
+  position: sticky;
+  background: #0a0a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+
+
 .navContainer {
   display: flex;
   align-items: center;

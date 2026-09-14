@@ -194,16 +194,20 @@ export default function FloatingContactHub() {
           aria-expanded={isOpen}
           aria-haspopup="menu"
         >
-          {isOpen ? (
-            <svg className={styles.triggerIcon} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          {/* Chat icon — visible when closed */}
+          <span className={`${styles.iconSlot} ${isOpen ? styles.iconSlotHidden : styles.iconSlotVisible}`}>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+          </span>
+
+          {/* Close (×) icon — visible when open */}
+          <span className={`${styles.iconSlot} ${isOpen ? styles.iconSlotVisible : styles.iconSlotHidden}`}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
-          ) : (
-            <svg className={styles.triggerIcon} width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-            </svg>
-          )}
+          </span>
         </button>
       </div>
     </div>

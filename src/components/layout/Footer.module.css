@@ -1,6 +1,6 @@
 .footer {
-  background-color: #ffffff;
-  border-top: 1px solid #e2e8f0;
+  background-color: #0a0a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding-top: var(--space-section-sm);
   padding-bottom: 2rem;
   margin-top: auto;
@@ -26,7 +26,7 @@
   font-size: 1.4rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .brandAccent {
@@ -34,7 +34,7 @@
 }
 
 .brandDescription {
-  color: #64748b;
+  color: #94a3b8;
   font-size: var(--font-small);
   max-width: 360px;
   line-height: 1.6;
@@ -53,11 +53,11 @@
   align-items: center;
   gap: 0.5rem;
   font-size: var(--font-small);
-  color: #475569;
+  color: #94a3b8;
 }
 
 .contactLink {
-  color: #475569;
+  color: #94a3b8;
   transition: color var(--transition-fast);
 }
 
@@ -69,7 +69,7 @@
   font-family: var(--font-heading-family, sans-serif);
   font-size: 1.05rem;
   font-weight: 600;
-  color: #0f172a;
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
@@ -82,7 +82,7 @@
 
 .footerLink {
   font-size: var(--font-small);
-  color: #64748b;
+  color: #94a3b8;
   transition: all var(--transition-fast);
 }
 
@@ -94,14 +94,14 @@
 .bottomBar {
   margin-top: var(--space-section-sm);
   padding-top: 1.5rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   font-size: var(--font-small);
-  color: #94a3b8;
+  color: #475569;
 }
 
 @media (min-width: 640px) {
