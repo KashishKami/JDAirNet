@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { gsap, ScrollTrigger } from '@/lib/animations'
 import styles from './WhyUsSection.module.css'
 
@@ -72,6 +72,48 @@ export default function WhyUsSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const imageWrapperRef = useRef<HTMLDivElement>(null)
+  const [activeMobileIndex, setActiveMobileIndex] = useState(0)
+
+  // Handle mobile scroll tracking for pagination dots
+  const handleMobileScroll = () => {
+    if (typeof window !== 'undefined' && window.innerWidth >= 900) return
+    const track = trackRef.current
+    if (!track) return
+
+    const scrollLeft = track.scrollLeft
+    const cards = track.querySelectorAll<HTMLElement>(`.${styles.card}`)
+    if (cards.length === 0) return
+
+    let closestIndex = 0
+    let minDistance = Infinity
+    const trackCenter = scrollLeft + track.clientWidth / 2
+
+    cards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + card.clientWidth / 2
+      const distance = Math.abs(trackCenter - cardCenter)
+      if (distance < minDistance) {
+        minDistance = distance
+        closestIndex = index
+      }
+    })
+
+    setActiveMobileIndex(closestIndex)
+  }
+
+  const scrollToMobileCard = (index: number) => {
+    const track = trackRef.current
+    if (!track) return
+    const cards = track.querySelectorAll<HTMLElement>(`.${styles.card}`)
+    const targetCard = cards[index]
+    if (targetCard) {
+      const targetScroll = targetCard.offsetLeft - (track.clientWidth - targetCard.clientWidth) / 2
+      track.scrollTo({
+        left: Math.max(0, targetScroll),
+        behavior: 'smooth',
+      })
+      setActiveMobileIndex(index)
+    }
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -84,7 +126,10 @@ export default function WhyUsSection() {
     const track = trackRef.current
     if (!section || !track) return
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia()
+
+    // ── DESKTOP (≥ 900px): Full Pinned Horizontal Scroll & Playful Choreography ──
+    mm.add('(min-width: 900px)', () => {
       const getScrollDistance = () => {
         const viewportWidth = track.parentElement?.clientWidth || window.innerWidth
         return Math.max(0, track.scrollWidth - viewportWidth)
@@ -135,13 +180,12 @@ export default function WhyUsSection() {
         )
       }
 
-      // 3. Custom playful GSAP entrances — each card only becomes visible when the previous card reaches the center of the screen
-      // Card 01: Starts immediately visible at resting position
+      // 3. Custom playful GSAP entrances on desktop
       if (cards[0]) {
         gsap.set(cards[0], { opacity: 1, y: 0, x: 0, rotationZ: 0, scale: 1 })
       }
 
-      // Card 02 (Ultra-Low Latency ⚡): Appears strictly when Card 01 reaches center
+      // Card 02 (Ultra-Low Latency ⚡)
       if (cards[1] && cards[0]) {
         gsap.fromTo(
           cards[1],
@@ -155,15 +199,15 @@ export default function WhyUsSection() {
             scrollTrigger: {
               trigger: cards[0],
               containerAnimation: horizontalTween,
-              start: 'center 50%',
-              end: 'center 35%',
-              scrub: 0.3,
+              start: 'center 60%',
+              end: 'center 42%',
+              scrub: 0.4,
             },
           }
         )
       }
 
-      // Card 03 (24/7 Support 📞): Appears strictly when Card 02 reaches center
+      // Card 03 (24/7 Support 📞)
       if (cards[2] && cards[1]) {
         gsap.fromTo(
           cards[2],
@@ -178,15 +222,15 @@ export default function WhyUsSection() {
             scrollTrigger: {
               trigger: cards[1],
               containerAnimation: horizontalTween,
-              start: 'center 50%',
-              end: 'center 35%',
-              scrub: 0.3,
+              start: 'center 60%',
+              end: 'center 42%',
+              scrub: 0.4,
             },
           }
         )
       }
 
-      // Card 04 (Wi-Fi 6 📡): Appears strictly when Card 03 reaches center
+      // Card 04 (Wi-Fi 6 📡)
       if (cards[3] && cards[2]) {
         gsap.fromTo(
           cards[3],
@@ -200,15 +244,15 @@ export default function WhyUsSection() {
             scrollTrigger: {
               trigger: cards[2],
               containerAnimation: horizontalTween,
-              start: 'center 50%',
-              end: 'center 35%',
-              scrub: 0.3,
+              start: 'center 60%',
+              end: 'center 42%',
+              scrub: 0.4,
             },
           }
         )
       }
 
-      // Card 05 (Symmetric Speeds ⇅): Appears strictly when Card 04 reaches center
+      // Card 05 (Symmetric Speeds ⇅)
       if (cards[4] && cards[3]) {
         gsap.fromTo(
           cards[4],
@@ -223,15 +267,15 @@ export default function WhyUsSection() {
             scrollTrigger: {
               trigger: cards[3],
               containerAnimation: horizontalTween,
-              start: 'center 50%',
-              end: 'center 35%',
-              scrub: 0.3,
+              start: 'center 60%',
+              end: 'center 42%',
+              scrub: 0.4,
             },
           }
         )
       }
 
-      // Card 06 (Zero FUP 🛡️): Appears strictly when Card 05 reaches center
+      // Card 06 (Zero FUP 🛡️)
       if (cards[5] && cards[4]) {
         gsap.fromTo(
           cards[5],
@@ -245,9 +289,9 @@ export default function WhyUsSection() {
             scrollTrigger: {
               trigger: cards[4],
               containerAnimation: horizontalTween,
-              start: 'center 50%',
-              end: 'center 35%',
-              scrub: 0.3,
+              start: 'center 60%',
+              end: 'center 42%',
+              scrub: 0.4,
             },
           }
         )
@@ -260,9 +304,9 @@ export default function WhyUsSection() {
       return () => {
         horizontalTween.kill()
       }
-    }, sectionRef)
+    })
 
-    return () => ctx.revert()
+    return () => mm.revert()
   }, [])
 
   return (
@@ -280,9 +324,19 @@ export default function WhyUsSection() {
           </p>
         </div>
 
+        {/* Mobile Visual (Visible < 900px) */}
+        <div className={styles.mobileVisual} aria-hidden="true">
+          <img
+            src="/Why_choose_us-removebg-preview.png"
+            alt=""
+            className={styles.mobileImage}
+            loading="lazy"
+          />
+        </div>
+
         {/* Horizontal Track Viewport */}
         <div className={styles.trackViewport}>
-          {/* Left Feature Image Visual */}
+          {/* Desktop Left Feature Image Visual (≥ 900px) */}
           <div ref={imageWrapperRef} className={styles.featureImageWrapper} aria-hidden="true">
             <img
               src="/Why_choose_us-removebg-preview.png"
@@ -292,7 +346,11 @@ export default function WhyUsSection() {
             />
           </div>
 
-          <div ref={trackRef} className={styles.track}>
+          <div
+            ref={trackRef}
+            className={styles.track}
+            onScroll={handleMobileScroll}
+          >
             {FEATURES.map((feature, idx) => (
               <div key={idx} className={styles.card}>
                 <div className={styles.cardHeader}>
@@ -306,6 +364,19 @@ export default function WhyUsSection() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Mobile Swipe Pagination Dots (< 900px) */}
+        <div className={styles.mobilePagination} aria-hidden="true">
+          {FEATURES.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`${styles.dot} ${i === activeMobileIndex ? styles.dotActive : ''}`}
+              onClick={() => scrollToMobileCard(i)}
+              aria-label={`Go to feature ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>
