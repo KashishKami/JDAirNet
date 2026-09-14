@@ -18,7 +18,7 @@ out/
 # Test artifacts
 playwright-report/
 test-results/
-coverage/
+/coverage/
 
 # OS
 .DS_Store
