@@ -9,6 +9,7 @@ import {
   generateServiceSchema,
   generateBreadcrumbSchema,
 } from '@/lib/schemaGenerators'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -96,102 +97,116 @@ export default function LeaseLinesPage() {
 
       <div className="container">
         {/* Header Section */}
-        <div className={styles.headerSection}>
-          <span className={styles.eyebrow}>Enterprise Dedicated Connectivity</span>
-          <h1 className={styles.title}>Enterprise Internet Lease Lines</h1>
-          <p className={styles.subtitle}>
-            Mission-critical, dedicated fiber bandwidth engineered with 1:1 uncontended symmetrical throughput, guaranteed 99.9% SLA, and local NOC level-3 engineering.
-          </p>
+        <ScrollReveal y={24} duration={0.6}>
+          <div className={styles.headerSection}>
+            <span className={styles.eyebrow}>Enterprise Dedicated Connectivity</span>
+            <h1 className={styles.title}>Enterprise Internet Lease Lines</h1>
+            <p className={styles.subtitle}>
+              Mission-critical, dedicated fiber bandwidth engineered with 1:1 uncontended symmetrical throughput, guaranteed 99.9% SLA, and local NOC level-3 engineering.
+            </p>
 
-          <div className={styles.headerActions}>
-            <Link href="/contact/" className="btn btn-primary">
-              Request a Quote →
-            </Link>
-            <a href={`tel:${CONTACT_INFO.phone}`} className="btn btn-secondary">
-              Talk to Sales: {CONTACT_INFO.phoneDisplay}
-            </a>
+            <div className={styles.headerActions}>
+              <Link href="/contact/" className="btn btn-primary">
+                Request a Quote →
+              </Link>
+              <a href={`tel:${CONTACT_INFO.phone}`} className="btn btn-secondary">
+                Talk to Sales: {CONTACT_INFO.phoneDisplay}
+              </a>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Stats / Value Highlights Banner */}
-        <div className={styles.statsBanner} aria-label="Key Performance Indicators">
-          <div className={styles.statItem}>
-            <div className={styles.statValue}>1:1</div>
-            <div className={styles.statLabel}>Dedicated Symmetrical Speed</div>
+        <ScrollReveal selector={`.${styles.statsBanner} > *`} y={25} stagger={0.1}>
+          <div className={styles.statsBanner} aria-label="Key Performance Indicators">
+            <div className={styles.statItem}>
+              <div className={styles.statValue}>1:1</div>
+              <div className={styles.statLabel}>Dedicated Symmetrical Speed</div>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statValue}>99.9%</div>
+              <div className={styles.statLabel}>SLA Uptime Commitment</div>
+            </div>
+            <div className={styles.statItem}>
+              <div className={styles.statValue}>&lt; 15ms</div>
+              <div className={styles.statLabel}>Ultra-Low Core Latency</div>
+            </div>
           </div>
-          <div className={styles.statItem}>
-            <div className={styles.statValue}>99.9%</div>
-            <div className={styles.statLabel}>SLA Uptime Commitment</div>
-          </div>
-          <div className={styles.statItem}>
-            <div className={styles.statValue}>&lt; 15ms</div>
-            <div className={styles.statLabel}>Ultra-Low Core Latency</div>
-          </div>
-        </div>
+        </ScrollReveal>
 
         {/* 6 Features Grid */}
         <section className={styles.featuresSection} aria-labelledby="features-heading">
-          <div className={styles.sectionHeader}>
-            <h2 id="features-heading" className={styles.sectionTitle}>
-              Engineered for Enterprise Performance
-            </h2>
-            <p className={styles.sectionSubtitle}>
-              Built on resilient optical fiber architecture to power enterprise cloud systems, VoIP, and mission-critical workflows.
-            </p>
-          </div>
+          <ScrollReveal y={20}>
+            <div className={styles.sectionHeader}>
+              <h2 id="features-heading" className={styles.sectionTitle}>
+                Engineered for Enterprise Performance
+              </h2>
+              <p className={styles.sectionSubtitle}>
+                Built on resilient optical fiber architecture to power enterprise cloud systems, VoIP, and mission-critical workflows.
+              </p>
+            </div>
+          </ScrollReveal>
 
-          <div className={styles.featuresGrid}>
-            {LEASE_LINE_FEATURES.map((feature, idx) => (
-              <div key={idx} className={styles.featureCard}>
-                <div className={styles.featureIcon} aria-hidden="true">
-                  {FEATURE_ICONS[feature.icon] || FEATURE_ICONS.dedicated}
+          <ScrollReveal selector={`.${styles.featuresGrid} > *`} y={30} stagger={0.08}>
+            <div className={styles.featuresGrid}>
+              {LEASE_LINE_FEATURES.map((feature, idx) => (
+                <div key={idx} className={styles.featureCard}>
+                  <div className={styles.featureIcon} aria-hidden="true">
+                    {FEATURE_ICONS[feature.icon] || FEATURE_ICONS.dedicated}
+                  </div>
+                  <h3 className={styles.featureTitle}>{feature.label}</h3>
+                  <p className={styles.featureDesc}>{feature.description}</p>
                 </div>
-                <h3 className={styles.featureTitle}>{feature.label}</h3>
-                <p className={styles.featureDesc}>{feature.description}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* Use Cases Section */}
         <section className={styles.useCasesSection} aria-labelledby="usecases-heading">
-          <h2 id="usecases-heading" className={styles.sectionTitle}>
-            Who Relies on JDAirNet Lease Lines?
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Custom-tailored fiber infrastructure for multi-user campuses, enterprises, and high-density institutions.
-          </p>
+          <ScrollReveal y={20}>
+            <h2 id="usecases-heading" className={styles.sectionTitle}>
+              Who Relies on JDAirNet Lease Lines?
+            </h2>
+            <p className={styles.sectionSubtitle}>
+              Custom-tailored fiber infrastructure for multi-user campuses, enterprises, and high-density institutions.
+            </p>
+          </ScrollReveal>
 
-          <div className={styles.useCasesGrid}>
-            {LEASE_LINE_USE_CASES.map((useCase, index) => (
-              <div key={index} className={styles.useCaseChip}>
-                <span className={styles.chipDot} aria-hidden="true" />
-                <span>{useCase}</span>
-              </div>
-            ))}
-          </div>
+          <ScrollReveal selector={`.${styles.useCasesGrid} > *`} y={20} stagger={0.04}>
+            <div className={styles.useCasesGrid}>
+              {LEASE_LINE_USE_CASES.map((useCase, index) => (
+                <div key={index} className={styles.useCaseChip}>
+                  <span className={styles.chipDot} aria-hidden="true" />
+                  <span>{useCase}</span>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* Enterprise Bottom Conversion CTA */}
-        <div className={styles.enterpriseCta}>
-          <h2 className={styles.ctaTitle}>Ready to Deploy Enterprise Fiber?</h2>
-          <p className={styles.ctaSubtitle}>
-            Get a tailored proposal with custom bandwidth configurations, route diversity, and enterprise SLAs.
-          </p>
-          <div className={styles.ctaButtonGroup}>
-            <Link href="/contact/" className="btn btn-primary">
-              Request a Quote →
-            </Link>
-            <a
-              href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent('Hello JDAirNet, I would like to request an Enterprise Lease Line quote.')}`}
-              className="btn btn-whatsapp"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Chat on WhatsApp
-            </a>
+        <ScrollReveal y={30} duration={0.7}>
+          <div className={styles.enterpriseCta}>
+            <h2 className={styles.ctaTitle}>Ready to Deploy Enterprise Fiber?</h2>
+            <p className={styles.ctaSubtitle}>
+              Get a tailored proposal with custom bandwidth configurations, route diversity, and enterprise SLAs.
+            </p>
+            <div className={styles.ctaButtonGroup}>
+              <Link href="/contact/" className="btn btn-primary">
+                Request a Quote →
+              </Link>
+              <a
+                href={`https://wa.me/${CONTACT_INFO.whatsapp}?text=${encodeURIComponent('Hello JDAirNet, I would like to request an Enterprise Lease Line quote.')}`}
+                className="btn btn-whatsapp"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Chat on WhatsApp
+              </a>
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </main>
   )

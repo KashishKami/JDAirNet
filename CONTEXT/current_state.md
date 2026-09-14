@@ -3,7 +3,7 @@
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
 **Last Updated:** 2026-09-14
-**Current Active Phase:** Phase 5 (Coverage, About, Contact Pages)
+**Current Active Phase:** Phase 6 (Polish, Performance & Pre-Launch)
 
 
 ---
@@ -739,119 +739,222 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
   - Purely CSS-driven, zero flicker, no React re-render jank for the icon swap.
 
 ## Phase 5 — Coverage, About, Contact Pages
+> Goal: Complete all secondary marketing, conversion, and legal pages with schemas, interactive contact form with PHP backend, and custom 404 page.
 
 ---
 
 #### W-501 — Coverage Page (`/coverage/`)
 
-**Root cause:** Prospective customers need to know if their area is served before they call.
+- [x] **RED — E2E & Unit Tests (`tests/coverage.spec.ts` & `src/tests/CoveragePage.test.tsx`):**
+  - [x] Test: Navigate to `/coverage/` — page title includes "Coverage"
+  - [x] Test: At least one CTA linking to `/contact/` or `tel:` is present
+  - [x] Test: Assert `WebPage` and `BreadcrumbList` schemas
+  - [x] **Run — confirm RED**
 
-**Goal:** `/coverage/` explains the service area in text, provides a feasibility contact CTA, and has `WebPage` + `BreadcrumbList` schemas.
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/app/coverage/page.tsx` with metadata + content + CTAs + `<JsonLd>`
+  - [x] Create `src/app/coverage/page.module.css` with 70vw layout and area tags
+  - [x] Run unit & E2E tests — **confirm GREEN**
 
----
-
-- [ ] **RED — E2E Test (`tests/coverage.spec.ts`):**
-  - [ ] Test: Navigate to `/coverage/` — page title includes "Coverage"
-  - [ ] Test: At least one CTA linking to `/contact/` or `tel:` is present
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/coverage/page.tsx` with metadata + content + CTAs + `<JsonLd>`
-  - [ ] Run E2E test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/coverage/` — content about service areas renders
-  - [ ] Contact/feasibility CTA visible
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Navigate to `/coverage/` — content about service areas renders
+  - [x] Contact/feasibility CTA visible
+  - [x] ✅ Done
 
 ---
 
 #### W-502 — About Page (`/about/`)
 
-**Root cause:** Trust is built through story. An About page humanizes the brand for both residential and business customers.
+- [x] **RED — Unit & E2E Tests (`src/tests/AboutPage.test.tsx` & `tests/about.spec.ts`):**
+  - [x] Test: `generateWebPageSchema({ type: 'AboutPage', ... })` — assert `@type: 'AboutPage'`
+  - [x] Test: Assert company story, stats ribbon, core values, and CTAs render
+  - [x] **Run — confirm RED**
 
-**Goal:** `/about/` renders with company story, values, and an `AboutPage` + `BreadcrumbList` schema.
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/app/about/page.tsx` with metadata + content + `<JsonLd>`
+  - [x] Create `src/app/about/page.module.css` with values grid and stats ribbon
+  - [x] Run unit & E2E tests — **confirm GREEN**
 
----
-
-- [ ] **RED — Unit Test:**
-  - [ ] Test: `generateWebPageSchema({ type: 'AboutPage', ... })` — assert `@type: 'AboutPage'`
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/about/page.tsx` with metadata + content + `<JsonLd>`
-  - [ ] Run unit test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/about/` — content renders correctly at all viewports
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Navigate to `/about/` — content renders correctly at all viewports
+  - [x] ✅ Done
 
 ---
 
 #### W-503 — Contact Page & Form (`/contact/`)
 
-**Root cause:** The contact page is where all three channels converge. The form is the primary backend-touching element — it must submit to `contact.php` and show success/error feedback.
+- [x] **RED — Component & E2E Tests (`src/tests/ContactForm.test.tsx`, `src/tests/ContactPage.test.tsx`, `tests/contact.spec.ts`):**
+  - [x] Test: Render `<ContactForm />` — assert name, email, phone, message fields present
+  - [x] Test: Submit with empty fields — assert error state (form does not submit)
+  - [x] Test: Submit with valid data — mock `fetch` to return `{success: true}` — assert success message renders
+  - [x] Test: Submit with valid data — mock `fetch` to return `{success: false}` — assert error message renders
+  - [x] **Run — confirm RED**
 
-**Goal:** `/contact/` renders all 3 contact channels (call, WhatsApp, form) prominently. The form submits via `fetch('/contact.php')` and shows a success message on completion or an error message on failure.
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/components/ui/ContactForm.tsx` (Client Component) with form state + fetch + success/error UI
+  - [x] Create `src/components/ui/ContactForm.module.css`
+  - [x] Create `contact.php` (saved in project root as `contact.php`, deployed to Hostinger separately)
+  - [x] Create `src/app/contact/page.tsx` with metadata, all 3 channels, `<ContactForm />`, `LocalBusiness` schema, `ContactPage` schema
+  - [x] Create `src/app/contact/page.module.css`
+  - [x] Run component & E2E tests — **confirm GREEN**
 
-**Approach:** `ContactForm.tsx` as a Client Component with `useState` for form fields and submission state. Playwright E2E test mocks the `/contact.php` POST endpoint using `page.route()`.
-
----
-
-- [ ] **RED — Component Test (`src/tests/ContactForm.test.tsx`):**
-  - [ ] Test: Render `<ContactForm />` — assert name, email, phone, message fields present
-  - [ ] Test: Submit with empty fields — assert error state (form does not submit)
-  - [ ] Test: Submit with valid data — mock `fetch` to return `{success: true}` — assert success message renders
-  - [ ] Test: Submit with valid data — mock `fetch` to return `{success: false}` — assert error message renders
-  - [ ] **Run — confirm RED**
-
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/components/ui/ContactForm.tsx` (Client Component) with form state + fetch + success/error UI
-  - [ ] Create `contact.php` (saved in project root as `contact.php`, deployed to Hostinger separately)
-  - [ ] Create `src/app/contact/page.tsx` with metadata, all 3 channels, `<ContactForm />`, `LocalBusiness` schema, `ContactPage` schema
-  - [ ] Run component tests — **confirm GREEN**
-
-- [ ] **GREEN — E2E Test (`tests/contact.spec.ts`):**
-  - [ ] Mock `POST /contact.php` to return `{success: true}` using `page.route()`
-  - [ ] Test: Fill form fields → submit → success message appears
-  - [ ] Test: Phone CTA visible and has `href` starting with `tel:`
-  - [ ] Test: WhatsApp CTA visible and has `href` starting with `https://wa.me/`
-  - [ ] Run E2E test — **confirm GREEN**
-
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/contact/` — 3 contact channels displayed prominently
-  - [ ] Fill form → submit → success message appears
-  - [ ] On mobile: all 3 CTAs are tappable (44px+ touch targets)
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Navigate to `/contact/` — 3 contact channels displayed prominently
+  - [x] Fill form → submit → success message appears
+  - [x] On mobile: all 3 CTAs are tappable (44px+ touch targets)
+  - [x] ✅ Done
 
 ---
 
 #### W-504 — Legal Pages & Custom 404
 
-- [ ] **RED — E2E Test:**
-  - [ ] Test: Navigate to `/privacy-policy/` — page renders, title contains "Privacy"
-  - [ ] Test: Navigate to `/terms-of-service/` — page renders
-  - [ ] Test: Navigate to `/this-does-not-exist/` — 404 page renders, contains link back to home
-  - [ ] **Run — confirm RED**
+- [x] **RED — Unit & E2E Tests (`src/tests/LegalPages.test.tsx` & `tests/legal.spec.ts`):**
+  - [x] Test: Navigate to `/privacy-policy/` — page renders, title contains "Privacy"
+  - [x] Test: Navigate to `/terms-of-service/` — page renders
+  - [x] Test: Navigate to `/this-does-not-exist/` — 404 page renders, contains link back to home
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/privacy-policy/page.tsx` with basic legal content + metadata
-  - [ ] Create `src/app/terms-of-service/page.tsx` with basic legal content + metadata
-  - [ ] Create `src/app/not-found.tsx` with branded 404 design + "Go Home" CTA
-  - [ ] Run E2E tests — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/app/privacy-policy/page.tsx` with basic legal content + metadata
+  - [x] Create `src/app/terms-of-service/page.tsx` with basic legal content + metadata
+  - [x] Create `src/app/legal.module.css`
+  - [x] Create `src/app/not-found.tsx` with branded 404 design + "Go Home" CTA
+  - [x] Create `src/app/not-found.module.css`
+  - [x] Run unit & E2E tests — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] `/privacy-policy/` renders — breadcrumb shows Home > Privacy Policy
-  - [ ] Navigate to a non-existent URL — custom 404 page shows (Apache serves `/404/index.html` per `.htaccess` `ErrorDocument 404` rule)
-  - [ ] Ensure card uses `var(--space-card)`, `var(--font-h3)` for plan name, `var(--font-h2)` for price
-  - [ ] Desktop-only scale: `.planCard--highlighted { transform: scale(1.04); }` inside `@media (min-width: 1024px)`
-  - [ ] Run component test — **confirm GREEN**
+- [x] **Verification chain:**
+  - [x] `/privacy-policy/` renders — breadcrumb shows Home > Privacy Policy
+  - [x] `/terms-of-service/` renders — breadcrumb shows Home > Terms of Service
+  - [x] Navigate to a non-existent URL — custom 404 page shows
+  - [x] ✅ Done
 
-- [ ] **Verification chain:**
-  - [ ] Render all 4 plan cards side by side at 1024px — highlighted card is visually elevated
-  - [ ] At 600px: 2 columns, cards equal height
-  - [ ] At 375px: 1 column, highlighted card does NOT scale (correct — scale only on desktop)
-  - [ ] ✅ Done
+### Session Note — Phase 5 Completion & UI Polish (2026-09-14)
+
+- **Completed Phase 5 (Coverage, About, Contact, Legal & 404) via Strict TDD:**
+  - **Coverage Page (`/coverage/`) (W-501):** Built `src/app/coverage/page.tsx` with residential & enterprise service clusters, interactive feasibility check CTA, and `WebPage` + `BreadcrumbList` JSON-LD schemas.
+  - **About Page (`/about/`) (W-502):** Built `src/app/about/page.tsx` with company mission, 4-stat ribbon (100% Optical Fiber, 99.9% Uptime SLA, < 15ms Latency, 24/7 Local NOC), core values grid, and `AboutPage` schema.
+  - **Contact Page & Form (`/contact/`) (W-503):** Built `src/components/ui/ContactForm.tsx` (accessible client-side validation, `POST /contact.php` fetch with feedback alerts), created standalone `contact.php` mailer in project root for Hostinger FTP deployment, assembled `src/app/contact/page.tsx` with 3 contact channels (Direct Call, WhatsApp, Form) and `ContactPage` + `LocalBusiness` schemas.
+  - **Legal & System Pages (W-504):** Built `src/app/privacy-policy/page.tsx`, `src/app/terms-of-service/page.tsx`, and branded custom `src/app/not-found.tsx`.
+- **Delivered UI Polish & Bug Fixes:**
+  - **Cross-Page FAQ Navigation:** Enhanced `SmoothScrollProvider.tsx` with cross-page hash detection, auto-scrolling to `#faq` with -80px header offset after page transitions, and fixed footer link in `Footer.tsx` to `/#faq`.
+  - **Navbar Clearance:** Standardized all inner page top section paddings to `padding-top: clamp(6rem, 12vw, 9rem);` so pills and titles no longer touch the fixed navbar.
+  - **Scroll Reveal Animations:** Created reusable `<ScrollReveal>` component and wrapped all headers, cards, and CTA sections across Plans, Lease Lines, Coverage, About, Contact, and Legal pages.
+  - **15% Margin Compliance:** Updated `legal.module.css` to respect the 15% desktop margin policy (`width: 70vw; max-width: 70vw; margin-inline: auto;`).
+- **Quality Gates & Tests:**
+  - 21/21 test files / 65 unit tests passing in Vitest (100% pass rate).
+  - `npm run lint` and `npm run typecheck` passing with 0 warnings/errors.
+
+---
+
+## Session Log — 2026-09-15
+
+### Bug Fixed: Footer "Frequently Asked Questions" Link
+
+**Symptom:** Clicking the FAQ footer link from any page other than home
+landed on the "Why Choose Us" / Plans section instead of the FAQ section.
+On the home page itself, the link did nothing (kept the user at the footer).
+
+**Root causes identified (three separate bugs):**
+
+1. **Same-page click did nothing** — `handleAnchorClick` in
+   `SmoothScrollProvider` called `calculatePinnedScrollY`, which walked
+   `offsetTop` chains and then added GSAP ScrollTrigger `start`/`end` values
+   as "pin distances". Those values are scroll-progress markers, not pixel
+   distances, so the arithmetic badly overcounted and sent Lenis to the
+   bottom of the page (visually: no movement from footer).
+
+2. **Cross-page click landed on WhyUs/Plans** — the click handler only
+   intercepted `/#hash` links when `window.location.pathname === '/'`.
+   From other pages the click fell through un-prevented, Next.js navigated
+   client-side to `/#faq`, and the `pathname` useEffect tried to scroll —
+   but with a stale, incorrectly-sized GSAP pin spacer.
+
+3. **Pin spacer sized incorrectly on fresh navigation** — `WhyUsSection`'s
+   `useEffect` dispatches `layout-pinned` synchronously after
+   `ScrollTrigger.refresh()`. At that exact moment `track.scrollWidth`
+   (the card track's rendered width) is often `0` or an incomplete value
+   because the browser's CSS layout pass hasn't completed yet. GSAP's
+   `end: () => \`+=${getScrollDistance() + 450}\`` callback evaluates to
+   `~450px` instead of `~1590px`, making the pin spacer far too short.
+   Every subsequent scroll-position calculation based on
+   `getBoundingClientRect()` therefore returns the position of `#faq`
+   *without* the pin spacer, landing the user at the WhyUs/Plans boundary.
+
+**Fix applied — `SmoothScrollProvider.tsx`:**
+
+- Replaced `calculatePinnedScrollY` (broken offsetTop + GSAP pin-distance
+  arithmetic) with `getScrollTarget` — uses
+  `getBoundingClientRect().top + window.scrollY - headerOffset`, which reads
+  the actual rendered position and is always correct for same-page scrolls.
+
+- Fixed `handleAnchorClick` to extract `hash` from any `/#hash` href
+  (removed the `pathname === '/'` restriction). If the target element exists
+  on the current page → intercept + smooth-scroll. If not → **two-step
+  cross-page flow** (see below).
+
+- **Two-step cross-page navigation:** When `/#faq` is clicked from another
+  page and the target element is not in the DOM:
+  1. Store `hash` in `pendingHashRef.current`.
+  2. Call `router.push('/')` — navigates to home *without* a hash, so
+     `window.scrollY` resets to `0` and the browser never attempts a native
+     anchor jump.
+  3. The `pathname` useEffect fires for `/`. It reads `pendingHashRef` (not
+     `window.location.hash`, which is empty), clears it, and enters the
+     `isPending` branch.
+  4. Waits a flat **600 ms** — by then every React effect has run, GSAP has
+     set up its ScrollTrigger with the correct `track.scrollWidth`, and CSS
+     layout is fully settled.
+  5. Calls `ScrollTrigger.refresh()` to re-evaluate the dynamic `end`
+     callback and resize the pin spacer to its true height.
+  6. One `requestAnimationFrame` to let the browser commit the updated pin
+     spacer to layout.
+  7. `getScrollTarget(#faq)` now returns the correct document position →
+     `lenis.scrollTo(scrollY, { duration: 1.2 })` → URL updated to `/#faq`.
+
+- Kept the original `layout-pinned` event + 50 ms polling logic for the
+  *direct URL hash* case (user opens `/#faq` directly in a new tab), where
+  the flat 600 ms wait would add unnecessary delay.
+
+**Files changed:**
+- `src/components/providers/SmoothScrollProvider.tsx` — all logic above.
+  No changes to `WhyUsSection.tsx`, `Footer.tsx`, or any other file.
+
+---
+
+### Session Note — Video Optimization, 404 Page Redesign & Test Suite Polish (2026-09-15)
+
+- **High-Efficiency Video Optimization (`ffmpeg-static`):**
+  - Built automated optimization scripts (`scripts/optimize-videos.js` and `scripts/optimize-404-1.js`) using `ffmpeg-static` (H.264 CRF 28/30 720p slow preset + VP9 WebM CRF 33/35 + poster frame extraction).
+  - `Hero.mp4`: 16.3 MB → **1.01 MB** (93.8% reduction), created `Hero.webm` (**1.18 MB**) and `hero-poster.jpg` (158 KB).
+  - `404.mp4`: 7.4 MB → **0.42 MB** (94.4% reduction), created `404.webm` (**0.65 MB**) and `404-poster.jpg` (188 KB).
+  - `404_1.mp4`: 14.0 MB → **0.32 MB** (97.7% reduction), created `404_1.webm` (**0.23 MB**) and `404_1-poster.jpg` (171 KB).
+  - Total video asset footprint reduced by ~95%, ensuring fast load times on shared hosting.
+
+- **Custom 404 Page Redesign & Polish (`/404`):**
+  - Rebuilt `src/app/not-found.tsx` with full-screen `404_1` space/earth video background and `404_1-poster.jpg` fallback.
+  - Eliminated Flash of Unstyled Content (FOUC) by hiding Navbar, Footer, and `FloatingContactHub` at paint time using pure CSS `body:has([data-page="not-found"])` in `globals.css`.
+  - Converted error code to semantic `<h1 className={styles.errorCode}>404</h1>` in clean glowing white (`#ffffff`).
+  - Added copy:
+    - *"The page seems to have slipped beyond our reach :/"*
+    - *"Let’s bring you back to solid ground."*
+  - Streamlined CTA to single primary *"Back to Homepage"* button.
+  - Calibrated video filter (`brightness(0.85) saturate(0.95)`) and softened gradient overlays in `not-found.module.css` for clear atmosphere and starfield visibility while preserving high text legibility.
+
+- **Test Suite & CI Quality Gates:**
+  - **FAQ Accessibility:** Coerced `aria-expanded` to explicit `'true' | 'false'` strings in `FaqSection.tsx` to fix WebKit/Mobile Safari accessibility query discrepancies.
+  - **Unit Tests:** Updated `src/tests/LegalPages.test.tsx` to assert semantic `<h1>404</h1>` and new 404 copy.
+  - **E2E Tests:** Updated `tests/legal.spec.ts` 404 navigation to use `{ waitUntil: 'domcontentloaded' }`, preventing Mobile Safari media stream buffering timeouts.
+- **Why Choose Us Section Redesign & Playful GSAP Choreography:**
+  - **Left Feature Image Integration:** Positioned `/Why_choose_us-removebg-preview.png` on the left of `trackViewport` in `WhyUsSection.tsx` with responsive scaling and drop shadow.
+  - **Image Exit Synchronized to Card Contact:** Wired GSAP `containerAnimation` so the left image remains 100% solid while the user views the initial state, and smoothly slides/fades out (`opacity: 0, x: -100px`) only when Card 01 moves across to meet its boundary.
+  - **Whitespace Reduction & Centering:** Set `.section` to `justify-content: center` with tightened top/bottom padding (`clamp(1rem, 2vw, 2rem)`) to eliminate bottom dead space inside the pinned viewport.
+  - **Enlarged Figure & Slimmed Cards:** Scaled feature image to `clamp(380px, 44vw, 580px)` (`max-height: 620px`) and slimmed card widths to `350px` on desktop (`300px–340px` on tablet) for a modern, balanced composition.
+  - **Center-Screen Sequential Entrances:** Cards 02–06 start 100% invisible (`opacity: 0`). Each card's custom playful entrance triggers strictly when the preceding card reaches the center (50%) of the screen:
+    - Card 02 (⚡ Low Latency): Drops in with an elastic top bounce (`y: -130px`, `rotation: 7deg`, `back.out(1.6)`).
+    - Card 03 (📞 24/7 Support): Rises from bottom-right with a tilt (`y: +120px`, `x: +50px`, `rotation: -8deg`).
+    - Card 04 (📡 Wi-Fi 6): Elastic pop with de-blurring focus (`scale: 0.55`, `blur(8px)` → `scale: 1`, `blur(0px)`).
+    - Card 05 (⇅ Symmetric Speeds): Swift overshoot slide-in from right (`x: +180px`, `y: -35px`, `rotation: -6deg`).
+    - Card 06 (🛡️ Zero FUP): 3D perspective fold-in (`rotationY: 40deg`, `y: +70px`, `scale: 0.82` with 1200px perspective).
 
 ---
 
@@ -935,6 +1038,6 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 | Phase 2.5 | Lenis Smooth Scroll & GSAP Animations | ✅ COMPLETED |
 | Phase 3 | Plans Page | ✅ COMPLETED |
 | Phase 4 | Lease Lines Page | ✅ COMPLETED |
-| Phase 5 | Coverage, About, Contact Pages | 🟢 READY TO START |
-| Phase 6 | Polish, Performance & Pre-Launch | ⏸️ BLOCKED (needs P5) |
+| Phase 5 | Coverage, About, Contact Pages | ✅ COMPLETED |
+| Phase 6 | Polish, Performance & Pre-Launch | 🟢 READY TO START |
 | Phase 7 | Blog | 🔵 FUTURE |

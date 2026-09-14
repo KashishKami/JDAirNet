@@ -1,23 +1,23 @@
 .section {
-  padding-top: clamp(1.75rem, 3.5vw, 2.75rem);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(2rem, 3.5vw, 3.25rem);
+  padding-bottom: clamp(1rem, 2vw, 2rem);
   background-color: #ffffff;
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   min-height: 100vh;
 }
 
 .header {
   text-align: center;
-  max-width: 680px;
-  margin: 0 auto 1.25rem;
+  max-width: 720px;
+  margin: 0 auto 1.5rem;
 }
 
 .eyebrow {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .title {
@@ -25,7 +25,7 @@
   font-size: var(--font-h2);
   font-weight: 800;
   color: #0f172a;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
   letter-spacing: -0.01em;
 }
 
@@ -40,49 +40,94 @@
   width: 100%;
   overflow: visible;
   position: relative;
+  perspective: 1200px;
+}
+
+.featureImageWrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 1;
+  pointer-events: none;
+  width: clamp(380px, 44vw, 580px);
+  will-change: transform, opacity;
+}
+
+@media (min-width: 900px) {
+  .featureImageWrapper {
+    display: flex;
+  }
+}
+
+.featureImage {
+  width: 100%;
+  height: auto;
+  max-height: clamp(440px, 68vh, 620px);
+  object-fit: contain;
+  object-position: bottom left;
+  filter: drop-shadow(0 20px 35px rgba(15, 23, 42, 0.08));
 }
 
 .track {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: var(--space-gap-lg, 2.25rem);
+  gap: var(--space-gap-lg, 2rem);
   width: max-content;
   will-change: transform;
-  padding: 3rem 0.5rem 3.5rem clamp(120px, 42vw, 520px);
+  position: relative;
+  z-index: 2;
+  padding: 1.25rem 0.5rem 1.5rem clamp(20px, 4vw, 40px);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .track {
-    padding-left: clamp(380px, 48vw, 680px);
+    padding-left: clamp(480px, 52vw, 650px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .track {
+    padding-left: clamp(540px, 50vw, 720px);
   }
 }
 
 .card {
-  width: clamp(280px, 78vw, 360px);
+  width: clamp(270px, 75vw, 320px);
+  min-height: 380px;
   flex-shrink: 0;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 24px;
-  padding: var(--space-card, 2.25rem);
+  padding: 2.25rem 1.75rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
   box-shadow: 0 12px 35px rgba(15, 23, 42, 0.07);
   user-select: none;
   transform-origin: center center;
-  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
 }
 
 @media (min-width: 768px) {
   .card {
-    width: clamp(340px, 32vw, 420px);
+    width: clamp(300px, 28vw, 340px);
+    min-height: 390px;
+    padding: 2.25rem 2rem;
   }
 }
 
 @media (min-width: 1200px) {
   .card {
-    width: 390px;
+    width: 350px;
+    min-height: 400px;
+    padding: 2.5rem 2.25rem;
   }
 }
 
@@ -100,9 +145,9 @@
 }
 
 .iconWrapper {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
   background: rgba(200, 30, 43, 0.08);
   border: 1px solid rgba(200, 30, 43, 0.18);
   display: flex;
@@ -111,9 +156,14 @@
   color: var(--color-primary);
 }
 
+.iconWrapper svg {
+  width: 28px;
+  height: 28px;
+}
+
 .cardNum {
   font-family: var(--font-display-family, sans-serif);
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #cbd5e1;
   letter-spacing: -0.02em;
@@ -121,17 +171,17 @@
 
 .cardTitle {
   font-family: var(--font-heading-family, sans-serif);
-  font-size: var(--font-h3);
+  font-size: clamp(1.3rem, 1.8vw, 1.55rem);
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
   line-height: 1.3;
 }
 
 .cardText {
-  font-size: var(--font-body);
+  font-size: 1.05rem;
   color: #475569;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 /* Fallback for reduced motion preference */

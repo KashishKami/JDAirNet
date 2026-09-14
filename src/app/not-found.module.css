@@ -1,0 +1,152 @@
+/* ═══════════════════════════════════════════════════════
+   404 Not Found Page
+   Full-screen video background with brand-tinted overlay
+   ═══════════════════════════════════════════════════════ */
+
+.notFoundPage {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-color: var(--color-bg-dark); /* fallback while video loads */
+}
+
+/* ── Video background ─────────────────────────────────── */
+.videoWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* Keep video clear and vibrant */
+  filter: brightness(0.85) saturate(0.95);
+}
+
+/* Lightened overlay:
+   - Subtle vignette around the perimeter for contrast
+   - Soft red radial glow centered around content
+   - Keeps video bright and visible */
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Red brand radial glow behind the content */
+    radial-gradient(ellipse 60% 50% at 50% 45%, rgba(200, 30, 43, 0.12) 0%, transparent 65%),
+    /* Soft vignette */
+    radial-gradient(ellipse 100% 100% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.45) 100%),
+    /* Gentle bottom fade */
+    linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 35%);
+}
+
+/* ── Page content ─────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  padding-top: 5rem;   /* clear the fixed header */
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.errorCode {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 18vw, 11rem);
+  font-weight: 800;
+  line-height: 1;
+  /* White number with soft glow for legibility on the video */
+  color: #ffffff;
+  text-shadow:
+    0 0 40px rgba(255, 255, 255, 0.35),
+    0 2px 16px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.04em;
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto 2.25rem;
+  text-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.8),
+    0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Buttons ──────────────────────────────────────────── */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 480px) {
+  .actions {
+    flex-direction: row;
+  }
+}
+
+.primaryBtn {
+  min-height: 48px;
+  padding: var(--space-btn-y) var(--space-btn-x);
+  font-size: var(--font-cta);
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow:
+    0 4px 14px rgba(200, 30, 43, 0.45),
+    0 0 24px rgba(200, 30, 43, 0.2);
+}
+
+.primaryBtn:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 20px rgba(200, 30, 43, 0.55),
+    0 0 32px rgba(200, 30, 43, 0.25);
+}
+
+.secondaryBtn {
+  min-height: 48px;
+  padding: var(--space-btn-y) var(--space-btn-x);
+  font-size: var(--font-cta);
+  font-weight: 600;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  /* Glass effect against the video */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.secondaryBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}

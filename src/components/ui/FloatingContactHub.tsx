@@ -126,7 +126,7 @@ export default function FloatingContactHub() {
   }, [])
 
   return (
-    <div ref={containerRef} className={styles.hubContainer}>
+    <div ref={containerRef} className={styles.hubContainer} data-floating-hub>
       {/* 3 Channels Popup Menu */}
       {isOpen && (
         <div ref={menuRef} className={styles.menuList} role="menu" aria-label="Contact Channels">

@@ -54,7 +54,7 @@ export default function FaqSection() {
                   id={questionId}
                   className={styles.questionButton}
                   onClick={() => toggleFaq(index)}
-                  aria-expanded={isOpen}
+                  aria-expanded={isOpen ? 'true' : 'false'}
                   aria-controls={answerId}
                 >
                   <span>{faq.question}</span>

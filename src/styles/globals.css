@@ -282,3 +282,21 @@ video {
     align-items: stretch;
   }
 }
+
+/* ── 404 full-screen: hide Navbar, Footer, FloatingContactHub ─────────────
+   Uses CSS :has() on a data attribute (not a CSS Module class — those get
+   hashed and can't be targeted from globals.css). data-page="not-found" is
+   a plain HTML attribute that survives verbatim in the DOM, so the selector
+   always matches. Fires at paint time: zero JavaScript, zero flash.
+   :has() is supported in Chrome 105+, Firefox 121+, Safari 15.4+.
+   ───────────────────────────────────────────────────────────────────────── */
+body:has([data-page="not-found"]) header,
+body:has([data-page="not-found"]) footer,
+body:has([data-page="not-found"]) [data-floating-hub] {
+  display: none !important;
+}
+
+body:has([data-page="not-found"]) main {
+  padding: 0;
+  margin: 0;
+}

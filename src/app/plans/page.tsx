@@ -10,6 +10,7 @@ import {
   generatePlansItemListSchema,
   generateBreadcrumbSchema,
 } from '@/lib/schemaGenerators'
+import ScrollReveal from '@/components/ui/ScrollReveal'
 import styles from './page.module.css'
 
 export const metadata: Metadata = {
@@ -106,64 +107,76 @@ export default function PlansPage() {
 
       <div className="container">
         {/* Header */}
-        <div className={styles.headerSection}>
-          <span className={styles.eyebrow}>Pricing & Packages</span>
-          <h1 className={styles.title}>High-Speed Fiber Broadband Plans</h1>
-          <p className={styles.subtitle}>
-            Ultra-fast, symmetric fiber internet engineered for gaming, streaming, remote work, and multi-user homes.
-          </p>
-        </div>
+        <ScrollReveal y={24} duration={0.6}>
+          <div className={styles.headerSection}>
+            <span className={styles.eyebrow}>Pricing & Packages</span>
+            <h1 className={styles.title}>High-Speed Fiber Broadband Plans</h1>
+            <p className={styles.subtitle}>
+              Ultra-fast, symmetric fiber internet engineered for gaming, streaming, remote work, and multi-user homes.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 4 Plans Grid */}
-        <div className={styles.plansGrid}>
-          {BROADBAND_PLANS.map((plan) => (
-            <PlanCard key={plan.id} plan={plan} />
-          ))}
-        </div>
+        <ScrollReveal selector={`.${styles.plansGrid} > *`} y={30} stagger={0.1}>
+          <div className={styles.plansGrid}>
+            {BROADBAND_PLANS.map((plan) => (
+              <PlanCard key={plan.id} plan={plan} />
+            ))}
+          </div>
+        </ScrollReveal>
 
         {/* GST & Terms Note */}
-        <div className={styles.gstDisclaimer}>
-          <p>
-            * All prices exclude 18% GST. Free installation applies on multi-month subscriptions. Router provided as per plan specifications.
-          </p>
-        </div>
+        <ScrollReveal y={20} duration={0.5}>
+          <div className={styles.gstDisclaimer}>
+            <p>
+              * All prices exclude 18% GST. Free installation applies on multi-month subscriptions. Router provided as per plan specifications.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Add-ons Section */}
         <section className={styles.addonsSection} aria-labelledby="addons-heading">
-          <div className={styles.addonsHeader}>
-            <h2 id="addons-heading" className={styles.addonsTitle}>
-              Available Add-ons & Services
-            </h2>
-            <p className={styles.addonsSubtitle}>
-              Enhance your broadband connection with our entertainment, live TV, and enterprise network add-ons.
-            </p>
-          </div>
+          <ScrollReveal y={20}>
+            <div className={styles.addonsHeader}>
+              <h2 id="addons-heading" className={styles.addonsTitle}>
+                Available Add-ons & Services
+              </h2>
+              <p className={styles.addonsSubtitle}>
+                Enhance your broadband connection with our entertainment, live TV, and enterprise network add-ons.
+              </p>
+            </div>
+          </ScrollReveal>
 
-          <div className={styles.addonsGrid}>
-            {ADDONS.map((addon, index) => (
-              <div key={index} className={styles.addonCard}>
-                <div className={styles.addonIcon} aria-hidden="true">
-                  {addon.icon}
+          <ScrollReveal selector={`.${styles.addonsGrid} > *`} y={30} stagger={0.08}>
+            <div className={styles.addonsGrid}>
+              {ADDONS.map((addon, index) => (
+                <div key={index} className={styles.addonCard}>
+                  <div className={styles.addonIcon} aria-hidden="true">
+                    {addon.icon}
+                  </div>
+                  <h3 className={styles.addonName}>{addon.name}</h3>
+                  <p className={styles.addonDesc}>{addon.desc}</p>
                 </div>
-                <h3 className={styles.addonName}>{addon.name}</h3>
-                <p className={styles.addonDesc}>{addon.desc}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* Enterprise Lease Lines Cross-Link Banner */}
-        <div className={styles.leaseLineBanner}>
-          <div className={styles.bannerContent}>
-            <h2 className={styles.bannerTitle}>Need Dedicated Bandwidth for Business?</h2>
-            <p className={styles.bannerText}>
-              Explore our Enterprise Lease Lines featuring 1:1 uncontended symmetrical speeds, 99.9% uptime SLA, and local NOC support.
-            </p>
+        <ScrollReveal y={30} duration={0.7}>
+          <div className={styles.leaseLineBanner}>
+            <div className={styles.bannerContent}>
+              <h2 className={styles.bannerTitle}>Need Dedicated Bandwidth for Business?</h2>
+              <p className={styles.bannerText}>
+                Explore our Enterprise Lease Lines featuring 1:1 uncontended symmetrical speeds, 99.9% uptime SLA, and local NOC support.
+              </p>
+            </div>
+            <Link href="/lease-lines/" className={`btn btn-primary ${styles.bannerBtn}`}>
+              Explore Lease Lines →
+            </Link>
           </div>
-          <Link href="/lease-lines/" className={`btn btn-primary ${styles.bannerBtn}`}>
-            Explore Lease Lines →
-          </Link>
-        </div>
+        </ScrollReveal>
       </div>
     </main>
   )

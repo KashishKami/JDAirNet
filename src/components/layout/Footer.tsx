@@ -68,7 +68,7 @@ export default function Footer() {
             <li><Link href="/privacy-policy/" className={styles.footerLink}>Privacy Policy</Link></li>
             <li><Link href="/terms-of-service/" className={styles.footerLink}>Terms of Service</Link></li>
             <li><Link href="/contact/" className={styles.footerLink}>24/7 Help Desk</Link></li>
-            <li><Link href="/contact/#faq" className={styles.footerLink}>Frequently Asked Questions</Link></li>
+            <li><Link href="/#faq" scroll={false} className={styles.footerLink}>Frequently Asked Questions</Link></li>
           </ul>
         </div>
       </div>

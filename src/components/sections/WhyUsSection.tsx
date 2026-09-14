@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useEffect } from 'react'
-import { gsap } from '@/lib/animations'
+import { gsap, ScrollTrigger } from '@/lib/animations'
 import styles from './WhyUsSection.module.css'
 
 const FEATURES = [
@@ -71,6 +71,7 @@ const FEATURES = [
 export default function WhyUsSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
+  const imageWrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -96,51 +97,165 @@ export default function WhyUsSection() {
         scrollTrigger: {
           trigger: section,
           pin: true,
-          scrub: 1,
+          scrub: 0.8,
           start: 'top top',
-          end: () => `+=${getScrollDistance() + 450}`,
+          end: () => `+=${getScrollDistance() + 200}`,
           invalidateOnRefresh: true,
           anticipatePin: 1,
         },
       })
 
-      // 2. Playful alternating entrance for cards as they enter the screen
       const cards = track.querySelectorAll<HTMLElement>(`.${styles.card}`)
-      cards.forEach((card, index) => {
-        // First card starts immediately visible in resting position
-        if (index === 0) {
-          gsap.set(card, { y: 0, rotationZ: 0, scale: 1, opacity: 1 })
-          return
-        }
 
-        const isEven = index % 2 === 0
-        const initialY = isEven ? 75 : -65
-        const initialRotation = isEven ? 5 : -5
-
+      // 2. Left visual image stays 100% visible until Card 01 actually reaches it
+      if (imageWrapperRef.current && cards[0]) {
         gsap.fromTo(
-          card,
+          imageWrapperRef.current,
+          { opacity: 1, x: 0, scale: 1 },
           {
-            y: initialY,
-            rotationZ: initialRotation,
-            scale: 0.88,
-            opacity: 0.35,
-          },
-          {
-            y: 0,
-            rotationZ: 0,
-            scale: 1,
-            opacity: 1,
-            ease: 'power2.out',
+            opacity: 0,
+            x: -100,
+            scale: 0.92,
+            ease: 'power1.in',
             scrollTrigger: {
-              trigger: card,
+              trigger: cards[0],
               containerAnimation: horizontalTween,
-              start: 'left 95%',
-              end: 'left 45%',
-              scrub: 0.6,
+              start: () => {
+                const imgRight = imageWrapperRef.current?.getBoundingClientRect().right || 480
+                return `left ${imgRight + 30}px`
+              },
+              end: () => {
+                const imgWidth = imageWrapperRef.current?.offsetWidth || 480
+                return `left ${imgWidth * 0.35}px`
+              },
+              scrub: 0.5,
+              invalidateOnRefresh: true,
             },
           }
         )
-      })
+      }
+
+      // 3. Custom playful GSAP entrances — each card only becomes visible when the previous card reaches the center of the screen
+      // Card 01: Starts immediately visible at resting position
+      if (cards[0]) {
+        gsap.set(cards[0], { opacity: 1, y: 0, x: 0, rotationZ: 0, scale: 1 })
+      }
+
+      // Card 02 (Ultra-Low Latency ⚡): Appears strictly when Card 01 reaches center
+      if (cards[1] && cards[0]) {
+        gsap.fromTo(
+          cards[1],
+          { opacity: 0, y: -130, rotationZ: 7, scale: 0.82 },
+          {
+            opacity: 1,
+            y: 0,
+            rotationZ: 0,
+            scale: 1,
+            ease: 'back.out(1.6)',
+            scrollTrigger: {
+              trigger: cards[0],
+              containerAnimation: horizontalTween,
+              start: 'center 50%',
+              end: 'center 35%',
+              scrub: 0.3,
+            },
+          }
+        )
+      }
+
+      // Card 03 (24/7 Support 📞): Appears strictly when Card 02 reaches center
+      if (cards[2] && cards[1]) {
+        gsap.fromTo(
+          cards[2],
+          { opacity: 0, y: 120, x: 50, rotationZ: -8, scale: 0.85 },
+          {
+            opacity: 1,
+            y: 0,
+            x: 0,
+            rotationZ: 0,
+            scale: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: cards[1],
+              containerAnimation: horizontalTween,
+              start: 'center 50%',
+              end: 'center 35%',
+              scrub: 0.3,
+            },
+          }
+        )
+      }
+
+      // Card 04 (Wi-Fi 6 📡): Appears strictly when Card 03 reaches center
+      if (cards[3] && cards[2]) {
+        gsap.fromTo(
+          cards[3],
+          { opacity: 0, scale: 0.55, rotationZ: 4, filter: 'blur(8px)' },
+          {
+            opacity: 1,
+            scale: 1,
+            rotationZ: 0,
+            filter: 'blur(0px)',
+            ease: 'back.out(1.8)',
+            scrollTrigger: {
+              trigger: cards[2],
+              containerAnimation: horizontalTween,
+              start: 'center 50%',
+              end: 'center 35%',
+              scrub: 0.3,
+            },
+          }
+        )
+      }
+
+      // Card 05 (Symmetric Speeds ⇅): Appears strictly when Card 04 reaches center
+      if (cards[4] && cards[3]) {
+        gsap.fromTo(
+          cards[4],
+          { opacity: 0, x: 180, y: -35, rotationZ: -6, scale: 0.86 },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            rotationZ: 0,
+            scale: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: cards[3],
+              containerAnimation: horizontalTween,
+              start: 'center 50%',
+              end: 'center 35%',
+              scrub: 0.3,
+            },
+          }
+        )
+      }
+
+      // Card 06 (Zero FUP 🛡️): Appears strictly when Card 05 reaches center
+      if (cards[5] && cards[4]) {
+        gsap.fromTo(
+          cards[5],
+          { opacity: 0, rotationY: 40, y: 70, scale: 0.82, transformPerspective: 800 },
+          {
+            opacity: 1,
+            rotationY: 0,
+            y: 0,
+            scale: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: cards[4],
+              containerAnimation: horizontalTween,
+              start: 'center 50%',
+              end: 'center 35%',
+              scrub: 0.3,
+            },
+          }
+        )
+      }
+
+      // Ensure all pin spacers and measurements are registered globally
+      ScrollTrigger.refresh()
+      window.dispatchEvent(new CustomEvent('layout-pinned'))
 
       return () => {
         horizontalTween.kill()
@@ -167,6 +282,16 @@ export default function WhyUsSection() {
 
         {/* Horizontal Track Viewport */}
         <div className={styles.trackViewport}>
+          {/* Left Feature Image Visual */}
+          <div ref={imageWrapperRef} className={styles.featureImageWrapper} aria-hidden="true">
+            <img
+              src="/Why_choose_us-removebg-preview.png"
+              alt=""
+              className={styles.featureImage}
+              loading="lazy"
+            />
+          </div>
+
           <div ref={trackRef} className={styles.track}>
             {FEATURES.map((feature, idx) => (
               <div key={idx} className={styles.card}>

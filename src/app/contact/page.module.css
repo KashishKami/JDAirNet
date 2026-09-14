@@ -1,0 +1,149 @@
+.contactPage {
+  position: relative;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-white);
+  padding-top: clamp(6rem, 12vw, 9rem);
+  padding-bottom: var(--space-section);
+  min-height: 80vh;
+  overflow-x: hidden;
+}
+
+.headerSection {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--space-gap-lg);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--font-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+  background: var(--color-primary-glow);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(200, 30, 43, 0.2);
+  margin-bottom: var(--space-gap-sm);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--font-h1);
+  font-weight: 700;
+  color: var(--color-text-white);
+  line-height: 1.2;
+  margin-bottom: var(--space-gap-sm);
+}
+
+.subtitle {
+  font-size: var(--font-body);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* Layout Grid: Left Channels + Right Form */
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-gap-lg);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .layoutGrid {
+    grid-template-columns: 1fr 1.3fr;
+  }
+}
+
+/* Contact Details & Channels Column */
+.channelsCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-gap-md);
+}
+
+.channelCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: var(--space-card);
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.channelCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+}
+
+.channelIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--color-primary-glow);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.channelIconWhatsApp {
+  background: rgba(31, 138, 76, 0.12);
+  color: var(--color-whatsapp);
+}
+
+.channelInfo {
+  flex-grow: 1;
+}
+
+.channelTitle {
+  font-family: var(--font-heading);
+  font-size: var(--font-h4);
+  font-weight: 600;
+  color: var(--color-text-white);
+  margin-bottom: 4px;
+}
+
+.channelDesc {
+  font-size: var(--font-small);
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.channelLink {
+  font-size: var(--font-body);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.channelLink:hover {
+  text-decoration: underline;
+}
+
+.channelLinkWhatsApp {
+  color: var(--color-whatsapp);
+}
+
+.officeText {
+  font-size: var(--font-body);
+  color: var(--color-text-white);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.officeSubtext {
+  font-size: var(--font-small);
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
