@@ -14,11 +14,11 @@ describe('WhyUsSection', () => {
   it('renders all 6 core differentiators/features', () => {
     render(<WhyUsSection />)
 
-    expect(screen.getByText(/99.9% Network Uptime/i)).toBeInTheDocument()
-    expect(screen.getByText(/Ultra-Low Latency/i)).toBeInTheDocument()
-    expect(screen.getByText(/24\/7 Local Support/i)).toBeInTheDocument()
-    expect(screen.getByText(/Dual-Band Wi-Fi 6 Routers/i)).toBeInTheDocument()
-    expect(screen.getByText(/Symmetric Speeds/i)).toBeInTheDocument()
-    expect(screen.getByText(/Zero Hidden FUP/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/99.9% Network Uptime/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Ultra-Low Latency/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/24\/7 Local Support/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Dual-Band Wi-Fi 6 Routers/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Symmetric Speeds/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Zero Hidden FUP/i).length).toBeGreaterThan(0)
   })
 })

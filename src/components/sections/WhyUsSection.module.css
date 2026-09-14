@@ -33,107 +33,320 @@
   line-height: 1.6;
 }
 
-/* ── Carousel Container & Controls ───────────────────────── */
-.carouselWrapper {
+/* ── Carousel Wrapper & Main Container ──────────────────── */
+.carouselContainer {
+  width: 100%;
+  max-width: 820px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+}
+
+.helperText {
+  text-align: center;
+  font-size: var(--font-small);
+  color: var(--color-text-dim);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+/* ── Expanded Active Spotlight Card ─────────────────────── */
+.expandedWrapper {
   position: relative;
   width: 100%;
+  margin-bottom: 1.5rem;
+  min-height: 250px;
 }
 
-.track {
-  display: flex;
-  flex-direction: row;
-  gap: clamp(1rem, 2vw, 1.75rem);
+.expandedCard {
+  position: relative;
   width: 100%;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding: 0.5rem 4px 1.25rem 4px;
-}
-
-.track::-webkit-scrollbar {
-  display: none;
-}
-
-/* ── Cards ───────────────────────────────────────────────── */
-.card {
-  flex: 0 0 clamp(280px, 78vw, 340px);
-  scroll-snap-align: center;
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 2.5vw, 2rem);
+  border-radius: 28px;
+  padding: clamp(1.75rem, 3.5vw, 2.25rem);
+  color: #ffffff;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
-  box-shadow: var(--shadow-sm);
-  user-select: none;
-  min-height: 290px;
+  min-height: 250px;
+  overflow: hidden;
+  z-index: 5;
 }
 
-.card:hover {
-  border-color: var(--color-primary);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+.expandedTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.cardHeader {
+.expandedIconBox {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.expandedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  font-size: var(--font-small);
+  font-weight: 700;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.expandedBody {
+  margin-top: 1.25rem;
+}
+
+.expandedTitle {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 1.95rem);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+  line-height: 1.25;
+}
+
+.expandedValue {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.75rem;
+}
+
+.expandedDesc {
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.6;
+  max-width: 660px;
   margin-bottom: 1.25rem;
 }
 
-.iconWrapper {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
-  background: var(--color-primary-glow);
-  border: 1px solid rgba(200, 30, 43, 0.15);
+.expandedFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.expandedCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: var(--font-cta);
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.expandedCta:hover {
+  transform: translateY(-2px);
+  background: #f8fafc;
+}
+
+.cardCounter {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: var(--font-small);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.05em;
+}
+
+.resetBtn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.5rem 1.15rem;
+  font-size: var(--font-small);
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background var(--transition-fast);
+}
+
+.resetBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── Full Default Grid (When No Card is Expanded) ───────── */
+.cardsGridDefault {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.15rem);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .cardsGridDefault {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Sliding 3-Card Carousel Track & Controls ───────────── */
+.carouselSection {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardsCarouselTrack {
+  display: flex;
+  gap: clamp(0.85rem, 2vw, 1.15rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-block: 0.5rem 0.75rem;
+  padding-inline: 4px;
+  width: 100%;
+}
+
+.cardsCarouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Standard Card Styling ──────────────────────────────── */
+.gridCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 24px;
+  padding: clamp(1.25rem, 2.5vw, 1.5rem);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.09);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  min-height: 145px;
+  user-select: none;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+/* In the sliding carousel, exactly 3 cards fit on screen with full sizing */
+.carouselCardItem {
+  flex: 0 0 clamp(230px, 31%, 255px);
+  scroll-snap-align: start;
+}
+
+@media (max-width: 639px) {
+  .carouselCardItem {
+    flex: 0 0 clamp(210px, 46%, 230px);
+  }
+}
+
+.gridCard:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.16);
+}
+
+.gridCardActive {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(200, 30, 43, 0.3), 0 16px 32px rgba(15, 23, 42, 0.2);
+  transform: translateY(-2px);
+}
+
+.gridCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.gridIconBox {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary);
 }
 
-.cardNum {
-  font-family: var(--font-kanit), sans-serif;
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--color-border);
-  letter-spacing: -0.02em;
-}
-
-.cardTitle {
-  font-family: var(--font-kanit), sans-serif;
-  font-size: var(--font-h3);
+.gridActionDot {
+  width: 26px;
+  height: 26px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--color-text-white);
-  margin-bottom: 0.6rem;
+  transition: background var(--transition-fast);
+}
+
+.gridCardActive .gridActionDot {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.gridCardTitle {
+  font-family: var(--font-kanit), sans-serif;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 0.25rem;
+}
+
+.gridCardValue {
+  font-size: clamp(0.82rem, 1.1vw, 0.92rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.3;
 }
 
-.cardText {
-  font-size: var(--font-body);
-  color: var(--color-text-muted);
-  line-height: 1.6;
+/* ── Navigation Arrows & Controls ───────────────────────── */
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
-/* ── Navigation Dots & Arrows ────────────────────────────── */
-.navigation {
+.navBtnGroup {
   display: flex;
-  justify-content: center;
+  gap: 0.75rem;
   align-items: center;
-  gap: 1rem;
-  margin-top: 1.25rem;
+  justify-content: center;
 }
 
 .arrowBtn {
   width: 38px;
   height: 38px;
   border-radius: 9999px;
-  background: var(--color-bg-card);
+  background: #ffffff;
   border: 1px solid var(--color-border);
   color: var(--color-text-white);
   display: flex;
@@ -141,17 +354,21 @@
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  font-size: 16px;
 }
 
 .arrowBtn:hover {
   background: var(--color-primary);
   border-color: var(--color-primary);
   color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
-.dots {
+.paginationDots {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
 }
 
@@ -167,6 +384,31 @@
 }
 
 .dotActive {
-  width: 24px;
+  width: 22px;
   background-color: var(--color-primary);
+}
+
+/* ── Card Color Themes ──────────────────────────────────── */
+.bgBurgundy {
+  background: linear-gradient(135deg, #c81e2b 0%, #991b1b 100%);
+}
+
+.bgSlate {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.bgIndigo {
+  background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
+}
+
+.bgNavy {
+  background: linear-gradient(135deg, #075985 0%, #0369a1 100%);
+}
+
+.bgEmerald {
+  background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+}
+
+.bgCharcoal {
+  background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
 }

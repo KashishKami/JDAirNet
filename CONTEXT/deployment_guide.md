@@ -1,4 +1,4 @@
-﻿# Production Deployment Guide: JDAirNet → Hostinger Shared Hosting
+# Production Deployment Guide: JDAirNet → Hostinger Shared Hosting
 
 This document provides exact step-by-step instructions for building the Next.js static export and deploying to Hostinger shared hosting, including PHP mailer setup for the contact form.
 
@@ -117,9 +117,21 @@ $headers  = "From: JDAirNet Website <$from>\r\n";
 $headers .= "Reply-To: $email\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-// Send email using PHP's built-in mail() function
-// Hostinger's shared hosting configures sendmail automatically
-if (mail($to, $subject, $body, $headers)) {
+// GoDaddy cPanel Email Configuration
+$to   = 'support@jdairnet.com';    // Receiver Inbox
+$from = 'noreply@jdairnet.com';    // GoDaddy Authenticated Sender Domain
+
+$headers   = [];
+$headers[] = 'MIME-Version: 1.0';
+$headers[] = 'Content-type: text/html; charset=UTF-8';
+$headers[] = 'From: JDAirNet Website <' . $from . '>';
+$headers[] = 'Reply-To: ' . $name . ' <' . $email . '>';
+$headers[] = 'X-Mailer: PHP/' . phpversion();
+$headerString = implode("\r\n", $headers);
+
+// Send email using PHP's built-in mail() function with GoDaddy envelope sender flag (-f)
+$mailSent = @mail($to, $subject, $body, $headerString, "-f" . $from);
+if ($mailSent) {
     echo json_encode(['success' => true, 'message' => 'Message sent successfully.']);
 } else {
     http_response_code(500);
@@ -128,11 +140,9 @@ if (mail($to, $subject, $body, $headers)) {
 ?>
 ```
 
-> **If `mail()` doesn't work on Hostinger:** Use PHPMailer with SMTP. Install PHPMailer via Composer or include it manually, then configure with Hostinger SMTP settings:
-> - SMTP Host: `smtp.hostinger.com`
-> - Port: 465 (SSL) or 587 (TLS)
-> - Username: Your Hostinger email address (e.g., `noreply@jdairnet.com`)
-> - Password: The email account password set in Hostinger hPanel
+> **GoDaddy Hosting Mail Logic:** 
+> - On GoDaddy Linux / cPanel hosting, passing `"-f" . $from` as the 5th parameter sets the envelope sender / Return-Path header to `noreply@jdairnet.com`, preventing GoDaddy's exim MTA from rejecting or marking the email as spam.
+> - Ensure the `noreply@jdairnet.com` email account is created in GoDaddy cPanel / Workspace Email.
 
 ---
 

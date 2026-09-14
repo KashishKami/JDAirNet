@@ -7,12 +7,9 @@ node_modules/
 # Static export output — never commit the build
 out/
 
-# Environment files — real values never go to git
-.env.local
-.env.test
-.env.production
-
-# Example env is committed (no real values)
+# Environment files — never commit real env files to git
+.env
+.env.*
 !.env.example
 
 # Test artifacts
