@@ -71,5 +71,38 @@ test.describe('Home Page E2E', () => {
     const contactHub = page.locator('button[aria-label="Contact Us"]')
     await expect(contactHub).toBeVisible()
   })
+
+  test('Services section renders and links to plans and leased lines', async ({ page }) => {
+    await page.goto('/')
+
+    const servicesSection = page.locator('section[aria-label="Our Services & Solutions"]')
+    await expect(servicesSection).toBeVisible()
+
+    const homeBroadband = servicesSection.getByRole('heading', { level: 3, name: 'Home Broadband' })
+    await expect(homeBroadband).toBeVisible()
+
+    const illHeading = servicesSection.getByRole('heading', { level: 3, name: 'Internet Leased Line' })
+    await expect(illHeading).toBeVisible()
+
+    const exploreLink = servicesSection.getByRole('link', { name: /Explore Plans/i })
+    await expect(exploreLink).toHaveAttribute('href', '/plans/')
+  })
+
+  test('Speed test section triggers benchmark and displays recommendation', async ({ page }) => {
+    await page.goto('/')
+
+    const speedSection = page.locator('section[aria-labelledby="speed-test-title"]')
+    await expect(speedSection).toBeVisible()
+
+    const startBtn = speedSection.getByRole('button', { name: /Start Speed Test/i })
+    await expect(startBtn).toBeVisible()
+
+    await startBtn.click()
+
+    // Wait for the simulated test to finish and recommendation to appear
+    await expect(speedSection.getByText(/Recommended: JDAirNet/i)).toBeVisible({ timeout: 10000 })
+    await expect(speedSection.getByRole('link', { name: /Upgrade to/i })).toBeVisible()
+  })
 })
+
 

@@ -1,8 +1,10 @@
 import React from 'react'
 import type { Metadata } from 'next'
 import HeroSection from '@/components/sections/HeroSection'
+import ServicesSection from '@/components/sections/ServicesSection'
 import PlansPreview from '@/components/sections/PlansPreview'
 import WhyUsSection from '@/components/sections/WhyUsSection'
+import SpeedTestSection from '@/components/sections/SpeedTestSection'
 import FaqSection from '@/components/sections/FaqSection'
 import ContactCTA from '@/components/sections/ContactCTA'
 import JsonLd from '@/components/seo/JsonLd'
@@ -54,8 +56,10 @@ export default function HomePage() {
 
       {/* Page Sections */}
       <HeroSection />
+      <ServicesSection />
       <PlansPreview />
       <WhyUsSection />
+      <SpeedTestSection />
       <FaqSection />
       <ContactCTA />
     </main>

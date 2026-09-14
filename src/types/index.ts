@@ -18,6 +18,18 @@ export interface LeaseLineFeature {
   description: string
 }
 
+export interface ServiceItem {
+  id: string
+  title: string
+  category: 'residential' | 'enterprise'
+  tagline: string
+  description: string
+  features: string[]
+  ctaLabel: string
+  ctaHref: string
+  badge?: string
+}
+
 export interface ContactInfo {
   phone: string
   phoneDisplay: string

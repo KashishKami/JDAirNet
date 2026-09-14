@@ -2,7 +2,7 @@
 
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
-**Last Updated:** 2026-09-14
+**Last Updated:** 2026-09-15
 **Current Active Phase:** Phase 6 (Polish, Performance & Pre-Launch)
 
 
@@ -956,6 +956,174 @@ On the home page itself, the link did nothing (kept the user at the footer).
     - Card 05 (⇅ Symmetric Speeds): Swift overshoot slide-in from right (`x: +180px`, `y: -35px`, `rotation: -6deg`).
     - Card 06 (🛡️ Zero FUP): 3D perspective fold-in (`rotationY: 40deg`, `y: +70px`, `scale: 0.82` with 1200px perspective).
 
+## Phase 5.5 — Home Page Interactive Upgrades: Services Showcase, Speed Test Tool & Swipeable Why Us
+> Goal: Integrate two high-engagement interactive features on the homepage (Expanded Services Showcase and Live Internet Speed Test Widget), adjust the Why Choose Us section into a smooth swipeable carousel (identical on mobile & desktop), and restructure homepage section flow: Hero → Services Showcase → Plans Preview → Why Choose Us → Speed Test Widget → FAQs → Contact CTA.
+
+---
+
+#### W-551 — Expanded Services Showcase Section (`ServicesSection.tsx`)
+
+**Root cause:**
+The current homepage presents broadband and leased lines solely as broad pricing cards. Enterprise and residential visitors looking for specific ISP offerings (e.g., Home Broadband, Internet Leased Lines, Managed ILL, Business Internet Access, and Managed Wi-Fi Solutions) need a dedicated interactive showcase right below the Hero to immediately identify their service category and navigate to the relevant plan or quote page.
+
+**Goal:**
+1. Create `src/data/services.ts` containing the 5 core ISP service categories with icons, short descriptions, target badges, and direct navigation links (`/plans/` or `/lease-lines/`).
+2. Build `src/components/sections/ServicesSection.tsx` placed directly below `HeroSection`.
+3. On Desktop (≥ 900px): Feature image visual (`/Why_choose_us-removebg-preview.png`) positioned on the left with horizontal GSAP entrance / scroll animation across the 5 service cards.
+4. On Mobile (< 900px): Clean swipeable card carousel with left/right touch swipe gestures, pagination dot navigation, and top visual image.
+
+**Approach:**
+Extract services data in `src/data/services.ts`. Model after the proven GSAP horizontal animation pattern on desktop, and touch-scroll with swipe indicators on mobile. Each card renders an icon, service title, badge, benefit description, and an action button linking to `/plans/` or `/lease-lines/`.
+
+---
+
+- [x] **RED — Component Test (`src/tests/ServicesSection.test.tsx`):**
+  - [x] Test: Render `<ServicesSection />` — assert section renders with `aria-labelledby="services-title"` and heading "Our Services & Solutions".
+  - [x] Test: Assert all 5 service cards render with titles: "Home Broadband", "Internet Leased Line (ILL)", "Managed Internet Leased Line", "Business Internet Access", and "Managed Wi-Fi Solutions".
+  - [x] Test: Assert CTA links correctly point to `/plans/` (for residential) and `/lease-lines/` (for enterprise).
+  - [x] Test: Assert visual feature image is present with `src="/Why_choose_us-removebg-preview.png"`.
+  - [x] **Run — confirm RED (component and data files do not exist yet).**
+
+- [x] **GREEN — Implementation:**
+  - [x] [Type] Add `ServiceItem` interface in `src/types/index.ts`.
+  - [x] [Data] Create `src/data/services.ts` with all 5 core service offerings.
+  - [x] [Component] Create `src/components/sections/ServicesSection.tsx` and `ServicesSection.module.css` conforming to the 70vw layout grid on desktop and touch swipe on mobile.
+  - [x] Run component test — **confirm GREEN.**
+
+- [x] **Verification chain:**
+  - [x] Navigate to `http://127.0.0.1:3007/` in browser.
+  - [x] Observe Services section immediately below the Hero video.
+  - [x] Desktop (≥ 900px): Feature image renders on the left; horizontal animation glides smoothly through all 5 service cards.
+  - [x] Mobile (375px): User swipes left/right across cards smoothly with responsive dot indicators.
+  - [x] Click "Explore Plans" → navigates to `/plans/`; click "Request Leased Line" → navigates to `/lease-lines/`.
+  - [x] ✅ Done.
+
+---
+
+#### W-552 — Why Choose Us Swipeable Slider Refactor (`WhyUsSection.tsx`)
+
+**Root cause:**
+The previous fullscreen GSAP scroll-pinning in `WhyUsSection.tsx` created heavy scroll takeover and occasional anchor jumping edge-cases. Since the horizontal animation is now championed by the new Services section, Why Choose Us should be converted into a clean, lightweight swipeable card slider (both desktop and mobile) so visitors can freely swipe cards left/right without locking document scroll.
+
+**Goal:**
+1. Refactor `src/components/sections/WhyUsSection.tsx` and `WhyUsSection.module.css` to eliminate the pinned GSAP `ScrollTrigger` takeover.
+2. Provide a fluid horizontal swipeable carousel for all 6 feature cards with smooth drag/scroll and navigation dots/arrows.
+3. Keep the section lightweight, performant, accessible, and natural to scroll past on all viewports.
+
+**Approach:**
+Remove GSAP pin-scroll tweens from `WhyUsSection.tsx`. Implement CSS scroll-snap with standard touch swipe and optional arrow/dot controls.
+
+---
+
+- [x] **RED — Component & Unit Test (`src/tests/WhyUsSection.test.tsx`):**
+  - [x] Test: Render `<WhyUsSection />` — assert all 6 feature cards render without requiring GSAP pin triggers.
+  - [x] Test: Assert pagination dots allow clicking to scroll to card index.
+  - [x] Test: Assert no layout locks or horizontal document scrollbars occur on root container.
+  - [x] **Run — confirm RED (current implementation relies on pinned GSAP scroll).**
+
+- [x] **GREEN — Implementation:**
+  - [x] [Component] Update `src/components/sections/WhyUsSection.tsx` to remove GSAP pin logic while retaining clean entrance reveals (`<ScrollReveal>`).
+  - [x] [Styles] Update `src/components/sections/WhyUsSection.module.css` with smooth CSS scroll-snap and drag/swipe support.
+  - [x] Run component test — **confirm GREEN.**
+
+- [x] **Verification chain:**
+  - [x] Navigate to `http://127.0.0.1:3007/` and scroll to "Why Choose Us".
+  - [x] Notice page vertical scrolling remains 100% natural and unpinned.
+  - [x] On mobile & desktop: swipe or click dots to slide between the 6 feature cards smoothly.
+  - [x] ✅ Done.
+
+---
+
+#### W-553 — Interactive Internet Speed Test Widget (`SpeedTestSection.tsx`)
+
+**Root cause:**
+ISP visitors are highly motivated by testing their current connection speed. Having a live, interactive speed test tool directly on the homepage increases user engagement, creates trust, and provides an immediate conversion opportunity (comparing current speed against JDAirNet's plans).
+
+**Goal:**
+1. Build `src/components/sections/SpeedTestSection.tsx` placed immediately after the "Why Choose Us" section.
+2. Interactive client-side speed test tool (100% compatible with static export):
+   - "Start Test" trigger button.
+   - Animated speedometer gauge / progress arc (measuring Ping/Latency, Download Speed in Mbps, and Jitter).
+   - Real-time client-side measurement (downloading static binary chunks with `performance.now()`).
+   - Dynamic comparison and plan recommendation banner upon completion (e.g., *"Your speed is 24 Mbps — Upgrade to JDAirNet 200 Mbps for buffer-free 4K"* with direct CTA to `/plans/` and WhatsApp).
+
+**Approach:**
+Create a dedicated Client Component `SpeedTestSection.tsx` using HTML5 Canvas or SVG gauge with smooth numeric count-up animations. For measurement in static export, fetch small static payload files from `public/` with cache-busting headers to compute real-time throughput and round-trip ping.
+
+---
+
+- [x] **RED — Component Test (`src/tests/SpeedTestSection.test.tsx`):**
+  - [x] Test: Render `<SpeedTestSection />` — assert initial idle state renders with "Start Speed Test" button and gauge at 0 Mbps.
+  - [x] Test: Click "Start Speed Test" — assert test initiates (state changes to testing, gauge animates).
+  - [x] Test: Assert result state displays measured speed, ping, and recommendation CTA linking to `/plans/`.
+  - [x] **Run — confirm RED (component does not exist yet).**
+
+- [x] **GREEN — Implementation:**
+  - [x] [Component] Create `src/components/sections/SpeedTestSection.tsx` with gauge animation, measurement engine, and recommendation CTA card.
+  - [x] [Styles] Create `src/components/sections/SpeedTestSection.module.css` with speedometer arc, responsive stats counters, and glow highlights.
+  - [x] [Asset] Ensure lightweight static test asset exists in `public/` for reliable throughput calculation.
+  - [x] Run component test — **confirm GREEN.**
+
+- [x] **Verification chain:**
+  - [x] Scroll to Speed Test section on homepage.
+  - [x] Click "Start Speed Test" → watch needle/arc sweep with real-time ping and download calculation.
+  - [x] Test finishes → results card highlights connection quality + recommends matching JDAirNet plan.
+  - [x] Click "Upgrade to this Plan" → navigates to `/plans/` with target plan highlighted.
+  - [x] ✅ Done.
+
+---
+
+#### W-554 — Home Page Assembly, Section Ordering & E2E Verification (`src/app/page.tsx`, `tests/home.spec.ts`)
+
+**Root cause:**
+The homepage must integrate all new interactive components in the exact specified flow: Hero → Services Showcase → Plans Preview → Why Choose Us → Speed Test → FAQs → Contact CTA, without any layout shift, broken links, or test regressions.
+
+**Goal:**
+1. Update `src/app/page.tsx` to mount sections in the exact sequential order.
+2. Update Playwright E2E suite (`tests/home.spec.ts` & `tests/interactive.spec.ts`) to validate all new interactive behaviors.
+3. Validate static export build (`npm run build`) and quality gates (`npm run ci:quality`).
+
+---
+
+- [x] **RED — E2E Test (`tests/interactive.spec.ts`):**
+  - [x] Test: Navigate to `/` — verify section order (Hero → Services → Plans → WhyUs → SpeedTest → FAQs → ContactCTA).
+  - [x] Test: Services section cards link properly to `/plans/` and `/lease-lines/`.
+  - [x] Test: Speed test widget completes test cycle and renders recommendation CTA.
+  - [x] Test (mobile 375px): Services and Why Us cards swipe cleanly without horizontal page blowout.
+  - [x] **Run — confirm RED.**
+
+- [x] **GREEN — Implementation:**
+  - [x] Update `src/app/page.tsx` section sequence.
+  - [x] Update `tests/home.spec.ts` and add `tests/interactive.spec.ts`.
+  - [x] Run full CI quality suite (`npm run ci:quality`) — **confirm GREEN.**
+
+- [x] **Verification chain:**
+  - [x] Run `npm run ci:quality` — all lint, typecheck, unit tests, and E2E tests pass (100% green).
+  - [x] Run `npm run build` — static export succeeds to `out/` with zero errors.
+  - [x] Run `npm run serve` — QA the complete homepage flow in real browser.
+  - [x] ✅ Done.
+
+### Session Note — Phase 5.5 Completion: Services Showcase, Live Speed Test & Swipeable Why Us (2026-09-15)
+
+- **Expanded Services Showcase (`ServicesSection.tsx` & `src/data/services.ts`) (W-551):**
+  - Positioned directly below the Hero video, providing immediate category clarity for residential and B2B visitors (*Home Broadband, Internet Leased Line, Managed Leased Line, Business Internet, and Managed Wi-Fi Solution*).
+  - Desktop (≥ 900px): Integrated left feature image (`/Why_choose_us-removebg-preview.png`) with full-screen pinned GSAP horizontal scroll and exact playful sequential entrances (Elastic Top Bounce, Bottom-Right Rise & Tilt, Elastic Pop & De-blur, and Swift Overshoot Slide). Left figure smoothly slides and fades out (`opacity: 0, x: -100px`) synchronized directly to Card 01 boundary.
+  - Mobile (< 900px): Fluid touch-swipeable card carousel with interactive dot pagination indicators.
+  - Streamlined card presentation with concise 1–2 line descriptions, speed taglines, and direct conversion CTAs linking to `/plans/` and `/lease-lines/`.
+
+- **Why Choose Us Swipeable Slider Refactor (`WhyUsSection.tsx`) (W-552):**
+  - Converted the layout on desktop and mobile into a lightweight, unpinned horizontal swipeable carousel with CSS scroll-snap, arrow buttons, and pagination dots.
+  - Eliminated full-screen scroll takeover, restoring 100% natural, unpinned vertical page scrolling through the section.
+
+- **Live In-Browser Speed Test & Plan Matcher (`SpeedTestSection.tsx`) (W-553):**
+  - Built an interactive client-side speed benchmark widget positioned right after Why Choose Us (100% static export compatible).
+  - Integrated real-time network latency probes (`performance.now()`), jitter calculation, and progressive data stream throughput measurement (`fetch()` with `ReadableStream`) for accurate Mbps readings matching real benchmarks like Fast.com.
+  - Animated SVG speedometer arc with real-time numeric count-ups and intelligent post-test plan recommendation cards (*e.g., detecting slow speeds like 7–8 Mbps and recommending JDAirNet 100 Mbps or 200 Mbps fiber*).
+
+- **Homepage Assembly & Verification (W-554):**
+  - Updated `src/app/page.tsx` section sequence: Hero → Services Showcase → Plans Preview → Why Choose Us → Speed Test Tool → FAQs → Contact CTA.
+  - Created unit tests (`src/tests/ServicesSection.test.tsx`, `src/tests/SpeedTestSection.test.tsx`) and updated E2E suite (`tests/home.spec.ts`).
+
 ---
 
 ## Phase 6 — Polish, Performance & Pre-Launch
@@ -1039,5 +1207,6 @@ On the home page itself, the link did nothing (kept the user at the footer).
 | Phase 3 | Plans Page | ✅ COMPLETED |
 | Phase 4 | Lease Lines Page | ✅ COMPLETED |
 | Phase 5 | Coverage, About, Contact Pages | ✅ COMPLETED |
+| Phase 5.5 | Home Page Interactive Upgrades (Services, Speed Test & Swipeable Why Us) | ✅ COMPLETED |
 | Phase 6 | Polish, Performance & Pre-Launch | 🟢 READY TO START |
 | Phase 7 | Blog | 🔵 FUTURE |
