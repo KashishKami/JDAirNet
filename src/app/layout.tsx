@@ -13,6 +13,7 @@ const unbounded = Unbounded({
   weight: ['700', '800'],
   variable: '--font-display-family',
   display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
 })
 
 const kanit = Kanit({
@@ -20,6 +21,7 @@ const kanit = Kanit({
   weight: ['500', '600', '700'],
   variable: '--font-heading-family',
   display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
 })
 
 const poppins = Poppins({
@@ -27,6 +29,7 @@ const poppins = Poppins({
   weight: ['400', '500', '600'],
   variable: '--font-body-family',
   display: 'swap',
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
 })
 
 export const viewport: Viewport = {

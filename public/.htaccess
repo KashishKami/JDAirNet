@@ -2,6 +2,9 @@
 # JDAirNet — Apache .htaccess Configuration for GoDaddy / cPanel
 # ─────────────────────────────────────────────────────────────────
 
+# Force Apache to prioritize index.html over index.txt
+DirectoryIndex index.html index.php
+
 # Enable Rewrite Engine
 RewriteEngine On
 
