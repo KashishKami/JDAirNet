@@ -38,26 +38,32 @@ test.describe('Lease Lines Page E2E', () => {
   test('conversion buttons link to contact page, phone dialer, and WhatsApp', async ({ page }) => {
     await page.goto('/lease-lines/')
 
-    // Request a Quote buttons link to /contact/
-    const quoteBtns = page.getByRole('link', { name: /Request a Quote →/i })
-    const count = await quoteBtns.count()
-    expect(count).toBeGreaterThanOrEqual(1)
+    // Send Message buttons link to /contact/
+    const messageBtns = page.getByRole('link', { name: /Send Message/i })
+    const msgCount = await messageBtns.count()
+    expect(msgCount).toBeGreaterThanOrEqual(2)
 
-    for (let i = 0; i < count; i++) {
-      await expect(quoteBtns.nth(i)).toHaveAttribute('href', '/contact/')
+    for (let i = 0; i < msgCount; i++) {
+      await expect(messageBtns.nth(i)).toHaveAttribute('href', '/contact/')
     }
 
-    // Phone CTA
-    const phoneCta = page.getByRole('link', { name: /Talk to Sales/i })
-    await expect(phoneCta).toBeVisible()
-    const phoneHref = await phoneCta.getAttribute('href')
-    expect(phoneHref?.startsWith('tel:')).toBe(true)
+    // Phone CTA (Call Us)
+    const phoneCtas = page.getByRole('link', { name: /Call Us/i })
+    const phoneCount = await phoneCtas.count()
+    expect(phoneCount).toBeGreaterThanOrEqual(2)
+    for (let i = 0; i < phoneCount; i++) {
+      const phoneHref = await phoneCtas.nth(i).getAttribute('href')
+      expect(phoneHref?.startsWith('tel:')).toBe(true)
+    }
 
     // WhatsApp CTA
-    const waCta = page.getByRole('link', { name: /Chat on WhatsApp/i })
-    await expect(waCta).toBeVisible()
-    const waHref = await waCta.getAttribute('href')
-    expect(waHref?.startsWith('https://wa.me/')).toBe(true)
+    const waCtas = page.getByRole('link', { name: /WhatsApp/i })
+    const waCount = await waCtas.count()
+    expect(waCount).toBeGreaterThanOrEqual(2)
+    for (let i = 0; i < waCount; i++) {
+      const waHref = await waCtas.nth(i).getAttribute('href')
+      expect(waHref?.startsWith('https://wa.me/')).toBe(true)
+    }
   })
 
   test('responsive mobile layout (375px) has zero horizontal overflow', async ({ page }) => {

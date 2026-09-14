@@ -40,11 +40,19 @@ describe('LeaseLinesPage & Schema', () => {
     expect(container.textContent).not.toMatch(/₹\d+/)
   })
 
-  it('renders Request a Quote and Contact Sales CTAs linking to /contact/ and phone', () => {
+  it('renders all three CTAs (Call Us, WhatsApp, Send Message) linking to phone, WhatsApp, and /contact/', () => {
     render(<LeaseLinesPage />)
 
-    const quoteLinks = screen.getAllByRole('link', { name: /Request a Quote/i })
-    expect(quoteLinks.length).toBeGreaterThanOrEqual(1)
-    expect(quoteLinks[0].getAttribute('href')).toMatch(/^\/contact\/?$/)
+    const callLinks = screen.getAllByRole('link', { name: /Call Us/i })
+    expect(callLinks.length).toBeGreaterThanOrEqual(2)
+    expect(callLinks[0].getAttribute('href')).toMatch(/^tel:/)
+
+    const waLinks = screen.getAllByRole('link', { name: /WhatsApp/i })
+    expect(waLinks.length).toBeGreaterThanOrEqual(2)
+    expect(waLinks[0].getAttribute('href')).toMatch(/^https:\/\/wa\.me\//)
+
+    const messageLinks = screen.getAllByRole('link', { name: /Send Message/i })
+    expect(messageLinks.length).toBeGreaterThanOrEqual(2)
+    expect(messageLinks[0].getAttribute('href')).toMatch(/^\/contact\/?$/)
   })
 })

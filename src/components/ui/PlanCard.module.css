@@ -163,30 +163,66 @@
   color: #10b981;
 }
 
-/* Action Button */
-.cardAction {
+/* 3 Contact Action Buttons in One Horizontal Line */
+.cardActions {
   margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 220px;
+  margin-inline: auto;
 }
 
-.cardBtn {
-  width: 100%;
-  min-height: 46px;
-  font-weight: 600;
+.actionBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
+  width: 100%;
+  min-height: 42px;
+  padding: 0.55rem 0.5rem;
+  border-radius: var(--radius-full, 9999px);
+  text-decoration: none;
+  transition: all var(--transition-fast, 0.2s ease);
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
-.cardBtnSecondary {
+.callBtn {
+  background-color: var(--color-primary, #c91c28);
+  color: #ffffff;
+  border: 1px solid var(--color-primary, #c91c28);
+}
+
+.callBtn:hover {
+  background-color: var(--color-primary-dark, #a8141e);
+  border-color: var(--color-primary-dark, #a8141e);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(201, 28, 40, 0.35);
+}
+
+.whatsappBtn {
+  background-color: #1e7e34;
+  color: #ffffff;
+  border: 1px solid #1e7e34;
+}
+
+.whatsappBtn:hover {
+  background-color: #155724;
+  border-color: #155724;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(30, 126, 52, 0.35);
+}
+
+.messageBtn {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1.5px solid #cbd5e1;
+}
+
+.messageBtn:hover {
   background-color: #ffffff;
-  color: #111111;
-  border: 1px solid #e0e0e0;
-}
-
-.cardBtnSecondary:hover {
-  background-color: #f9f9f9;
-  border-color: #111111;
+  border-color: #0f172a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }

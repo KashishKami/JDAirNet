@@ -53,6 +53,12 @@
   flex-wrap: wrap;
 }
 
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 /* Highlight Stat Banner */
 .statsBanner {
   display: grid;

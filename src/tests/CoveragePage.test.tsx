@@ -42,7 +42,7 @@ describe('CoveragePage & Schema', () => {
     expect(checkFeasibilityLinks[0].getAttribute('href')).toMatch(/^\/contact\/?$/)
 
     // Call CTA
-    const callLinks = screen.getAllByRole('link', { name: /Call Support/i })
+    const callLinks = screen.getAllByRole('link', { name: /Call Us/i })
     expect(callLinks.length).toBeGreaterThanOrEqual(1)
     expect(callLinks[0].getAttribute('href')).toMatch(/^tel:/)
   })

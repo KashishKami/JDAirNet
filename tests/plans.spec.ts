@@ -29,17 +29,27 @@ test.describe('Plans Page E2E', () => {
     await expect(badges).toHaveCount(1)
   })
 
-  test('CTA buttons on all plan cards link to tel: or whatsapp', async ({ page }) => {
+  test('CTA buttons on all plan cards provide Call Us, WhatsApp, and Send Message', async ({ page }) => {
     await page.goto('/plans/')
 
-    const ctaLinks = page.locator('a[aria-label*="Get This Plan"]')
-    const count = await ctaLinks.count()
-    expect(count).toBe(4)
+    const callLinks = page.locator('main a[aria-label*="Call Us for"]')
+    expect(await callLinks.count()).toBe(4)
 
-    for (let i = 0; i < count; i++) {
-      const href = await ctaLinks.nth(i).getAttribute('href')
-      expect(href).not.toBeNull()
-      expect(href?.startsWith('tel:') || href?.startsWith('https://wa.me/')).toBe(true)
+    const waLinks = page.locator('main a[aria-label*="WhatsApp for"]')
+    expect(await waLinks.count()).toBe(4)
+
+    const messageLinks = page.locator('main a[aria-label*="Send Message for"]')
+    expect(await messageLinks.count()).toBe(4)
+
+    for (let i = 0; i < 4; i++) {
+      const callHref = await callLinks.nth(i).getAttribute('href')
+      expect(callHref?.startsWith('tel:')).toBe(true)
+
+      const waHref = await waLinks.nth(i).getAttribute('href')
+      expect(waHref?.startsWith('https://wa.me/')).toBe(true)
+
+      const msgHref = await messageLinks.nth(i).getAttribute('href')
+      expect(msgHref?.startsWith('/contact/')).toBe(true)
     }
   })
 

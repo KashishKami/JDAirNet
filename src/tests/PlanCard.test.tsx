@@ -36,12 +36,19 @@ describe('PlanCard', () => {
     expect(screen.getByText(/Most Popular/i)).toBeInTheDocument()
   })
 
-  it('renders CTA button linking to tel: or whatsapp', () => {
+  it('renders all three contact channel options: Call Us, WhatsApp, and Send Message', () => {
     render(<PlanCard plan={homePlan} />)
 
-    const ctaButton = screen.getByRole('link', { name: new RegExp(homePlan.ctaLabel, 'i') })
-    expect(ctaButton).toBeInTheDocument()
-    const href = ctaButton.getAttribute('href') || ''
-    expect(href.startsWith('tel:') || href.startsWith('https://wa.me/')).toBe(true)
+    const callLink = screen.getByRole('link', { name: new RegExp(`Call Us for ${homePlan.name}`, 'i') })
+    expect(callLink).toBeInTheDocument()
+    expect(callLink.getAttribute('href')).toMatch(/^tel:/)
+
+    const waLink = screen.getByRole('link', { name: new RegExp(`WhatsApp for ${homePlan.name}`, 'i') })
+    expect(waLink).toBeInTheDocument()
+    expect(waLink.getAttribute('href')).toMatch(/^https:\/\/wa\.me\//)
+
+    const messageLink = screen.getByRole('link', { name: new RegExp(`Send Message for ${homePlan.name}`, 'i') })
+    expect(messageLink).toBeInTheDocument()
+    expect(messageLink.getAttribute('href')).toMatch(new RegExp(`^/contact/?\\?plan=${homePlan.id}`))
   })
 })

@@ -16,7 +16,7 @@ test.describe('Coverage Page', () => {
     await expect(cta).toHaveAttribute('href', /\/contact\/?/)
 
     // Direct Call CTA
-    const callCta = page.getByRole('link', { name: /Call Support/i }).first()
+    const callCta = page.getByRole('link', { name: /Call Us/i }).first()
     await expect(callCta).toBeVisible()
     await expect(callCta).toHaveAttribute('href', /^tel:/)
   })

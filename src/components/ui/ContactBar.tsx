@@ -10,10 +10,10 @@ export default function ContactBar() {
       <a
         href={`tel:${CONTACT_INFO.phone}`}
         className={`${styles.channelBtn} ${styles.callBtn}`}
-        aria-label="Direct Call"
+        aria-label="Call Us"
       >
         <span>📞</span>
-        <span>Call</span>
+        <span>Call Us</span>
       </a>
 
       {/* 2. WhatsApp Chat */}
@@ -22,7 +22,7 @@ export default function ContactBar() {
         target="_blank"
         rel="noopener noreferrer"
         className={`${styles.channelBtn} ${styles.whatsappBtn}`}
-        aria-label="Chat on WhatsApp"
+        aria-label="WhatsApp"
       >
         <span>💬</span>
         <span>WhatsApp</span>
@@ -32,10 +32,10 @@ export default function ContactBar() {
       <Link
         href="/contact/"
         className={`${styles.channelBtn} ${styles.formBtn}`}
-        aria-label="Contact Form"
+        aria-label="Send Message"
       >
         <span>✉️</span>
-        <span>Enquire</span>
+        <span>Send Message</span>
       </Link>
     </aside>
   )
