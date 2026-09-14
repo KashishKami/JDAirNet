@@ -2,8 +2,8 @@
 
 This is the live phase-by-phase build tracker. Always check this file FIRST before writing any code. Mark items `[/]` when starting, `[x]` when done. Do not skip to a later phase until all items in the current phase are complete.
 
-**Last Updated:** 2026-09-12
-**Current Active Phase:** Phase 3 (Plans Page `/plans/`)
+**Last Updated:** 2026-09-14
+**Current Active Phase:** Phase 5 (Coverage, About, Contact Pages)
 
 
 ---
@@ -576,27 +576,27 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component Test (`src/tests/PlanCard.test.tsx`):**
-  - [ ] Test: Render `<PlanCard plan={BROADBAND_PLANS[0]} />` — assert plan name is visible
-  - [ ] Test: Assert speed is displayed
-  - [ ] Test: Assert all features in the plan's `features` array are rendered
-  - [ ] Test: Assert "Most Popular" badge NOT rendered when `highlighted: false`
-  - [ ] Test: Render with `highlighted: true` — assert badge IS rendered
-  - [ ] Test: CTA button has `href` starting with `tel:` or `https://wa.me/`
-  - [ ] **Run — confirm RED**
+- [x] **RED — Component Test (`src/tests/PlanCard.test.tsx`):**
+  - [x] Test: Render `<PlanCard plan={BROADBAND_PLANS[0]} />` — assert plan name is visible
+  - [x] Test: Assert speed is displayed
+  - [x] Test: Assert all features in the plan's `features` array are rendered
+  - [x] Test: Assert "Most Popular" badge NOT rendered when `highlighted: false`
+  - [x] Test: Render with `highlighted: true` — assert badge IS rendered
+  - [x] Test: CTA button has `href` starting with `tel:` or `https://wa.me/`
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/types/index.ts` with `BroadbandPlan` interface
-  - [ ] Create `src/components/ui/PlanCard.tsx` + `.module.css`
-  - [ ] Ensure card uses `var(--space-card)`, `var(--font-h3)` for plan name, `var(--font-h2)` for price
-  - [ ] Desktop-only scale: `.planCard--highlighted { transform: scale(1.04); }` inside `@media (min-width: 1024px)`
-  - [ ] Run component test — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/types/index.ts` with `BroadbandPlan` interface
+  - [x] Create `src/components/ui/PlanCard.tsx` + `.module.css`
+  - [x] Ensure card uses `var(--space-card)`, `var(--font-h3)` for plan name, `var(--font-h2)` for price
+  - [x] Desktop-only scale: `.planCard--highlighted { transform: scale(1.04); }` inside `@media (min-width: 1024px)`
+  - [x] Run component test — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Render all 4 plan cards side by side at 1024px — highlighted card is visually elevated
-  - [ ] At 600px: 2 columns, cards equal height
-  - [ ] At 375px: 1 column, highlighted card does NOT scale (correct — scale only on desktop)
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Render all 4 plan cards side by side at 1024px — highlighted card is visually elevated
+  - [x] At 600px: 2 columns, cards equal height
+  - [x] At 375px: 1 column, highlighted card does NOT scale (correct — scale only on desktop)
+  - [x] ✅ Done
 
 ---
 
@@ -608,37 +608,52 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Unit Test:**
-  - [ ] Test: `generatePlansItemListSchema(BROADBAND_PLANS)` returns `@type: 'ItemList'` with `numberOfItems: 4`
-  - [ ] Test: Each item in `itemListElement` has `position`, `item.name`, `item.offers.price`
-  - [ ] **Run — confirm RED**
+- [x] **RED — Unit Test:**
+  - [x] Test: `generatePlansItemListSchema(BROADBAND_PLANS)` returns `@type: 'ItemList'` with `numberOfItems: 4`
+  - [x] Test: Each item in `itemListElement` has `position`, `item.name`, `item.offers.price`
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Add `generatePlansItemListSchema()` to `schemaGenerators.ts`
-  - [ ] Create `src/app/plans/page.tsx` with `metadata` export + 4 plan cards grid + GST note
-  - [ ] Inject `<JsonLd>` for `Service` schema and `ItemList` schema
-  - [ ] Add-ons section below the plans grid
-  - [ ] Run unit test — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Add `generatePlansItemListSchema()` to `schemaGenerators.ts`
+  - [x] Create `src/app/plans/page.tsx` with `metadata` export + 4 plan cards grid + GST note
+  - [x] Inject `<JsonLd>` for `Service` schema and `ItemList` schema
+  - [x] Add-ons section below the plans grid
+  - [x] Run unit test — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/plans/` — all 4 plan cards visible
-  - [ ] GST disclaimer visible below grid ("All prices exclude 18% GST")
-  - [ ] At 375px: 1 column, stacked cards, no horizontal scroll
-  - [ ] At 1024px: 4 columns, highlighted card elevated
-  - [ ] Build `out/plans/index.html` — JSON-LD for ItemList present in `<head>`
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Navigate to `/plans/` — all 4 plan cards visible
+  - [x] GST disclaimer visible below grid ("All prices exclude 18% GST")
+  - [x] At 375px: 1 column, stacked cards, no horizontal scroll
+  - [x] At 1024px: 4 columns, highlighted card elevated
+  - [x] Build `out/plans/index.html` — JSON-LD for ItemList present in `<head>`
+  - [x] ✅ Done
 
 ---
 
 #### W-303 — Plans E2E Test
 
-- [ ] **E2E (`tests/plans.spec.ts`):**
-  - [ ] Test: Navigate to `/plans/` — 4 plan cards render
-  - [ ] Test: "Most Popular" badge is visible on exactly 1 card
-  - [ ] Test: No plan card has an empty price (data integrity)
-  - [ ] Test: All CTA buttons have `href` starting with `tel:` or `https://wa.me/`
-  - [ ] Test (mobile 375px): 1 column layout, no horizontal scroll
-  - [ ] **Run `npm run test:e2e` — confirm all pass**
+- [x] **E2E (`tests/plans.spec.ts`):**
+  - [x] Test: Navigate to `/plans/` — 4 plan cards render
+  - [x] Test: "Most Popular" badge is visible on exactly 1 card
+  - [x] Test: No plan card has an empty price (data integrity)
+  - [x] Test: All CTA buttons have `href` starting with `tel:` or `https://wa.me/`
+  - [x] Test (mobile 375px): 1 column layout, no horizontal scroll
+  - [x] **Run `npm run test:e2e` — confirm all pass**
+
+### Session Note — Phase 3 Completion (2026-09-14)
+
+- **Completed Phase 3 Plans Page (`/plans/`) via Strict TDD:**
+  - **PlanCard Reusability (W-301):** Verified existing `PlanCard.tsx` component handles all 4 tiers (Starter, Home, Power, Ultra) with speed, price, features, badge, and dynamic direct-call/WhatsApp CTAs.
+  - **Plans Page Layout & SEO (W-302):**
+    - Built `src/app/plans/page.tsx` and `src/app/plans/page.module.css` with responsive 4-column layout conforming to 70vw (`.container`) grid.
+    - Integrated comprehensive Add-ons section (Watcho OTT, Pioneer IPTV, Static IP, HD Streaming) and an Enterprise Lease Lines cross-link banner.
+    - Added GST and terms disclaimer: `* All prices exclude 18% GST...`.
+    - Injected complete JSON-LD structured data: `WebPage`, `Service` (broadband), `ItemList` (all 4 plan products), and `BreadcrumbList`.
+    - Exported full page metadata with canonical `https://jdairnet.com/plans/` and OpenGraph tags.
+  - **Test Suite & Quality Fixes (W-303):**
+    - Created unit/schema test suite `src/tests/PlansPage.test.tsx` verifying schema and page components.
+    - Fixed Testing Library element ambiguity by querying add-on headers directly via `getByRole('heading', { level: 3, name: 'Static IP' })`.
+    - Created E2E test suite `tests/plans.spec.ts` testing 4 cards, badges, CTAs, add-ons, and mobile 375px responsiveness.
 
 ---
 
@@ -655,28 +670,46 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 
 ---
 
-- [ ] **RED — Component + E2E Test:**
-  - [ ] Unit test: `generateServiceSchema({ name: 'Enterprise Lease Line', ... })` — assert `@type: 'Service'`, assert no `offers` key (no pricing)
-  - [ ] E2E test: Navigate to `/lease-lines/` — assert NO element contains `₹` or `price` text
-  - [ ] E2E test: "Request a Quote" button is visible and links to `/contact/`
-  - [ ] **Run — confirm RED**
+- [x] **RED — Component + E2E Test:**
+  - [x] Unit test: `generateServiceSchema({ name: 'Enterprise Lease Line', ... })` — assert `@type: 'Service'`, assert no `offers` key (no pricing)
+  - [x] E2E test: Navigate to `/lease-lines/` — assert NO element contains `₹` or `price` text
+  - [x] E2E test: "Request a Quote" button is visible and links to `/contact/`
+  - [x] **Run — confirm RED**
 
-- [ ] **GREEN — Implementation:**
-  - [ ] Create `src/app/lease-lines/page.tsx` with metadata + hero H1 + features grid + use cases + CTA
-  - [ ] Create `src/data/leaseLines.ts` with `LEASE_LINE_FEATURES` (if not done in Phase 1)
-  - [ ] Inject `<JsonLd>` for `Service` schema (lease line) and `BreadcrumbList`
-  - [ ] Run tests — **confirm GREEN**
+- [x] **GREEN — Implementation:**
+  - [x] Create `src/app/lease-lines/page.tsx` with metadata + hero H1 + features grid + use cases + CTA
+  - [x] Create `src/data/leaseLines.ts` with `LEASE_LINE_FEATURES` (if not done in Phase 1)
+  - [x] Inject `<JsonLd>` for `Service` schema (lease line) and `BreadcrumbList`
+  - [x] Run tests — **confirm GREEN**
 
-- [ ] **Verification chain:**
-  - [ ] Navigate to `/lease-lines/` — H1 is "Enterprise Internet Lease Lines" (or similar)
-  - [ ] 6 feature blocks visible in a responsive grid
-  - [ ] No price text anywhere on page
-  - [ ] "Request a Quote" button links to `/contact/`
-  - [ ] At 375px: features stack in 1 column, no horizontal scroll
-  - [ ] Breadcrumb schema visible in page source: Home > Lease Lines
-  - [ ] ✅ Done
+- [x] **Verification chain:**
+  - [x] Navigate to `/lease-lines/` — H1 is "Enterprise Internet Lease Lines" (or similar)
+  - [x] 6 feature blocks visible in a responsive grid
+  - [x] No price text anywhere on page
+  - [x] "Request a Quote" button links to `/contact/`
+  - [x] At 375px: features stack in 1 column, no horizontal scroll
+  - [x] Breadcrumb schema visible in page source: Home > Lease Lines
+  - [x] ✅ Done
+
+### Session Note — Phase 4 Completion & Tooling Infrastructure Fixes (2026-09-14)
+
+- **Completed Phase 4 Lease Lines Page (`/lease-lines/`) via Strict TDD:**
+  - **Enterprise UI & Structure (W-401):**
+    - Built `src/app/lease-lines/page.tsx` and `src/app/lease-lines/page.module.css` conforming to the 70vw desktop layout grid.
+    - Added high-impact value highlights banner (1:1 Dedicated Symmetrical Speed, 99.9% SLA, < 15ms latency).
+    - Rendered all 6 core enterprise capabilities (Symmetric Speeds, Dedicated Bandwidth, SLA Guaranteed, Security & Static IPs, 24/7 Local NOC, Scalable Bandwidth) with dedicated vector SVG icons.
+    - Added interactive target audience use-case chips and dark enterprise conversion footer banner with direct quote and WhatsApp CTAs.
+    - Strictly verified ZERO pricing text / symbols (`₹`) anywhere on the page or inside structured data.
+    - Injected complete JSON-LD schemas (`WebPage`, `Service` for lease line without offers, `BreadcrumbList`) and exported canonical metadata `https://jdairnet.com/lease-lines/`.
+  - **Tooling, Linting & Test Environment Fixes:**
+    - **ESLint Cleanliness (`src/tests/setup.ts`):** Removed `(global as any)` casts and introduced a strict `globalScope` type definition to eliminate `@typescript-eslint/no-explicit-any` lint errors.
+    - **GSAP ScrollTrigger Lifecycle (`src/tests/setup.ts`):** Resolved `TypeError: Cannot read properties of undefined (reading 'length')` by ensuring `gsap.registerPlugin(ScrollTrigger)` executes on window setup, and added comprehensive teardown in `afterEach` (`ScrollTrigger.getAll().forEach(t => t.kill(true))`, `gsap.killTweensOf('*')`, `gsap.globalTimeline.clear()`).
+    - **Next.js Link Test Assertion (`src/tests/LeaseLinesPage.test.tsx`):** Updated quote CTA href assertions to match Next.js client Link rendering with regex `/^\/contact\/?$/`.
+    - **Test Suites:** Created unit/schema tests `src/tests/LeaseLinesPage.test.tsx` and E2E test suite `tests/lease-lines.spec.ts`.
+
 
 ---
+
 
 ## Phase 5 — Coverage, About, Contact Pages
 
@@ -1060,9 +1093,9 @@ This is the live phase-by-phase build tracker. Always check this file FIRST befo
 | Phase 0 | Project Foundation & Quality Infrastructure | ✅ COMPLETED |
 | Phase 1 | SEO Foundation & Global Layout | ✅ COMPLETED |
 | Phase 2 | Home Page | ✅ COMPLETED |
-| Phase 2.5 | Lenis Smooth Scroll & GSAP Animations | 🟢 READY TO START |
-| Phase 3 | Plans Page | ⏸️ BLOCKED (needs P2.5) |
-| Phase 4 | Lease Lines Page | ⏸️ BLOCKED (needs P3) |
-| Phase 5 | Coverage, About, Contact Pages | ⏸️ BLOCKED |
-| Phase 6 | Polish, Performance & Pre-Launch | ⏸️ BLOCKED |
+| Phase 2.5 | Lenis Smooth Scroll & GSAP Animations | ✅ COMPLETED |
+| Phase 3 | Plans Page | ✅ COMPLETED |
+| Phase 4 | Lease Lines Page | ✅ COMPLETED |
+| Phase 5 | Coverage, About, Contact Pages | 🟢 READY TO START |
+| Phase 6 | Polish, Performance & Pre-Launch | ⏸️ BLOCKED (needs P5) |
 | Phase 7 | Blog | 🔵 FUTURE |

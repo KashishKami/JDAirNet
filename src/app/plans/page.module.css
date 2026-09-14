@@ -1,0 +1,211 @@
+.plansPage {
+  position: relative;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-white);
+  padding-top: clamp(6rem, 12vw, 9rem);
+  padding-bottom: var(--space-section);
+  overflow-x: hidden;
+}
+
+.headerSection {
+  text-align: center;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(200, 30, 43, 0.08);
+  border: 1px solid rgba(200, 30, 43, 0.2);
+  color: var(--color-primary);
+  font-size: var(--font-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+}
+
+.title {
+  font-size: var(--font-h1);
+  font-family: var(--font-kanit), var(--font-unbounded), sans-serif;
+  font-weight: 700;
+  color: var(--color-text-white);
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  font-size: var(--font-body);
+  color: var(--color-text-muted);
+  max-width: 680px;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* 4-column plans grid */
+.plansGrid {
+  display: grid;
+  gap: var(--space-gap-md);
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 600px) {
+  .plansGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .plansGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* GST disclaimer */
+.gstDisclaimer {
+  text-align: center;
+  font-size: var(--font-small);
+  color: var(--color-text-dim);
+  margin-top: 1.5rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: var(--color-bg-medium);
+  border: 1px solid var(--color-border);
+}
+
+/* Add-ons Section */
+.addonsSection {
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background-color: var(--color-bg-medium);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+}
+
+.addonsHeader {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.addonsTitle {
+  font-size: var(--font-h2);
+  font-family: var(--font-kanit), sans-serif;
+  font-weight: 700;
+  color: var(--color-text-white);
+  margin-bottom: 0.5rem;
+}
+
+.addonsSubtitle {
+  font-size: var(--font-body);
+  color: var(--color-text-muted);
+}
+
+.addonsGrid {
+  display: grid;
+  gap: var(--space-gap-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .addonsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .addonsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.addonCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.addonCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.addonIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: rgba(200, 30, 43, 0.08);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.addonName {
+  font-size: var(--font-h4);
+  font-weight: 600;
+  color: var(--color-text-white);
+  margin-bottom: 0.4rem;
+}
+
+.addonDesc {
+  font-size: var(--font-small);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Lease Line CTA banner */
+.leaseLineBanner {
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding: clamp(2rem, 4vw, 3rem);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .leaseLineBanner {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.bannerContent {
+  max-width: 600px;
+}
+
+.bannerTitle {
+  font-size: var(--font-h3);
+  font-family: var(--font-kanit), sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.bannerText {
+  font-size: var(--font-body);
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.bannerBtn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}

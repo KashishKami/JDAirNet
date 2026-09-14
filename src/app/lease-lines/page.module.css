@@ -1,0 +1,251 @@
+.leasePage {
+  position: relative;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-white);
+  padding-top: clamp(6rem, 12vw, 9rem);
+  padding-bottom: var(--space-section);
+  overflow-x: hidden;
+}
+
+/* Header & Hero */
+.headerSection {
+  text-align: center;
+  max-width: 800px;
+  margin-inline: auto;
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  background-color: rgba(200, 30, 43, 0.08);
+  border: 1px solid rgba(200, 30, 43, 0.2);
+  color: var(--color-primary);
+  font-size: var(--font-small);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+}
+
+.title {
+  font-size: var(--font-h1);
+  font-family: var(--font-kanit), var(--font-unbounded), sans-serif;
+  font-weight: 700;
+  color: var(--color-text-white);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: var(--font-body);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Highlight Stat Banner */
+.statsBanner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-gap-sm);
+  background-color: var(--color-bg-medium);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .statsBanner {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.statItem {
+  padding: 0.5rem 1rem;
+}
+
+.statValue {
+  font-size: var(--font-h2);
+  font-family: var(--font-kanit), sans-serif;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: var(--font-small);
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Features Grid */
+.featuresSection {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.sectionTitle {
+  font-size: var(--font-h2);
+  font-family: var(--font-kanit), sans-serif;
+  font-weight: 700;
+  color: var(--color-text-white);
+  margin-bottom: 0.5rem;
+}
+
+.sectionSubtitle {
+  font-size: var(--font-body);
+  color: var(--color-text-muted);
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.featuresGrid {
+  display: grid;
+  gap: var(--space-gap-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 600px) {
+  .featuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .featuresGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.featureCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-hover);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.featureIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: rgba(200, 30, 43, 0.08);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.featureTitle {
+  font-size: var(--font-h4);
+  font-weight: 700;
+  color: var(--color-text-white);
+  margin-bottom: 0.5rem;
+}
+
+.featureDesc {
+  font-size: var(--font-body);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* Use Cases Section */
+.useCasesSection {
+  background-color: var(--color-bg-medium);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  text-align: center;
+}
+
+.useCasesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: 2rem;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.useCaseChip {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 9999px;
+  padding: 0.65rem 1.4rem;
+  font-size: var(--font-small);
+  font-weight: 600;
+  color: var(--color-text-white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chipDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+/* Final Enterprise CTA Box */
+.enterpriseCta {
+  background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: clamp(2.5rem, 6vw, 4rem);
+  color: #ffffff;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: var(--font-h2);
+  font-family: var(--font-kanit), sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.ctaSubtitle {
+  font-size: var(--font-body);
+  color: #cbd5e1;
+  max-width: 600px;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.ctaButtonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
