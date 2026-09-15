@@ -248,10 +248,11 @@ export default function ServicesSection() {
         {/* Mobile Visual (< 900px) */}
         <div className={styles.mobileVisual} aria-hidden="true">
           <img
-            src="/Why_choose_us-removebg-preview.png"
+            src="/Why_choose_us-removebg-preview.webp"
             alt=""
             className={styles.mobileImage}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
           />
         </div>
 
@@ -260,10 +261,11 @@ export default function ServicesSection() {
           {/* Desktop Left Feature Image (≥ 900px) */}
           <div ref={imageWrapperRef} className={styles.featureImageWrapper} aria-hidden="true">
             <img
-              src="/Why_choose_us-removebg-preview.png"
+              src="/Why_choose_us-removebg-preview.webp"
               alt=""
               className={styles.featureImage}
-              loading="lazy"
+              loading="eager"
+              decoding="async"
             />
           </div>
 

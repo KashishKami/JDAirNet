@@ -15,9 +15,11 @@ describe('HeroSection', () => {
     expect(video).toHaveAttribute('poster', '/hero-poster.jpg')
     expect(video).toHaveAttribute('preload', 'none')
 
-    const source = video?.querySelector('source')
-    expect(source).toHaveAttribute('src', '/Hero.mp4')
-    expect(source).toHaveAttribute('type', 'video/mp4')
+    const sources = video?.querySelectorAll('source')
+    expect(sources?.length).toBeGreaterThanOrEqual(1)
+    const srcs = Array.from(sources || []).map((s) => s.getAttribute('src'))
+    expect(srcs).toContain('/Hero.webm')
+    expect(srcs).toContain('/Hero.mp4')
   })
 
   it('renders eyebrow badge, primary H1, and subtext', () => {

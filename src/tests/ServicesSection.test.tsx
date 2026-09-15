@@ -39,7 +39,7 @@ describe('ServicesSection Component', () => {
     const { container } = render(<ServicesSection />)
     const images = container.querySelectorAll('img')
     const hasFeatureImage = Array.from(images).some((img) =>
-      img.getAttribute('src')?.includes('Why_choose_us-removebg-preview.png')
+      /Why_choose_us-removebg-preview\.(webp|png)/.test(img.getAttribute('src') || '')
     )
     expect(hasFeatureImage).toBe(true)
   })

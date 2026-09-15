@@ -22,6 +22,8 @@ export default defineConfig({
   use: {
     baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:3007',
     trace: 'on-first-retry',
+    actionTimeout: 15_000,
+    navigationTimeout: 20_000,
   },
   webServer: {
     command: 'npm run dev',

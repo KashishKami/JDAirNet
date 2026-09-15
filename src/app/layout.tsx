@@ -109,6 +109,7 @@ export default function RootLayout({
       className={`${unbounded.variable} ${kanit.variable} ${poppins.variable}`}
     >
       <head>
+        <link rel="preload" as="image" href="/hero-poster.jpg" fetchPriority="high" />
         <JsonLd schema={orgSchema} />
         <JsonLd schema={webSiteSchema} />
       </head>

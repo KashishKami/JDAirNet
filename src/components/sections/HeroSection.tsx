@@ -19,6 +19,7 @@ export default function HeroSection() {
           preload="none"
         >
           <source src="/Hero.mp4" type="video/mp4" />
+          <source src="/Hero.webm" type="video/webm" />
           Your browser does not support the video tag.
         </video>
         <div className={styles.videoOverlay} aria-hidden="true" />

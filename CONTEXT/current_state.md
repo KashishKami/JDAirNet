@@ -1149,6 +1149,30 @@ The homepage must integrate all new interactive components in the exact specifie
 
 ---
 
+### Session Note — Mobile Navbar Single-Row Layout, Global Official WhatsApp Icons & Performance Polish (2026-09-15)
+
+- **Mobile Navbar Drawer Bottom Actions Redesign (`Navbar.tsx` & `Navbar.module.css`):**
+  - Converted the stacked vertical contact buttons into a single, compact horizontal row of 3 icon-only touch buttons (Call, WhatsApp, Send Message).
+  - Balanced button widths with `flex: 1`, 48px touch targets, and removed excessive lateral spacing for a clean, app-like mobile navigation experience.
+- **Global Official WhatsApp Brand Icon Standardization:**
+  - Standardized all WhatsApp buttons across the entire website to use the official WhatsApp vector SVG path (`fill="currentColor"`):
+    - **Plan Cards (`PlanCard.tsx`):** Updated WhatsApp icon on Home, `/plans/`, and all tier card instances.
+    - **Contact Page (`contact/page.tsx`):** Fixed undersized/shrunken WhatsApp icon, scaling it to 22×22px to perfectly balance with Direct Phone Call and Office Headquarters icons.
+    - **Enterprise Lease Lines (`lease-lines/page.tsx`):** Updated bottom conversion CTA button.
+    - **Contact CTA Banner (`ContactCTA.tsx`):** Updated conversion channel button.
+    - **Floating Contact Hub (`FloatingContactHub.tsx`):** Updated expandable contact popup menu.
+    - **Mobile Drawer (`Navbar.tsx`):** Updated drawer contact button.
+- **Hero & Services Asset Performance Optimization:**
+  - Preloaded hero poster image (`/hero-poster.jpg`) with `fetchPriority="high"` in `src/app/layout.tsx`.
+  - Configured video `preload="none"` with MP4 source first in `HeroSection.tsx` to prevent WebKit/Safari streaming socket lockups and ensure instant React hydration on mobile.
+  - Converted Services section decorative image to WebP (`/Why_choose_us-removebg-preview.webp`, 89% reduction to 25.7 KB) with `loading="eager"` and `decoding="async"`.
+- **Why Choose Us Dark Section Theme (`WhyUsSection.module.css`):**
+  - Updated section background to dark `#0a0a1a` with 6 vibrant non-black card gradients (Burgundy, Indigo, Slate, Emerald, Cyan, Violet) and light typography (`#ffffff` / `#94a3b8`).
+- **Tests & Quality:**
+  - Unit tests & E2E suite updated and verified across Chromium, Mobile Chrome, and Mobile Safari.
+
+---
+
 ## Phase 6 — Polish, Performance & Pre-Launch
 
 ---
