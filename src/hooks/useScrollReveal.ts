@@ -33,11 +33,11 @@ export function useScrollReveal(
 
     const {
       selector,
-      y = 30,
-      scale = 0.96,
-      duration = 0.7,
-      stagger = 0.1,
-      start = 'top 85%',
+      y = 16,
+      scale = 0.98,
+      duration = 0.5,
+      stagger = 0.08,
+      start = 'top 95%',
       ease = 'power2.out',
     } = options
 

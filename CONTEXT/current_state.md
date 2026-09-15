@@ -1126,6 +1126,29 @@ The homepage must integrate all new interactive components in the exact specifie
 
 ---
 
+### Session Note — Mobile Scroll Reveal Timing, 404 Routing, Production Apache & CI Pipeline Fixes (2026-09-15)
+
+- **Mobile Scroll Reveal Responsiveness:**
+  - Updated `useScrollReveal.ts` and `ScrollReveal.tsx` default trigger `start` threshold from `top 88%` / `top 85%` to **`top 95%`**, ensuring elements reveal immediately when entering the viewport bottom.
+  - Reduced initial vertical offset `y` from `30px` to `16px` and duration to `0.5s` for swift, instantaneous entrances on mobile viewports.
+- **Apache Shared Hosting & Asset Loading Fixes (`public/.htaccess`):**
+  - Updated 404 handler to direct static export: `ErrorDocument 404 /404.html`.
+  - Added explicit MIME types (`AddType font/woff2 .woff2`, `AddType font/woff .woff`, `AddType video/webm .webm`, `AddType video/mp4 .mp4`).
+  - Added CORS headers (`Access-Control-Allow-Origin "*"`) for web fonts to resolve `status=2152398850` font download errors.
+  - Configured zero-caching on HTML files (`Cache-Control: no-cache, no-store, must-revalidate`) to prevent stale chunk hash mismatches (`ChunkLoadError`).
+  - Configured immutable caching for hashed static assets (`/_next/static/`).
+- **Automated Deployment Packaging (`scripts/package-build.js` & `npm run package`):**
+  - Built automated deployment packaging script creating `out/website.zip` (4.17 MB) with `.htaccess` and all static chunks for 1-click extraction on Hostinger / GoDaddy File Manager.
+- **CI Quality Gate Pipeline Update:**
+  - Added `npm run build` to `ci:quality` script in `package.json` (`npm run lint && npm run typecheck && npm run test:unit && npm run test:e2e && npm run build`) and updated `decision_log.md` and `local_setup.md`.
+- **Quality Gates & Tests:**
+  - 23/23 Vitest unit test files / 71 tests passing (100% green).
+  - 92/92 Playwright E2E tests passing across Desktop Chromium, Mobile Chrome, and Mobile Safari.
+  - `npm run lint` and `npm run typecheck` passing with 0 errors.
+  - Production static build and `website.zip` packaging succeeded cleanly.
+
+---
+
 ## Phase 6 — Polish, Performance & Pre-Launch
 
 ---

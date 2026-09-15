@@ -230,7 +230,7 @@ Even for a marketing website, quality gates prevent regressions and ensure the s
   "test:unit:watch": "vitest",
   "test:e2e": "playwright test",
   "test:e2e:ui": "playwright test --ui",
-  "ci:quality": "npm run lint && npm run typecheck && npm run test:unit && npm run test:e2e"
+  "ci:quality": "npm run lint && npm run typecheck && npm run test:unit && npm run test:e2e && npm run build"
 }
 ```
 

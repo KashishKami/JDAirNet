@@ -1,4 +1,4 @@
-﻿# Local Environment Setup Guide
+# Local Environment Setup Guide
 
 This document describes how to configure and run the JDAirNet website locally after cloning the repository. Follow every step in the exact order shown.
 
@@ -120,7 +120,7 @@ npm run test:e2e:ui       # Open Playwright UI (interactive debugging)
 npm run test:e2e:report   # Open last Playwright HTML report
 
 # ── Combined CI Suite (local pre-push) ──────────────────────────────
-npm run ci:quality    # Runs: lint → typecheck → test:unit → test:e2e
+npm run ci:quality    # Runs: lint → typecheck → test:unit → test:e2e → build
 
 # ── Build & Export ──────────────────────────────────────────────────
 npm run build         # Build production static export → out/ folder
